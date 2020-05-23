@@ -1,0 +1,34 @@
+# Build directory might optionally be placed here
+build*
+# Ignore .datasets
+.datasets
+# Ignore model output
+*.out
+CPU_stats.*
+_read_error.nml
+available_diags.0*
+SIS_fast.available_diags
+SIS.available_diags
+exitcode
+fort.*
+*.nc
+*.nc.*
+RESTART
+INPUT
+# Ignore python .pyc files
+*.pyc
+.ipynb_checkpoints
+# Ignore anything labeled ignore
+*.ignore
+runmpi.chinook*
+CCS1.*
+CCS2.*
+ARCTIC5.*
+nodes
+movie*
+*.png
+*.gif
+Codes.txt
+MOM_override.*
+[0-9].[0-9].[0-9]
+[0-9].[0-9].[0-9]a
