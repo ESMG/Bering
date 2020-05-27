@@ -1,7 +1,7 @@
 CCS1 50 vertical levels
 1900 1 1 0 0 0
 "ocean_hourly",           1, "hours",  1, "hours", "time"
-"ocean_daily",            1, "days",   1, "days", "time"
+"ocean_daily",            1, "days",   1, "hours", "time"
 
 #"ocean_model","u","u","ocean_hourly","all",.false.,"none",2
 #"ocean_model","v","v","ocean_hourly","all",.false.,"none",2
