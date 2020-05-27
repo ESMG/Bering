@@ -82,6 +82,10 @@ ARCTIC_ICE_EDGE_IC = 72.0       !   [degrees of latitude] default = 91.0
                                 ! The southern latitude of Arctic ice in an initial condition.
 ICE_INIT_MASS = 900.0           !   [kg m-2] default = 0.0
                                 ! A uniform initial sea ice mass per unit area where there is sea ice.
+ICE_SALINITY_IC = 4.0           !   [g kg-1] default = 0.0
+                                ! The uniform sea ice salinity used for the initial condition
+ICE_TEMPERATURE_IC = -4.0       !   [degC] default = 0.0
+                                ! The uniform sea ice and snow temperature used for the initial condition
 
 ! === module SIS_slow_thermo ===
 ! This module calculates the slow evolution of the ice mass, heat, and salt budgets.

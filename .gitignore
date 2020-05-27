@@ -21,9 +21,7 @@ INPUT
 # Ignore anything labeled ignore
 *.ignore
 runmpi.chinook*
-CCS1.*
-CCS2.*
-ARCTIC5.*
+BERING.*
 nodes
 movie*
 *.png
