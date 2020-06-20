@@ -86,10 +86,10 @@ for file in lst_file:
 #       cs = plt.contourf(clon, clat, rv, levels=levels, cmap=cmap, extend='both')
         plt.title('Surface RV')
 #       csa = plt.contour(clon, clat, rv, levels=levels, linewidths=(0.5,))
-        parallels = np.arange(45.,90.,15.)
+        parallels = np.arange(45.,75.,5.)
         # labels = [left,right,top,bottom]
         m.drawparallels(parallels)
-        meridians = np.arange(0.,360.,15.)
+        meridians = np.arange(155.,215.,5.)
         m.drawmeridians(meridians,labels=[1, 0, 0, 1])
 
 #       cbaxes = fig.add_axes([0.1, 0.05, 0.8, 0.02])

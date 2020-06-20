@@ -63,10 +63,10 @@ for file in lst_file:
         idiv *= 1.e5
         cs = m.pcolormesh(x, y, idiv, vmin=-.6, vmax=.6, cmap=cmap)
 #       cs = m.contourf(x, y, idiv, levels=levels, cmap=cmap, extend='both')
-        parallels = np.arange(45.,90.,15.)
+        parallels = np.arange(45.,75.,5.)
         # labels = [left,right,top,bottom]
         m.drawparallels(parallels)
-        meridians = np.arange(0.,360.,15.)
+        meridians = np.arange(155.,215.,5.)
         m.drawmeridians(meridians,labels=[1, 0, 0, 1])
 #   csa = m.contour(x, y, idiv, levels=levels, linewidths=(1,), colors='k')
 #   csa = m.contour(x, y, idiv, levels=levels, colors=('k',))
