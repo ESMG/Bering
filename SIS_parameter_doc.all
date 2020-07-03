@@ -2,8 +2,6 @@
 
 ! === module ice_model ===
 
-! === module MOM_unit_scaling ===
-! Parameters for doing unit scaling of variables.
 SPECIFIED_ICE = False           !   [Boolean] default = False
                                 ! If true, the ice is specified and there is no dynamics.
 CGRID_ICE_DYNAMICS = True       !   [Boolean] default = True
@@ -117,6 +115,12 @@ NIGLOBAL = 237                  !
 NJGLOBAL = 277                  !
                                 ! The total number of thickness grid points in the y-direction in the physical
                                 ! domain. With STATIC_MEMORY_ this is set in SIS2_memory.h at compile time.
+NIHALO = 4                      ! default = 4
+                                ! The number of halo points on each side in the x-direction.  How this is set
+                                ! varies with the calling component and static or dynamic memory configuration.
+NJHALO = 4                      ! default = 4
+                                ! The number of halo points on each side in the y-direction.  How this is set
+                                ! varies with the calling component and static or dynamic memory configuration.
 
 ! === module MOM_hor_index ===
 ! Sets the horizontal array index types.
@@ -447,7 +451,7 @@ SIS_TRACER_ADVECTION_SCHEME = "PPM:H3" ! default = "UPWIND_2D"
                                 !   PCM    - Directionally split piecewise constant
                                 !   PLM    - Piecewise Linear Method
                                 !   PPM:H3 - Piecewise Parabolic Method (Huyhn 3rd order)
-TRACER_ADV_REFILL_MASSLESS = False !   [Boolean] default = False
+TRACER_ADV_REFILL_MASSLESS = True !   [Boolean] default = False
                                 ! If true, increase the emphasis of the previous tracer values when the previous
                                 ! mass plus the mass passing through a cell is less than H_subroundoff*area.
 CFL_MASS_NEGLECT_BUG = False    !   [Boolean] default = False

@@ -7,3 +7,6 @@ LIQUID_RUNOFF_FROM_DATA = True
 DEBUG = False
 DEBUG_BT = False
 !VERBOSITY = 9
+#override LINEARIZED_BT_CORIOLIS = False
+#override BT_STRONG_DRAG = True
+#override BT_NONLIN_STRESS = True
