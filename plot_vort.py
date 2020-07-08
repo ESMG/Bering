@@ -24,7 +24,7 @@ lst_file = []
 #for year in lst_year:
 #    year = np.str(year)
 #lst = subprocess.getoutput('ls clima/*.nc')
-lst = subprocess.getoutput('ls 19800104.ocean_daily_old.nc')
+lst = subprocess.getoutput('ls *.ocean_daily.nc')
 lst = lst.split()
 lst_file = lst_file + lst
 
@@ -55,29 +55,30 @@ blon[0,-1] = x[0,-1]
 blat[-1,0] = y[-1,0]
 blon[-1,-1] = x[-1,-1]
 
-m = projmap.Projmap('arctic')
-#m = Basemap(llcrnrlon=-121., llcrnrlat=17., urcrnrlon=-125.0, urcrnrlat=53.0,\
-#            rsphere=(6378137.00,6356752.3142),\
-#            resolution='h', projection='lcc',\
-#            lat_0=30., lat_1=40.0, lon_0=-78.)
+m = Basemap(projection='lcc', lat_1=60, lat_2=60, lon_0=260, \
+llcrnrlon=194.25, llcrnrlat=44, urcrnrlon=160.8, urcrnrlat=74.0, \
+resolution='h')
 x, y = m(blon, blat)
 levels = np.arange(-.6, 0.6, 0.01)
 cmap = plt.cm.get_cmap("seismic")
 
+record = 0
 for file in lst_file:
     print("Plotting "+file)
     nc = netCDF4.Dataset(file, "r")
     times = nc.variables["time"][:]
     ntimes = len(times)
     for it in range(ntimes):
-        m = projmap.Projmap('arctic')
-        fig = plt.figure(figsize=(8,9))
+        m = Basemap(projection='lcc', lat_1=60, lat_2=60, lon_0=260, \
+          llcrnrlon=194.25, llcrnrlat=44, urcrnrlon=160.8, urcrnrlat=74.0, \
+          resolution='h')
+        fig = plt.figure(figsize=(8,7))
 #       ax = fig.add_subplot(111)
 #       ax.set_aspect('equal')
 #       ax.axis(xmin=-300,xmax=300)
 #       m.drawmapboundary(fill_color='0.3')
         m.drawcoastlines()
-        m.drawmapboundary(fill_color='#99ffff')
+#       m.drawmapboundary(fill_color='#99ffff')
         m.fillcontinents(color='0.3',lake_color='0.3')
         rv = nc.variables["RV"][it,0,:,:]
         rv *= 1.e4
@@ -86,9 +87,9 @@ for file in lst_file:
 #       cs = plt.contourf(clon, clat, rv, levels=levels, cmap=cmap, extend='both')
         plt.title('Surface RV')
 #       csa = plt.contour(clon, clat, rv, levels=levels, linewidths=(0.5,))
-        parallels = np.arange(45.,75.,5.)
         # labels = [left,right,top,bottom]
-        m.drawparallels(parallels)
+        parallels = np.arange(45.,75.,5.)
+        m.drawparallels(parallels,labels=[0, 1, 1, 0])
         meridians = np.arange(155.,215.,5.)
         m.drawmeridians(meridians,labels=[1, 0, 0, 1])
 
@@ -96,13 +97,14 @@ for file in lst_file:
 #       plt.colorbar(orientation='horizontal', cax=cbaxes)
         myday = jday2date(times[it]/24.)
         date_tag = myday.strftime('%d %B %Y')
-        plt.title(date_tag, fontsize=20)
-        fname = myday.strftime('movie_rv/frame_%(number)04d.png'%{'number': it})
+        plt.suptitle(date_tag, fontsize=20)
+        fname = myday.strftime('movie_rv/frame_%(number)04d.png'%{'number': record})
         print(date_tag)
-        cbar = plt.colorbar(cs, orientation='vertical')
+        cbar = plt.colorbar(cs, orientation='vertical', pad=0.2, shrink=0.6)
         cbar.ax.tick_params(labelsize=15)
 
         plt.savefig(fname)
         plt.close()
+        record += 1
 
     nc.close()
