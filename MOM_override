@@ -10,3 +10,6 @@ DEBUG_BT = False
 #override LINEARIZED_BT_CORIOLIS = False
 #override BT_STRONG_DRAG = True
 #override BT_NONLIN_STRESS = True
+! Bob's new option
+!#override INTEGRAL_BT_CONTINUITY=True
+!#override ENERGYSAVEDAYS = 0.041666

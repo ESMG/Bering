@@ -146,22 +146,14 @@ OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-BRUSHCUTTER_MODE = True         !   [Boolean] default = False
-                                ! If true, read external OBC data on the supergrid.
-OBC_SEGMENT_001_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
-                                ! OBC segment docs
-OBC_SEGMENT_002_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
-                                ! OBC segment docs
-OBC_SEGMENT_003_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
-                                ! OBC segment docs
-OBC_SEGMENT_004_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
-                                ! OBC segment docs
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
                                 ! An effective length scale for restoring the tracer concentration at the
                                 ! boundaries to externally imposed values when the flow is exiting the domain.
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3.0E+04 !   [m] default = 0.0
                                 ! An effective length scale for restoring the tracer concentration at the
                                 ! boundaries to values from the interior when the flow is entering the domain.
+BRUSHCUTTER_MODE = True         !   [Boolean] default = False
+                                ! If true, read external OBC data on the supergrid.
 MASKING_DEPTH = 1.0             !   [m] default = -9999.0
                                 ! The depth below which to mask points as land points, for which all fluxes are
                                 ! zeroed out. MASKING_DEPTH is ignored if negative.
@@ -311,6 +303,14 @@ SURFACE_HEIGHT_IC_FILE = "initial_condition_SODA3.nc" !
                                 ! The initial condition file for the surface height.
 SURFACE_HEIGHT_IC_VAR = "ssh"   ! default = "SSH"
                                 ! The initial condition variable for the surface height.
+OBC_SEGMENT_001_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+                                ! OBC segment docs
+OBC_SEGMENT_002_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+                                ! OBC segment docs
+OBC_SEGMENT_003_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+                                ! OBC segment docs
+OBC_SEGMENT_004_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+                                ! OBC segment docs
 
 ! === module MOM_diag_mediator ===
 
