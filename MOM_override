@@ -12,4 +12,4 @@ DEBUG_BT = False
 #override BT_NONLIN_STRESS = True
 ! Bob's new option
 !#override INTEGRAL_BT_CONTINUITY=True
-!#override ENERGYSAVEDAYS = 0.041666
+#override ENERGYSAVEDAYS = 0.041666

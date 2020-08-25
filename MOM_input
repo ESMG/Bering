@@ -148,13 +148,13 @@ OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.
                                 ! velocities.
 BRUSHCUTTER_MODE = True         !   [Boolean] default = False
                                 ! If true, read external OBC data on the supergrid.
-OBC_SEGMENT_001_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_001_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu1.nc(uamp),Uphase=file:tu1.nc(uphase),Vamp=file:tu1.nc(vamp),Vphase=file:tu1.nc(vphase),SSHamp=file:tz1.nc(zamp),SSHphase=file:tz1.nc(zphase)"
                                 ! OBC segment docs
-OBC_SEGMENT_002_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_002_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu2.nc(uamp),Uphase=file:tu2.nc(uphase),Vamp=file:tu2.nc(vamp),Vphase=file:tu2.nc(vphase),SSHamp=file:tz2.nc(zamp),SSHphase=file:tz2.nc(zphase)"
                                 ! OBC segment docs
-OBC_SEGMENT_003_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_003_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu3.nc(uamp),Uphase=file:tu3.nc(uphase),Vamp=file:tu3.nc(vamp),Vphase=file:tu3.nc(vphase),SSHamp=file:tz3.nc(zamp),SSHphase=file:tz3.nc(zphase)"
                                 ! OBC segment docs
-OBC_SEGMENT_004_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_004_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu4.nc(uamp),Uphase=file:tu4.nc(uphase),Vamp=file:tu4.nc(vamp),Vphase=file:tu4.nc(vphase),SSHamp=file:tz4.nc(zamp),SSHphase=file:tz4.nc(zphase)"
                                 ! OBC segment docs
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
                                 ! An effective length scale for restoring the tracer concentration at the
@@ -162,6 +162,15 @@ OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3.0E+04 !   [m] default = 0.0
                                 ! An effective length scale for restoring the tracer concentration at the
                                 ! boundaries to values from the interior when the flow is entering the domain.
+RAMP_OBCS = False               ! default = False
+OBC_RAMP_TIMESCALE = 2.0        !   [days] default = 1.0
+OBC_RADIATION_MAX = 1.0         !   [nondim] default = 1.0
+OBC_TIDE_N_CONSTITUENTS = 10
+OBC_TIDE_CONSTITUENTS = "M2,S2,N2,K2,K1,O1,P1,Q1,MM,MF"
+OBC_TIDE_REF_DATE = 1980,1,1    ! This should usually be the start of the run.
+OBC_TIDE_ADD_EQ_PHASE = True    ! Adds equilibrium phase to tidal calculation (then phase in segment data is Greenwich lag).
+OBC_TIDE_ADD_NODAL = True       ! Includes modulation of amplitudes and phases by 18.6 year nodal cycle.
+OBC_TIDE_NODAL_REF_DATE = 1980,7,2   ! Date for the nodal correction; I run 1 year at a time and change the year to match the model year.
 MASKING_DEPTH = 1.0             !   [m] default = -9999.0
                                 ! The depth below which to mask points as land points, for which all fluxes are
                                 ! zeroed out. MASKING_DEPTH is ignored if negative.
@@ -569,5 +578,20 @@ MAX_P_SURF = 0.0                !   [Pa] default = -1.0
                                 ! negative value is used.
 CD_TIDES = 0.0018               !   [nondim] default = 1.0E-04
                                 ! The drag coefficient that applies to the tides.
+TIDES = True
+TIDE_M2 = True
+TIDE_S2 = True
+TIDE_N2 = True
+TIDE_K2 = True
+TIDE_K1 = True
+TIDE_O1 = True
+TIDE_P1 = True
+TIDE_Q1 = True
+TIDE_MM = True
+TIDE_MF = True
+TIDE_SAL_SCALAR_VALUE = 0.094
+TIDE_USE_SAL_SCALAR = True
+TIDE_REF_DATE = 1980,1,1  ! This should usually be the start of the run
+TIDE_USE_EQ_PHASE = True  ! Adds equilibrium phase to calculation (otherwise tides are wrong).
 
 ! === module MOM_restart ===

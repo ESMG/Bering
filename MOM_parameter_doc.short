@@ -122,6 +122,18 @@ OBC_ZERO_BIHARMONIC = True      !   [Boolean] default = False
                                 ! viscosity term.
 OBC_RAMP_TIMESCALE = 2.0        !   [days] default = 1.0
                                 ! If RAMP_OBCS is true, this sets the ramping timescale.
+OBC_TIDE_N_CONSTITUENTS = 10    ! default = 0
+                                ! Number of tidal constituents being added to the open boundary.
+OBC_TIDE_CONSTITUENTS = "M2,S2,N2,K2,K1,O1,P1,Q1,MM,MF" !
+                                ! Names of tidal constituents being added to the open boundaries.
+OBC_TIDE_ADD_EQ_PHASE = True    !   [Boolean] default = False
+                                ! If true, add the equilibrium phase argument to the specified tidal phases.
+OBC_TIDE_ADD_NODAL = True       !   [Boolean] default = False
+                                ! If true, include 18.6 year nodal modulation in the boundary tidal forcing.
+OBC_TIDE_REF_DATE = 1980, 1, 1  !
+                                ! Reference date to use for tidal calculations and equilibrium phase.
+OBC_TIDE_NODAL_REF_DATE = 1980, 7, 2 ! default = 0
+                                ! Fixed reference date to use for nodal modulation of boundary tides.
 OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
@@ -303,13 +315,13 @@ SURFACE_HEIGHT_IC_FILE = "initial_condition_SODA3.nc" !
                                 ! The initial condition file for the surface height.
 SURFACE_HEIGHT_IC_VAR = "ssh"   ! default = "SSH"
                                 ! The initial condition variable for the surface height.
-OBC_SEGMENT_001_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_001_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu1.nc(uamp),Uphase=file:tu1.nc(uphase),Vamp=file:tu1.nc(vamp),Vphase=file:tu1.nc(vphase),SSHamp=file:tz1.nc(zamp),SSHphase=file:tz1.nc(zphase)" !
                                 ! OBC segment docs
-OBC_SEGMENT_002_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_002_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu2.nc(uamp),Uphase=file:tu2.nc(uphase),Vamp=file:tu2.nc(vamp),Vphase=file:tu2.nc(vphase),SSHamp=file:tz2.nc(zamp),SSHphase=file:tz2.nc(zphase)" !
                                 ! OBC segment docs
-OBC_SEGMENT_003_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_003_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu3.nc(uamp),Uphase=file:tu3.nc(uphase),Vamp=file:tu3.nc(vamp),Vphase=file:tu3.nc(vphase),SSHamp=file:tz3.nc(zamp),SSHphase=file:tz3.nc(zphase)" !
                                 ! OBC segment docs
-OBC_SEGMENT_004_DATA = "U=file:Bering_OBC.nc(u),V=file:Bering_OBC.nc(v),SSH=file:Bering_OBC.nc(zeta),TEMP=file:Bering_OBC.nc(temp),SALT=file:Bering_OBC.nc(salt)" !
+OBC_SEGMENT_004_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu4.nc(uamp),Uphase=file:tu4.nc(uphase),Vamp=file:tu4.nc(vamp),Vphase=file:tu4.nc(vphase),SSHamp=file:tz4.nc(zamp),SSHphase=file:tz4.nc(zphase)" !
                                 ! OBC segment docs
 
 ! === module MOM_diag_mediator ===
@@ -380,6 +392,8 @@ KV = 1.0E-04                    !   [m2 s-1]
 ! === module MOM_thickness_diffuse ===
 
 ! === module MOM_dynamics_split_RK2 ===
+TIDES = True                    !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing.
 
 ! === module MOM_continuity ===
 
@@ -411,6 +425,45 @@ BOUND_CORIOLIS = True           !   [Boolean] default = False
                                 ! (f+rv)v from the four neighboring v-points, and similarly at v-points.  This
                                 ! option would have no effect on the SADOURNY Coriolis scheme if it were
                                 ! possible to use centered difference thickness fluxes.
+
+! === module MOM_tidal_forcing ===
+TIDE_M2 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the M2 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_S2 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the S2 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_N2 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the N2 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_K2 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the K2 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_K1 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the K1 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_O1 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the O1 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_P1 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the P1 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_Q1 = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the Q1 frequency. This is only used
+                                ! if TIDES is true.
+TIDE_MF = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the MF frequency. This is only used
+                                ! if TIDES is true.
+TIDE_MM = True                  !   [Boolean] default = False
+                                ! If true, apply tidal momentum forcing at the MM frequency. This is only used
+                                ! if TIDES is true.
+TIDE_SAL_SCALAR_VALUE = 0.094   !   [m m-1]
+                                ! The constant of proportionality between sea surface height (really it should
+                                ! be bottom pressure) anomalies and bottom geopotential anomalies. This is only
+                                ! used if TIDES and TIDE_USE_SAL_SCALAR are true.
+TIDE_REF_DATE = 1980, 1, 1      ! default = 0
+                                ! Year,month,day to use as reference date for tidal forcing. If not specified,
+                                ! defaults to 0.
 
 ! === module MOM_PressureForce ===
 
@@ -557,6 +610,9 @@ MAXTRUNC = 100000               !   [truncations save_interval-1] default = 0
                                 ! The run will be stopped, and the day set to a very large value if the velocity
                                 ! is truncated more than MAXTRUNC times between energy saves.  Set MAXTRUNC to 0
                                 ! to stop if there is any truncation of velocities.
+ENERGYSAVEDAYS = 0.0416666666666667 !   [days] default = 1.0
+                                ! The interval in units of TIMEUNIT between saves of the energies of the run and
+                                ! other globally summed diagnostics.
 
 ! === module ocean_model_init ===
 
