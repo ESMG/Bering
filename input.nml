@@ -27,7 +27,7 @@
             days   = 2,
             hours  = 0,
             current_date = 2011,9,3,0,0,0,
-            calendar = 'julian',
+            calendar = 'gregorian',
             dt_cpld = 3600,
             dt_atmos = 3600,
             do_atmos = .false.,
