@@ -13,3 +13,5 @@ DEBUG_BT = False
 ! Bob's new option
 !#override INTEGRAL_BT_CONTINUITY=True
 #override ENERGYSAVEDAYS = 0.041666
+#override DO_RIVERMIX = True
+#override RIVERMIX_DEPTH = 10
