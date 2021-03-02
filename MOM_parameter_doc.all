@@ -118,6 +118,9 @@ SURFACE_2018_ANSWERS = False    !   [Boolean] default = False
                                 ! If true, use expressions for the surface properties that recover the answers
                                 ! from the end of 2018. Otherwise, use more appropriate expressions that differ
                                 ! at roundoff for non-Boussinesq cases.
+USE_DIABATIC_TIME_BUG = False   !   [Boolean] default = False
+                                ! If true, uses the wrong calendar time for diabatic processes, as was done in
+                                ! MOM6 versions prior to February 2018. This is not recommended.
 SAVE_INITIAL_CONDS = True       !   [Boolean] default = False
                                 ! If true, write the initial conditions to a file given by IC_OUTPUT_FILE.
 IC_OUTPUT_FILE = "MOM_IC"       ! default = "MOM_IC"
@@ -587,96 +590,6 @@ REFERENCE_HEIGHT = 0.0          !   [m] default = 0.0
                                 ! A reference value for geometric height fields, such as bathyT.
 
 ! === module MOM_state_initialization ===
-INIT_LAYERS_FROM_Z_FILE = False !   [Boolean] default = False
-                                ! If true, initialize the layer thicknesses, temperatures, and salinities from a
-                                ! Z-space file on a latitude-longitude grid.
-THICKNESS_CONFIG = "coord"      ! default = "uniform"
-                                ! A string that determines how the initial layer thicknesses are specified for a
-                                ! new run:
-                                !     file - read interface heights from the file specified
-                                !     thickness_file - read thicknesses from the file specified
-                                !       by (THICKNESS_FILE).
-                                !     coord - determined by ALE coordinate.
-                                !     uniform - uniform thickness layers evenly distributed
-                                !       between the surface and MAXIMUM_DEPTH.
-                                !     list - read a list of positive interface depths.
-                                !     DOME - use a slope and channel configuration for the
-                                !       DOME sill-overflow test case.
-                                !     ISOMIP - use a configuration for the
-                                !       ISOMIP test case.
-                                !     benchmark - use the benchmark test case thicknesses.
-                                !     Neverworld - use the Neverworld test case thicknesses.
-                                !     search - search a density profile for the interface
-                                !       densities. This is not yet implemented.
-                                !     circle_obcs - the circle_obcs test case is used.
-                                !     DOME2D - 2D version of DOME initialization.
-                                !     adjustment2d - 2D lock exchange thickness ICs.
-                                !     sloshing - sloshing gravity thickness ICs.
-                                !     seamount - no motion test with seamount ICs.
-                                !     dumbbell - sloshing channel ICs.
-                                !     soliton - Equatorial Rossby soliton.
-                                !     rossby_front - a mixed layer front in thermal wind balance.
-                                !     USER - call a user modified routine.
-TS_CONFIG = "file"              !
-                                ! A string that determines how the initial tempertures and salinities are
-                                ! specified for a new run:
-                                !     file - read velocities from the file specified
-                                !       by (TS_FILE).
-                                !     fit - find the temperatures that are consistent with
-                                !       the layer densities and salinity S_REF.
-                                !     TS_profile - use temperature and salinity profiles
-                                !       (read from TS_FILE) to set layer densities.
-                                !     benchmark - use the benchmark test case T & S.
-                                !     linear - linear in logical layer space.
-                                !     DOME2D - 2D DOME initialization.
-                                !     ISOMIP - ISOMIP initialization.
-                                !     adjustment2d - 2d lock exchange T/S ICs.
-                                !     sloshing - sloshing mode T/S ICs.
-                                !     seamount - no motion test with seamount ICs.
-                                !     dumbbell - sloshing channel ICs.
-                                !     rossby_front - a mixed layer front in thermal wind balance.
-                                !     SCM_CVMix_tests - used in the SCM CVMix tests.
-                                !     USER - call a user modified routine.
-TS_FILE = "initial_condition_SODA3.nc" !
-                                ! The initial condition file for temperature.
-TEMP_IC_VAR = "temp"            ! default = "PTEMP"
-                                ! The initial condition variable for potential temperature.
-SALT_IC_VAR = "salt"            ! default = "SALT"
-                                ! The initial condition variable for salinity.
-SALT_FILE = "initial_condition_SODA3.nc" ! default = "initial_condition_SODA3.nc"
-                                ! The initial condition file for salinity.
-VELOCITY_CONFIG = "zero"        ! default = "zero"
-                                ! A string that determines how the initial velocities are specified for a new
-                                ! run:
-                                !     file - read velocities from the file specified
-                                !       by (VELOCITY_FILE).
-                                !     zero - the fluid is initially at rest.
-                                !     uniform - the flow is uniform (determined by
-                                !       parameters INITIAL_U_CONST and INITIAL_V_CONST).
-                                !     rossby_front - a mixed layer front in thermal wind balance.
-                                !     soliton - Equatorial Rossby soliton.
-                                !     USER - call a user modified routine.
-CONVERT_THICKNESS_UNITS = False !   [Boolean] default = False
-                                ! If true,  convert the thickness initial conditions from units of m to kg m-2
-                                ! or vice versa, depending on whether BOUSSINESQ is defined. This does not apply
-                                ! if a restart file is read.
-DEPRESS_INITIAL_SURFACE = True  !   [Boolean] default = False
-                                ! If true,  depress the initial surface to avoid huge tsunamis when a large
-                                ! surface pressure is applied.
-TRIM_IC_FOR_P_SURF = False      !   [Boolean] default = False
-                                ! If true, cuts way the top of the column for initial conditions at the depth
-                                ! where the hydrostatic pressure matches the imposed surface pressure which is
-                                ! read from file.
-SURFACE_HEIGHT_IC_FILE = "initial_condition_SODA3.nc" !
-                                ! The initial condition file for the surface height.
-SURFACE_HEIGHT_IC_VAR = "ssh"   ! default = "SSH"
-                                ! The initial condition variable for the surface height.
-SURFACE_HEIGHT_IC_SCALE = 1.0   !   [variable] default = 1.0
-                                ! A scaling factor to convert SURFACE_HEIGHT_IC_VAR into units of m
-REGRID_ACCELERATE_INIT = False  !   [Boolean] default = False
-                                ! If true, runs REGRID_ACCELERATE_ITERATIONS iterations of the regridding
-                                ! algorithm to push the initial grid to be consistent with the initial
-                                ! condition. Useful only for state-based and iterative coordinates.
 SPONGE = False                  !   [Boolean] default = False
                                 ! If true, sponges may be applied anywhere in the domain. The exact location and
                                 ! properties of those sponges are specified via SPONGE_CONFIG.
@@ -1209,7 +1122,7 @@ TIDE_USE_EQ_PHASE = True        !   [Boolean] default = False
 TIDE_M2_AMP = 0.242334          !   [m] default = 0.242334
                                 ! Amplitude of the M2 tidal constituent. This is only used if TIDES and TIDE_M2
                                 ! are true.
-TIDE_M2_PHASE_T0 = 6.613640013072882 !   [radians] default = 6.613640013072882
+TIDE_M2_PHASE_T0 = 7.039177444795424 !   [radians] default = 7.039177444795424
                                 ! Phase of the M2 tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_M2 are true.
 TIDE_S2_AMP = 0.112743          !   [m] default = 0.112743
@@ -1221,49 +1134,49 @@ TIDE_S2_PHASE_T0 = 0.0          !   [radians] default = 0.0
 TIDE_N2_AMP = 0.046397          !   [m] default = 0.046397
                                 ! Amplitude of the N2 tidal constituent. This is only used if TIDES and TIDE_N2
                                 ! are true.
-TIDE_N2_PHASE_T0 = 11.12126563916264 !   [radians] default = 11.12126563916264
+TIDE_N2_PHASE_T0 = 11.77483021812139 !   [radians] default = 11.77483021812139
                                 ! Phase of the N2 tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_N2 are true.
 TIDE_K2_AMP = 0.030684          !   [m] default = 0.030684
                                 ! Amplitude of the K2 tidal constituent. This is only used if TIDES and TIDE_K2
                                 ! are true.
-TIDE_K2_PHASE_T0 = 9.801937118942135 !   [radians] default = 9.801937118942135
+TIDE_K2_PHASE_T0 = 9.767531535970488 !   [radians] default = 9.767531535970488
                                 ! Phase of the K2 tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_K2 are true.
 TIDE_K1_AMP = 0.141565          !   [m] default = 0.141565
                                 ! Amplitude of the K1 tidal constituent. This is only used if TIDES and TIDE_K1
                                 ! are true.
-TIDE_K1_PHASE_T0 = 6.471764886265964 !   [radians] default = 6.471764886265964
+TIDE_K1_PHASE_T0 = 6.45456209478014 !   [radians] default = 6.45456209478014
                                 ! Phase of the K1 tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_K1 are true.
 TIDE_O1_AMP = 0.100661          !   [m] default = 0.100661
                                 ! Amplitude of the O1 tidal constituent. This is only used if TIDES and TIDE_O1
                                 ! are true.
-TIDE_O1_PHASE_T0 = 0.1418751268069176 !   [radians] default = 0.1418751268069176
+TIDE_O1_PHASE_T0 = 0.5846153500152842 !   [radians] default = 0.5846153500152842
                                 ! Phase of the O1 tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_O1 are true.
 TIDE_P1_AMP = 0.046848          !   [m] default = 0.046848
                                 ! Amplitude of the P1 tidal constituent. This is only used if TIDES and TIDE_P1
                                 ! are true.
-TIDE_P1_PHASE_T0 = -6.471764886265964 !   [radians] default = -6.471764886265964
+TIDE_P1_PHASE_T0 = -6.45456209478014 !   [radians] default = -6.45456209478014
                                 ! Phase of the P1 tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_P1 are true.
 TIDE_Q1_AMP = 0.019273          !   [m] default = 0.019273
                                 ! Amplitude of the Q1 tidal constituent. This is only used if TIDES and TIDE_Q1
                                 ! are true.
-TIDE_Q1_PHASE_T0 = 4.649500752896675 !   [radians] default = 4.649500752896675
+TIDE_Q1_PHASE_T0 = 5.32026812334125 !   [radians] default = 5.32026812334125
                                 ! Phase of the Q1 tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_Q1 are true.
 TIDE_MF_AMP = 0.042041          !   [m] default = 0.042041
                                 ! Amplitude of the MF tidal constituent. This is only used if TIDES and TIDE_MF
                                 ! are true.
-TIDE_MF_PHASE_T0 = 3.1882971058692533 !   [radians] default = 3.1882971058692533
+TIDE_MF_PHASE_T0 = 2.728354091175063 !   [radians] default = 2.728354091175063
                                 ! Phase of the MF tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_MF are true.
 TIDE_MM_AMP = 0.022191          !   [m] default = 0.022191
                                 ! Amplitude of the MM tidal constituent. This is only used if TIDES and TIDE_MM
                                 ! are true.
-TIDE_MM_PHASE_T0 = -4.507625626089758 !   [radians] default = -4.507625626089758
+TIDE_MM_PHASE_T0 = -4.735652773325965 !   [radians] default = -4.735652773325965
                                 ! Phase of the MM tidal constituent at time 0. This is only used if TIDES and
                                 ! TIDE_MM are true.
 
@@ -1278,6 +1191,9 @@ ANALYTIC_FV_PGF = True          !   [Boolean] default = True
 MASS_WEIGHT_IN_PRESSURE_GRADIENT = True !   [Boolean] default = False
                                 ! If true, use mass weighting when interpolating T/S for integrals near the
                                 ! bathymetry in FV pressure gradient calculations.
+USE_INACCURATE_PGF_RHO_ANOM = False !   [Boolean] default = False
+                                ! If true, use a form of the PGF that uses the reference density in an
+                                ! inaccurate way. This is not recommended.
 RECONSTRUCT_FOR_PRESSURE = True !   [Boolean] default = True
                                 ! If True, use vertical reconstruction of T & S within the integrals of the FV
                                 ! pressure gradient calculation. If False, use the constant-by-layer algorithm.

@@ -6,3 +6,9 @@
 #override CONTINUITY_FRAC_NEGLECT=1e-20
 #override ICE_COVER_DISCARD = 1e-30
 #override ADCROFT_ADVECTIVE_CFL = True
+!#override ICE_YIELD_ELLIPTICITY = 1.5
+#override LEMIEUX_LANDFAST = True
+#override MIN_H_FOR_TEMP_CALC = 1.e-6
+!#override DEBUG = True
+#override LEMIEUX_K2 = 300.0
+#override MERGED_CONTINUITY = True
