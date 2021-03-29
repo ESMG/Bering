@@ -13,7 +13,7 @@
 "ICE" , "sw_flux_nir_dir_dn", "swrad", "/center1/AKWATERS/kate/JRA55-do/JRA55DO_1.4_swrad_2011.nc"     , "bilinear" ,  0.215
 "ICE" , "sw_flux_nir_dif_dn", "swrad", "/center1/AKWATERS/kate/JRA55-do/JRA55DO_1.4_swrad_2011.nc"     , "bilinear" ,  0.215
 "ICE" , "lprec"         , "rain"        , "/center1/AKWATERS/kate/JRA55-do/JRA55DO_1.4_rain_2011.nc"  , "bilinear" ,  1.0
-"ICE" , "fprec"         , ""        , ""  , "none" ,  0.0
+"ICE" , "fprec"         , "snow"        , "/center1/AKWATERS/kate/JRA55-do/JRA55DO_1.4_snow_2011.nc"  , "bilinear" ,  1.0
 "ICE" , "runoff"        , ""      , ""            , "none" ,  0.0
 "ICE" , "calving"       , ""            , ""                             , "none"  ,  0.0
 "ICE" , "dhdt"          , ""            , ""                             , "none"  , 80.0

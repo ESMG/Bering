@@ -266,7 +266,7 @@ SNOW_CONDUCTIVITY = 0.31        !   [W m-1 K-1] default = 0.31
                                 ! The conductivity of heat in snow.
 ICE_CONDUCTIVITY = 2.03         !   [W m-1 K-1] default = 2.03
                                 ! The conductivity of heat in ice.
-MIN_H_FOR_TEMP_CALC = 1.0E-06   !   [m] default = 0.0
+MIN_H_FOR_TEMP_CALC = 0.01      !   [m] default = 0.0
                                 ! The minimum ice thickness at which to do temperature calculations.
 DO_POND = False                 !   [Boolean] default = False
                                 ! If true, calculate melt ponds and use them for shortwave radiation
@@ -360,18 +360,8 @@ CFL_TRUNCATE = 0.5              !   [nondim] default = 0.5
 CFL_TRUNC_DYN_ITS = False       !   [Boolean] default = False
                                 ! If true, check the CFL number for every iteration of the rheology solver;
                                 ! otherwise only the final velocities that are used for transport are checked.
-LEMIEUX_LANDFAST = True         !   [Boolean] default = False
+LEMIEUX_LANDFAST = False        !   [Boolean] default = False
                                 ! If true, turn on Lemieux landfast ice parameterization.
-LEMIEUX_K1 = 8.0                !   [not defined] default = 8.0
-                                ! The value of the first Lemieux landfast ice tuneable parameter.
-LEMIEUX_K2 = 300.0              !   [not defined] default = 15.0
-                                ! The value of the second Lemieux landfast ice tuneable parameter.
-LEMIEUX_ALPHA_B = 20.0          !   [not defined] default = 20.0
-                                ! The value of a third Lemieux landfast ice tuneable parameter.
-LEMIEUX_THRESHOLD_HW = 30.0     !   [not defined] default = 30.0
-                                ! Maximum water depth for grounding in Lemieux landfast ice.
-LEMIEUX_U0 = 5.0E-05            !   [not defined] default = 5.0E-05
-                                ! Velocity for Lemieux landfast ice.
 RECATEGORIZE_ICE = True         !   [Boolean] default = True
                                 ! If true, readjust the distribution into ice thickness categories after
                                 ! advection.
@@ -383,13 +373,13 @@ SEA_ICE_ROLL_FACTOR = 1.0       !   [Nondim] default = 1.0
 ICE_COVER_DISCARD = 1.0E-30     !   [nondim] default = -1.0
                                 ! A tiny fractional ice coverage which if positive causes the mass in categories
                                 ! with less than this coverage to be discarded.
-SIS_THICKNESS_ADVECTION_SCHEME = "PCM" ! default = "UPWIND_2D"
+SIS_THICKNESS_ADVECTION_SCHEME = "PPM:H3" ! default = "UPWIND_2D"
                                 ! The horizontal transport scheme for thickness:
                                 !   UPWIND_2D - Non-directionally split upwind
                                 !   PCM    - Directionally split piecewise constant
                                 !   PLM    - Piecewise Linear Method
                                 !   PPM:H3 - Piecewise Parabolic Method (Huyhn 3rd order)
-SIS_CONTINUITY_SCHEME = "PCM"   ! default = "UPWIND_2D"
+SIS_CONTINUITY_SCHEME = "PPM:C2PD" ! default = "UPWIND_2D"
                                 ! The horizontal transport scheme used in continuity:
                                 !   UPWIND_2D - Non-directionally split upwind
                                 !   PCM       - Directionally split piecewise constant

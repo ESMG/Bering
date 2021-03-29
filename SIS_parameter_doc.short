@@ -56,7 +56,7 @@ ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
-MIN_H_FOR_TEMP_CALC = 1.0E-06   !   [m] default = 0.0
+MIN_H_FOR_TEMP_CALC = 0.01      !   [m] default = 0.0
                                 ! The minimum ice thickness at which to do temperature calculations.
 
 ! === module SIS_dyn_trans ===
@@ -72,20 +72,16 @@ MERGED_CONTINUITY = True        !   [Boolean] default = False
 DT_RHEOLOGY = 50.0              !   [seconds] default = -1.0
                                 ! The sub-cycling time step for iterating the rheology and ice momentum
                                 ! equations. If DT_RHEOLOGY is negative, the time step is set via NSTEPS_DYN.
-LEMIEUX_LANDFAST = True         !   [Boolean] default = False
-                                ! If true, turn on Lemieux landfast ice parameterization.
-LEMIEUX_K2 = 300.0              !   [not defined] default = 15.0
-                                ! The value of the second Lemieux landfast ice tuneable parameter.
 ICE_COVER_DISCARD = 1.0E-30     !   [nondim] default = -1.0
                                 ! A tiny fractional ice coverage which if positive causes the mass in categories
                                 ! with less than this coverage to be discarded.
-SIS_THICKNESS_ADVECTION_SCHEME = "PCM" ! default = "UPWIND_2D"
+SIS_THICKNESS_ADVECTION_SCHEME = "PPM:H3" ! default = "UPWIND_2D"
                                 ! The horizontal transport scheme for thickness:
                                 !   UPWIND_2D - Non-directionally split upwind
                                 !   PCM    - Directionally split piecewise constant
                                 !   PLM    - Piecewise Linear Method
                                 !   PPM:H3 - Piecewise Parabolic Method (Huyhn 3rd order)
-SIS_CONTINUITY_SCHEME = "PCM"   ! default = "UPWIND_2D"
+SIS_CONTINUITY_SCHEME = "PPM:C2PD" ! default = "UPWIND_2D"
                                 ! The horizontal transport scheme used in continuity:
                                 !   UPWIND_2D - Non-directionally split upwind
                                 !   PCM       - Directionally split piecewise constant
