@@ -1,2 +1,3 @@
-!#override LAYOUT = 8,4
+LAYOUT = 6,13
+MASKTABLE = "mask_table.6.6x13"
 #override IO_LAYOUT = 1,1
