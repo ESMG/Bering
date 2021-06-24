@@ -1,0 +1,111 @@
+! This file was written by the model and records the non-default parameters used at run-time.
+
+! === module ice_model ===
+SPECIFIED_ICE = True            !   [Boolean] default = False
+                                ! If true, the ice is specified and there is no dynamics.
+USE_SLAB_ICE = True             !   [Boolean]
+                                ! Use the very old slab-style ice.  With SPECIFIED_ICE, USE_SLAB_ICE is always
+                                ! true.
+
+! === module MOM_domains ===
+REENTRANT_X = False             !   [Boolean] default = True
+                                ! If true, the domain is zonally reentrant.
+NIGLOBAL = 237                  !
+                                ! The total number of thickness grid points in the x-direction in the physical
+                                ! domain. With STATIC_MEMORY_ this is set in SIS2_memory.h at compile time.
+NJGLOBAL = 277                  !
+                                ! The total number of thickness grid points in the y-direction in the physical
+                                ! domain. With STATIC_MEMORY_ this is set in SIS2_memory.h at compile time.
+
+! === module SIS_initialize_fixed ===
+INPUTDIR = "INPUT"              ! default = "."
+                                ! The directory in which input files are found.
+
+! === module MOM_grid_init ===
+GRID_CONFIG = "mosaic"          !
+                                ! A character string that determines the method for defining the horizontal
+                                ! grid.  Current options are:
+                                !     mosaic - read the grid from a mosaic (supergrid)
+                                !              file set by GRID_FILE.
+                                !     cartesian - use a (flat) Cartesian grid.
+                                !     spherical - use a simple spherical grid.
+                                !     mercator - use a Mercator spherical grid.
+GRID_FILE = "ocean_hgrid.nc"    !
+                                ! Name of the file from which to read horizontal grid data.
+TOPO_FILE = "ocean_topog.nc"    ! default = "topog.nc"
+                                ! The file from which the bathymetry is read.
+!MAXIMUM_DEPTH = 7000.0         !   [m]
+                                ! The (diagnosed) maximum depth of the ocean.
+OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
+                                ! The rotation rate of the earth.
+
+! === module hor_grid ===
+! Parameters providing information about the lateral grid.
+
+! === module SIS2_ice_thm (thermo) ===
+! This sub-module calculates ice thermodynamic quantities.
+
+! === module SIS_tracer_registry ===
+
+! === module SIS_tracer_flow_control ===
+CONCENTRATION_INIT_CONFIG = "file" ! default = "data_override"
+                                ! A string that determines how the initial total sea ice concentration is
+                                ! initialized for a new run:
+                                !     file - read sea ice concentrations from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     zero - there is no sea ice anywhere
+                                !     latitudes - initial sea ice concentration is a function of latitude.
+ICE_THICKNESS_INIT_CONFIG = "file" ! default = "data_override"
+                                ! A string that determines how the initial sea ice thickness is initialized for
+                                ! a new run:
+                                !     file - read sea ice thickesses from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     uniform - sea ice has uniform thickness where the concentration is
+                                !       nonzero.
+ICE_CONCENTRATION_FILE = "ice_init.nc" !
+                                ! The name of the sea ice concentration file.
+ICE_CONCENTRATION_IC_VAR = "aice" ! default = "conc_ice"
+                                ! The initial condition variable for ice mass per unit area.
+ICE_THICKNESS_FILE = "ice_init.nc" !
+                                ! The name of the sea ice thickness file.
+ICE_THICKNESS_IC_VAR = "mi"     ! default = "mH_ice"
+                                ! The initial condition variable for ice mass per unit area.
+ICE_SALINITY_IC = 4.0           !   [g kg-1] default = 0.0
+                                ! The uniform sea ice salinity used for the initial condition
+
+! === module SIS_slow_thermo ===
+! This module calculates the slow evolution of the ice mass, heat, and salt budgets.
+ICE_BULK_SALINITY = 0.0         !   [g/kg] default = 4.0
+                                ! The fixed bulk salinity of sea ice.
+ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
+                                ! The initial salinity of sea ice as a fraction of the salinity of the seawater
+                                ! from which it formed.
+
+! === module SIS2_ice_thm (updates) ===
+! This sub-module does updates of the sea-ice due to thermodynamic changes.
+MIN_H_FOR_TEMP_CALC = 0.01      !   [m] default = 0.0
+                                ! The minimum ice thickness at which to do temperature calculations.
+
+! === module specified_ice ===
+! This module updates the ice momentum and does ice transport.
+
+! === module SIS_sum_output ===
+MAXTRUNC = 200                  !   [truncations save_interval-1] default = 0
+                                ! The run will be stopped, and the day set to a very large value if the velocity
+                                ! is truncated more than MAXTRUNC times between  writing ice statistics. Set
+                                ! MAXTRUNC to 0 to stop if there is any truncation of sea ice velocities.
+
+! === module SIS_ice_diagnostics ===
+! This module handles sea-ice state diagnostics.
+
+! === module SIS_fast_thermo ===
+! This module applies rapidly varying heat fluxes to the ice and does an implicit surface temperature
+! calculation.
+
+! === module SIS2_ice_thm (updates) ===
+! This sub-module does updates of the sea-ice due to thermodynamic changes.
+
+! === module SIS_optics ===
+! This module calculates the albedo and absorption profiles for shortwave radiation.
+! USE_SLAB_ICE_OPTICS = True    !   [Boolean]
+                                ! Using the very old slab-style ice optics.
