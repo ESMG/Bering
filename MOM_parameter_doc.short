@@ -88,13 +88,16 @@ TOPO_CONFIG = "file"            !
                                 !     USER - call a user modified routine.
 TOPO_FILE = "ocean_topog.nc"    ! default = "topog.nc"
                                 ! The file from which the bathymetry is read.
-MAXIMUM_DEPTH = 6500.0          !   [m]
-                                ! The maximum depth of the ocean.
 MINIMUM_DEPTH = 5.0             !   [m] default = 0.0
                                 ! If MASKING_DEPTH is unspecified, then anything shallower than MINIMUM_DEPTH is
                                 ! assumed to be land and all fluxes are masked out. If MASKING_DEPTH is
                                 ! specified, then all depths shallower than MINIMUM_DEPTH but deeper than
                                 ! MASKING_DEPTH are rounded to MINIMUM_DEPTH.
+MASKING_DEPTH = 1.0             !   [m] default = -9999.0
+                                ! The depth below which to mask points as land points, for which all fluxes are
+                                ! zeroed out. MASKING_DEPTH needs to be smaller than MINIMUM_DEPTH
+MAXIMUM_DEPTH = 6500.0          !   [m]
+                                ! The maximum depth of the ocean.
 
 ! === module MOM_open_boundary ===
 ! Controls where open boundaries are located, what kind of boundary condition to impose, and what data to apply,
@@ -166,18 +169,11 @@ OBC_TIDE_REF_DATE = 1980, 1, 1  !
                                 ! Reference date to use for tidal calculations and equilibrium phase.
 OBC_TIDE_NODAL_REF_DATE = 1980, 7, 2 ! default = 0
                                 ! Fixed reference date to use for nodal modulation of boundary tides.
-MASKING_DEPTH = 1.0             !   [m] default = -9999.0
-                                ! The depth below which to mask points as land points, for which all fluxes are
-                                ! zeroed out. MASKING_DEPTH is ignored if negative.
 
 ! === module MOM_verticalGrid ===
 ! Parameters providing information about the vertical grid.
 NK = 75                         !   [nondim]
                                 ! The number of model layers.
-
-! === module MOM_boundary_update ===
-
-! === module segment_tracer_registry_init ===
 
 ! === module MOM_EOS ===
 DTFREEZE_DP = -7.75E-08         !   [deg C Pa-1] default = 0.0
@@ -185,6 +181,10 @@ DTFREEZE_DP = -7.75E-08         !   [deg C Pa-1] default = 0.0
                                 ! temperature with pressure.
 
 ! === module MOM_tracer_flow_control ===
+
+! === module MOM_boundary_update ===
+
+! === module segment_tracer_registry_init ===
 
 ! === module MOM_coord_initialization ===
 COORD_CONFIG = "gprime"         ! default = "none"
