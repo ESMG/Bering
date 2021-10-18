@@ -23,12 +23,12 @@ Bering 50 vertical levels
 "ocean_model","vbt","vbt","ocean_hourly","all",.false.,"none", 2
 #"ocean_model","temp","temp","ocean_hourly","all",.false.,"none", 2
 #"ocean_model","salt","salt","ocean_hourly","all",.false.,"none", 2
-"ocean_model",  "taux",     "taux",      "ocean_hourly", "all", ".false.", "none", 2
-"ocean_model",  "tauy",     "tauy",      "ocean_hourly", "all", ".false.", "none", 2
-"ice_model",  "siconc",     "siconc",    "ocean_hourly", "all", ".false.", "none", 2
+#"ocean_model",  "taux",     "taux",      "ocean_hourly", "all", ".false.", "none", 2
+#"ocean_model",  "tauy",     "tauy",      "ocean_hourly", "all", ".false.", "none", 2
+#"ice_model",  "siconc",     "siconc",    "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "UI",        "uice",      "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "VI",        "vice",      "ocean_hourly", "all", ".false.", "none", 2
-"ice_model",  "HI",         "hice",      "ocean_hourly", "all", ".false.", "none", 2
+#"ice_model",  "HI",         "hice",      "ocean_hourly", "all", ".false.", "none", 2
 "ice_model",  "sispeed",    "sispeed",   "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "MIS_tot",    "mis",       "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "SWDN",      "swdn",      "ocean_hourly", "all", ".false.", "none", 2
@@ -62,11 +62,12 @@ Bering 50 vertical levels
 "ice_model",  "HI",       "hice",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "HS",       "hsnow",     "ice_daily", "all", "mean", "none",2
 "ice_model",  "sispeed",  "sispeed",   "ice_daily", "all", "mean", "none",2
-"ice_model",  "sh_d_hf",     "sh_d_hf","ice_daily", "all", "mean", "none",2
-"ice_model",  "SWDN",    "swdn",       "ice_daily", "all", "mean", "none",2
+"ice_model",  "sh_d_hf",  "sh_d_hf",   "ice_daily", "all", "mean", "none",2
+"ice_model",  "SWDN",     "swdn",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "STRENGTH", "STRENGTH",  "ice_daily", "all", "mean", "none",2
 "ice_model",  "RDG_RATE", "RDG_RATE",  "ice_daily", "all", "mean", "none",2
 "ice_model",  "BHEAT",    "BHEAT",     "ice_daily", "all", "mean", "none",2
 "ice_model",  "SN2IC",    "SN2IC",     "ice_daily", "all", "mean", "none",2
-#"ice_model",  "RDG_FRAC", "RDG_FRAC", "ice_daily", "all", "mean", "none",2
-#"ice_model",  "cn",       "cn",       "ice_daily", "all", "mean", "none",2
+"ice_model",  "RDG_FRAC", "RDG_FRAC",  "ice_daily", "all", "mean", "none",2
+"ice_model",  "cn",       "cn",        "ice_daily", "all", "mean", "none",2
+"ice_model",  "simass_n", "simass_n",  "ice_daily", "all", "mean", "none",2
