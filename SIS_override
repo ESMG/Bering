@@ -10,4 +10,4 @@
 #override MIN_H_FOR_TEMP_CALC = 1.e-2
 DEBUG = False
 #override LEMIEUX_K2 = 300.0
-#override MERGED_CONTINUITY = True
+!#override MERGED_CONTINUITY = True
