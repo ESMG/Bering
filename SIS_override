@@ -1,13 +1,4 @@
-#override CGRID_ICE_DYNAMICS = True
-#override DO_ICEBERGS = False
-#override ICE_OCEAN_STRESS_STAGGER = "C"
-#override CONTINUITY_H_NEGLECT = 1e-28
-#override CONTINUITY_FRAC_NEGLECT=1e-20
-#override ICE_COVER_DISCARD = 1e-30
-#override ADCROFT_ADVECTIVE_CFL = True
-!#override ICE_YIELD_ELLIPTICITY = 1.5
-#override LEMIEUX_LANDFAST = True
+#override ICE_YIELD_ELLIPTICITY = 1.5
 #override MIN_H_FOR_TEMP_CALC = 1.e-2
 DEBUG = False
-#override LEMIEUX_K2 = 300.0
 !#override MERGED_CONTINUITY = True

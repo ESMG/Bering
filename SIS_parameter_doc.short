@@ -73,6 +73,10 @@ DT_ICE_DYNAMICS = 1200.0        !   [seconds] default = -1.0
                                 ! The time step used for the slow ice dynamics, including stepping the
                                 ! continuity equation and interactions between the ice mass field and
                                 ! velocities.  If 0 or negative the coupling time step will be used.
+ICE_YIELD_ELLIPTICITY = 1.5     !   [Nondim] default = 2.0
+                                ! The ellipticity coefficient for the plastic yield curve in the sea-ice
+                                ! rheology.  For an infinite ellipticity (i.e., a cavitating fluid rheology),
+                                ! use 0.
 LEMIEUX_LANDFAST = True         !   [Boolean] default = False
                                 ! If true, turn on Lemieux landfast ice parameterization.
 LEMIEUX_K2 = 300.0              !   [N m-3] default = 15.0
@@ -115,6 +119,9 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
                                 ! If true use the Adcroft reciprocal of the cell mass when calculating the
                                 ! advective CFL numbers used in PPM tracer advection schemes, rather than adding
                                 ! a small mass in the denominator of the advective CFL ratio.
+NEW_RIDGE_REDISTRIBUTION = True !   [Boolean] default = False
+                                ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
+                                ! Lipscomb et al. 2007
 
 ! === module SIS_sum_output ===
 MAXTRUNC = 200                  !   [truncations save_interval-1] default = 0

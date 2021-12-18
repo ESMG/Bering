@@ -4,9 +4,6 @@ DEBUG_BT = False
 ! Bob's new option
 !#override INTEGRAL_BT_CONTINUITY = True
 #override ENERGYSAVEDAYS = 0.041666
-#override USE_LEGACY_DIABATIC_DRIVER = False
-#override PARALLEL_RESTARTFILES = False
-#override BAROTROPIC_TIDAL_SAL_BUG = False
 !Z_RESCALE_POWER = 11
 !L_RESCALE_POWER = -5
 !T_RESCALE_POWER = 11

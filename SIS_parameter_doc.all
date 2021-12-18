@@ -349,7 +349,7 @@ PROJECT_ICE_DRAG_VEL = True     !   [Boolean] default = True
                                 ! If true, project forward the ice velocity used in the drag calculation to
                                 ! avoid an instability that can occur when a finite stress is applied to thin
                                 ! ice moving with the velocity of the ocean.
-ICE_YIELD_ELLIPTICITY = 2.0     !   [Nondim] default = 2.0
+ICE_YIELD_ELLIPTICITY = 1.5     !   [Nondim] default = 2.0
                                 ! The ellipticity coefficient for the plastic yield curve in the sea-ice
                                 ! rheology.  For an infinite ellipticity (i.e., a cavitating fluid rheology),
                                 ! use 0.
@@ -448,7 +448,7 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
 NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = False
                                 ! Participation function used in ridging, .false. for Thorndike et al. 1975
                                 ! .true. for Lipscomb et al. 2007
-NEW_RIDGE_REDISTRIBUTION = False !   [Boolean] default = False
+NEW_RIDGE_REDISTRIBUTION = True !   [Boolean] default = False
                                 ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
                                 ! Lipscomb et al. 2007
 
