@@ -1,8 +1,6 @@
 ! This file was written by the model and records the non-default parameters used at run-time.
 
 ! === module ice_model ===
-DO_RIDGING = True               !   [Boolean] default = False
-                                ! If true, call the ridging routines.
 
 ! === module MOM_domains ===
 REENTRANT_X = False             !   [Boolean] default = True
@@ -85,11 +83,6 @@ ICE_YIELD_ELLIPTICITY = 1.5     !   [Nondim] default = 2.0
                                 ! The ellipticity coefficient for the plastic yield curve in the sea-ice
                                 ! rheology.  For an infinite ellipticity (i.e., a cavitating fluid rheology),
                                 ! use 0.
-ITD_LANDFAST = True             !   [Boolean] default = False
-                                ! If true, turn on probabilistic landfast ice parameterization.
-H2_FILE = "ocean_topoh2.nc"     !
-                                ! The path to the file containing the sub-grid-scale topographic roughness
-                                ! amplitude with ITD_LANDFAST.
 ICE_COVER_DISCARD = 1.0E-30     !   [nondim] default = -1.0
                                 ! A tiny fractional ice coverage which if positive causes the mass in categories
                                 ! with less than this coverage to be discarded.
@@ -128,9 +121,6 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
                                 ! If true use the Adcroft reciprocal of the cell mass when calculating the
                                 ! advective CFL numbers used in PPM tracer advection schemes, rather than adding
                                 ! a small mass in the denominator of the advective CFL ratio.
-NEW_RIDGE_REDISTRIBUTION = True !   [Boolean] default = False
-                                ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
-                                ! Lipscomb et al. 2007
 
 ! === module SIS_sum_output ===
 MAXTRUNC = 200                  !   [truncations save_interval-1] default = 0

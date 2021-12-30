@@ -68,7 +68,7 @@ ADD_DIURNAL_SW = False          !   [Boolean] default = False
 DO_SUN_ANGLE_FOR_ALB = False    !   [Boolean] default = False
                                 ! If true, find the sun angle for calculating the ocean albedo within the sea
                                 ! ice model.
-DO_RIDGING = True               !   [Boolean] default = False
+DO_RIDGING = False              !   [Boolean] default = False
                                 ! If true, call the ridging routines.
 RESTARTFILE = "ice_model.res.nc" ! default = "ice_model.res.nc"
                                 ! The name of the restart file.
@@ -389,19 +389,8 @@ CFL_TRUNC_DYN_ITS = False       !   [Boolean] default = False
                                 ! otherwise only the final velocities that are used for transport are checked.
 LEMIEUX_LANDFAST = False        !   [Boolean] default = False
                                 ! If true, turn on Lemieux landfast ice parameterization.
-ITD_LANDFAST = True             !   [Boolean] default = False
+ITD_LANDFAST = False            !   [Boolean] default = False
                                 ! If true, turn on probabilistic landfast ice parameterization.
-LEMIEUX_ALPHA_B = 20.0          !   [Nondim] default = 20.0
-                                ! The value of a third Lemieux landfast ice tuneable parameter.
-LEMIEUX_U0 = 5.0E-05            !   [m s-1] default = 5.0E-05
-                                ! Velocity for Lemieux landfast ice.
-BASAL_STRESS_MIN_THICK = 0.01   !   [m] default = 0.01
-                                ! Minimum ice thickness for grounding in ITD landfast ice.
-BASAL_STRESS_MAX_DEPTH = 50.0   !   [m] default = 50.0
-                                ! Maximum water depth for grounding in ITD landfast ice.
-H2_FILE = "ocean_topoh2.nc"     !
-                                ! The path to the file containing the sub-grid-scale topographic roughness
-                                ! amplitude with ITD_LANDFAST.
 RECATEGORIZE_ICE = True         !   [Boolean] default = True
                                 ! If true, readjust the distribution into ice thickness categories after
                                 ! advection.
@@ -458,12 +447,6 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
                                 ! If true use the Adcroft reciprocal of the cell mass when calculating the
                                 ! advective CFL numbers used in PPM tracer advection schemes, rather than adding
                                 ! a small mass in the denominator of the advective CFL ratio.
-NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = False
-                                ! Participation function used in ridging, .false. for Thorndike et al. 1975
-                                ! .true. for Lipscomb et al. 2007
-NEW_RIDGE_REDISTRIBUTION = True !   [Boolean] default = False
-                                ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
-                                ! Lipscomb et al. 2007
 
 ! === module SIS_sum_output ===
 WRITE_STOCKS = True             !   [Boolean] default = True
