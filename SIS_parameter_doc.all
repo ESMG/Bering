@@ -270,9 +270,19 @@ DO_ICE_RESTORE = False          !   [Boolean] default = False
                                 ! If true, restore the sea ice state toward climatology.
 NUDGE_SEA_ICE = False           !   [Boolean] default = False
                                 ! If true, constrain the sea ice concentrations using observations.
-TRANSMUTE_SEA_ICE = False       !   [Boolean] default = False
+TRANSMUTE_SEA_ICE = True        !   [Boolean] default = False
                                 ! If true, allow ice to be transmuted directly into seawater with a spatially
                                 ! varying rate as a form of outflow open boundary condition.
+TRANSMUTATION_RATE_FILE = "ice_outflow.nc" !
+                                ! The file from which the transmutation rate should be read.
+TRANSMUTATION_RATE_VAR = "rate" ! default = "transmute_rate"
+                                ! The variable with the map of sea-ice transmutation rate.  No transmutation
+                                ! occurs where this field is 0.
+TRANSMUTATION_RATE_RESCALE = 1.0 !   [nondim] default = 1.0
+                                ! A rescaling factor to use when reading the transmutation rate to scale it to
+                                ! units of [s-1].  If this factor is negative, the field that is being read is a
+                                ! timescale, so the rate is the Adcroft reciprocal of the field that is read
+                                ! times this scaling factor
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
@@ -385,6 +395,10 @@ LEMIEUX_ALPHA_B = 20.0          !   [Nondim] default = 20.0
                                 ! The value of a third Lemieux landfast ice tuneable parameter.
 LEMIEUX_U0 = 5.0E-05            !   [m s-1] default = 5.0E-05
                                 ! Velocity for Lemieux landfast ice.
+BASAL_STRESS_MIN_THICK = 0.01   !   [m] default = 0.01
+                                ! Minimum ice thickness for grounding in ITD landfast ice.
+BASAL_STRESS_MAX_DEPTH = 50.0   !   [m] default = 50.0
+                                ! Maximum water depth for grounding in ITD landfast ice.
 H2_FILE = "ocean_topoh2.nc"     !
                                 ! The path to the file containing the sub-grid-scale topographic roughness
                                 ! amplitude with ITD_LANDFAST.

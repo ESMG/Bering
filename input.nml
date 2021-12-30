@@ -24,8 +24,8 @@
 
  &coupler_nml
             months = 0,
-            days   = 10,
-            hours  = 0,
+            days   = 0,
+            hours  = 2,
             current_date = 2011,9,3,0,0,0,
             calendar = 'gregorian',
             dt_cpld = 3600,

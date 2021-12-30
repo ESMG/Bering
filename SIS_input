@@ -82,6 +82,14 @@ ICE_BULK_SALINITY = 0.0         !   [g/kg] default = 4.0
 ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
                                 ! The initial salinity of sea ice as a fraction of the salinity of the seawater
                                 ! from which it formed.
+TRANSMUTE_SEA_ICE = True        !   [Boolean] default = False
+                                ! If true, allow ice to be transmuted directly into seawater with a spatially
+                                ! spatially varying rate as a form of outflow open boundary condition.
+TRANSMUTATION_RATE_FILE = "ice_outflow.nc" !
+                                ! The file from which the transmutation rate should be read.
+TRANSMUTATION_RATE_VAR = "rate" ! default = "transmute_rate"
+                                ! The variable with the map of sea-ice transmutation rate.  No transmutation
+                                ! occurs where this field is 0.
 !SIS2_FILLING_FRAZIL = False     !   [Boolean] default = True
 
 ! === module SIS2_ice_thm (updates) ===

@@ -1,4 +1,3 @@
 #override ICE_YIELD_ELLIPTICITY = 1.5
 #override MIN_H_FOR_TEMP_CALC = 1.e-2
-DEBUG = False
-!#override MERGED_CONTINUITY = True
+DEBUG = True
