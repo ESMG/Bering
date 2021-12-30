@@ -1,7 +1,6 @@
 DEBUG = False
 DEBUG_BT = False
 !VERBOSITY = 9
-! Bob's new option
 !#override INTEGRAL_BT_CONTINUITY = True
 #override ENERGYSAVEDAYS = 0.041666
 !Z_RESCALE_POWER = 11
