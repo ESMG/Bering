@@ -387,20 +387,23 @@ CFL_TRUNCATE = 0.5              !   [nondim] default = 0.5
 CFL_TRUNC_DYN_ITS = False       !   [Boolean] default = False
                                 ! If true, check the CFL number for every iteration of the rheology solver;
                                 ! otherwise only the final velocities that are used for transport are checked.
-LEMIEUX_LANDFAST = True         !   [Boolean] default = False
+LEMIEUX_LANDFAST = False        !   [Boolean] default = False
                                 ! If true, turn on Lemieux landfast ice parameterization.
-LEMIEUX_K1 = 8.0                !   [Nondim] default = 8.0
-                                ! The value of the first Lemieux landfast ice tuneable parameter.
-LEMIEUX_K2 = 300.0              !   [N m-3] default = 15.0
-                                ! The value of the second Lemieux landfast ice tuneable parameter.
-LEMIEUX_THRESHOLD_HW = 30.0     !   [m] default = 30.0
-                                ! Maximum water depth for grounding in Lemieux landfast ice.
-ITD_LANDFAST = False            !   [Boolean] default = False
+ITD_LANDFAST = True             !   [Boolean] default = False
                                 ! If true, turn on probabilistic landfast ice parameterization.
 LEMIEUX_ALPHA_B = 20.0          !   [Nondim] default = 20.0
                                 ! The value of a third Lemieux landfast ice tuneable parameter.
 LEMIEUX_U0 = 5.0E-05            !   [m s-1] default = 5.0E-05
                                 ! Velocity for Lemieux landfast ice.
+BASAL_STRESS_MIN_THICK = 0.01   !   [m] default = 0.01
+                                ! Minimum ice thickness for grounding in ITD landfast ice.
+BASAL_STRESS_MAX_DEPTH = 50.0   !   [m] default = 50.0
+                                ! Maximum water depth for grounding in ITD landfast ice.
+BASAL_STRESS_MU_S = 0.1         !   [nondim] default = 0.1
+                                ! Drag coefficient in ITD landfast ice.
+H2_FILE = "ocean_topoh2.nc"     !
+                                ! The path to the file containing the sub-grid-scale topographic roughness
+                                ! amplitude with ITD_LANDFAST.
 RECATEGORIZE_ICE = True         !   [Boolean] default = True
                                 ! If true, readjust the distribution into ice thickness categories after
                                 ! advection.
