@@ -83,6 +83,10 @@ ICE_YIELD_ELLIPTICITY = 1.5     !   [Nondim] default = 2.0
                                 ! The ellipticity coefficient for the plastic yield curve in the sea-ice
                                 ! rheology.  For an infinite ellipticity (i.e., a cavitating fluid rheology),
                                 ! use 0.
+LEMIEUX_LANDFAST = True         !   [Boolean] default = False
+                                ! If true, turn on Lemieux landfast ice parameterization.
+LEMIEUX_K2 = 300.0              !   [N m-3] default = 15.0
+                                ! The value of the second Lemieux landfast ice tuneable parameter.
 ICE_COVER_DISCARD = 1.0E-30     !   [nondim] default = -1.0
                                 ! A tiny fractional ice coverage which if positive causes the mass in categories
                                 ! with less than this coverage to be discarded.
