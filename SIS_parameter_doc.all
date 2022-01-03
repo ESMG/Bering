@@ -401,6 +401,12 @@ BASAL_STRESS_MAX_DEPTH = 50.0   !   [m] default = 50.0
                                 ! Maximum water depth for grounding in ITD landfast ice.
 BASAL_STRESS_MU_S = 0.1         !   [nondim] default = 0.1
                                 ! Drag coefficient in ITD landfast ice.
+BASAL_STRESS_PUNY = 1.0E-20     !   [nondim] default = 1.0E-20
+                                ! Small number in ITD landfast ice.
+BASAL_STRESS_SCALE = 1.0        !   [m] default = 1.0
+                                ! Scale factor in ITD landfast ice.
+BASAL_STRESS_CUTOFF = 1.943     !   [nondim] default = 1.943
+                                ! Scale factor in ITD landfast ice.
 H2_FILE = "ocean_topoh2.nc"     !
                                 ! The path to the file containing the sub-grid-scale topographic roughness
                                 ! amplitude with ITD_LANDFAST.
