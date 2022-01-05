@@ -68,7 +68,7 @@ ADD_DIURNAL_SW = False          !   [Boolean] default = False
 DO_SUN_ANGLE_FOR_ALB = False    !   [Boolean] default = False
                                 ! If true, find the sun angle for calculating the ocean albedo within the sea
                                 ! ice model.
-DO_RIDGING = False              !   [Boolean] default = False
+DO_RIDGING = True               !   [Boolean] default = False
                                 ! If true, call the ridging routines.
 RESTARTFILE = "ice_model.res.nc" ! default = "ice_model.res.nc"
                                 ! The name of the restart file.
@@ -466,6 +466,12 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
                                 ! If true use the Adcroft reciprocal of the cell mass when calculating the
                                 ! advective CFL numbers used in PPM tracer advection schemes, rather than adding
                                 ! a small mass in the denominator of the advective CFL ratio.
+NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = False
+                                ! Participation function used in ridging, .false. for Thorndike et al. 1975
+                                ! .true. for Lipscomb et al. 2007
+NEW_RIDGE_REDISTRIBUTION = False !   [Boolean] default = False
+                                ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
+                                ! Lipscomb et al. 2007
 
 ! === module SIS_sum_output ===
 WRITE_STOCKS = True             !   [Boolean] default = True

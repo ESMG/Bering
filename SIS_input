@@ -1,7 +1,7 @@
 ! This file was written by the model and records the non-default parameters used at run-time.
 
 ! === module ice_model ===
-!DO_RIDGING = True               !   [Boolean] default = False
+DO_RIDGING = True               !   [Boolean] default = False
                                 ! If true, call the ridging routines.
 
 ! === module MOM_domains ===
