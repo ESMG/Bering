@@ -404,6 +404,10 @@ BATHY_ROUGHNESS_MIN = 2.5       !   [m] default = 2.5
                                 ! Minimum bathymetric roughness.
 BATHY_ROUGHNESS_MAX = 2.5       !   [m] default = 2.5
                                 ! Maximum bathymetric roughness.
+BASAL_STRESS_NCAT_B = 100       ! default = 100
+                                ! Number of bathymetric depth categories in landfast ice computation.
+BASAL_STRESS_NCAT_I = 100       ! default = 100
+                                ! Number of ice thickness categories in landfast ice computation.
 RECATEGORIZE_ICE = True         !   [Boolean] default = True
                                 ! If true, readjust the distribution into ice thickness categories after
                                 ! advection.

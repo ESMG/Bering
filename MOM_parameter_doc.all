@@ -571,6 +571,15 @@ REMAPPING_SCHEME = "PPM_H4"     ! default = "PLM"
                                 ! PPM_IH4     (3rd-order accurate)
                                 ! PQM_IH4IH3  (4th-order accurate)
                                 ! PQM_IH6IH5  (5th-order accurate)
+VELOCITY_REMAPPING_SCHEME = "PPM_H4" ! default = "PPM_H4"
+                                ! This sets the reconstruction scheme used for vertical remapping of velocities.
+                                ! By default it is the same as REMAPPING_SCHEME. It can be one of the following
+                                ! schemes: PCM         (1st-order accurate)
+                                ! PLM         (2nd-order accurate)
+                                ! PPM_H4      (3rd-order accurate)
+                                ! PPM_IH4     (3rd-order accurate)
+                                ! PQM_IH4IH3  (4th-order accurate)
+                                ! PQM_IH6IH5  (5th-order accurate)
 FATAL_CHECK_RECONSTRUCTIONS = False !   [Boolean] default = False
                                 ! If true, cell-by-cell reconstructions are checked for consistency and if
                                 ! non-monotonicity or an inconsistency is detected then a FATAL error is issued.
@@ -583,6 +592,10 @@ REMAP_BOUND_INTERMEDIATE_VALUES = False !   [Boolean] default = False
 REMAP_BOUNDARY_EXTRAP = False   !   [Boolean] default = False
                                 ! If true, values at the interfaces of boundary cells are extrapolated instead
                                 ! of piecewise constant
+PARTIAL_CELL_VELOCITY_REMAP = False !   [Boolean] default = False
+                                ! If true, use partial cell thicknesses at velocity points that are masked out
+                                ! where they extend below the shallower of the neighboring bathymetry for
+                                ! remapping velocity.
 REMAP_AFTER_INITIALIZATION = True !   [Boolean] default = True
                                 ! If true, applies regridding and remapping immediately after initialization so
                                 ! that the state is ALE consistent. This is a legacy step and should not be
@@ -599,6 +612,10 @@ REGRID_FILTER_DEEP_DEPTH = 0.0  !   [m] default = 0.0
                                 ! The depth below which full time-filtering is applied with time-scale
                                 ! REGRID_TIME_SCALE. Between depths REGRID_FILTER_SHALLOW_DEPTH and
                                 ! REGRID_FILTER_SHALLOW_DEPTH the filter weights adopt a cubic profile.
+REMAP_VEL_MASK_BBL_THICK = -0.001 !   [m] default = -0.001
+                                ! A thickness of a bottom boundary layer below which velocities in thin layers
+                                ! are zeroed out after remapping, following practice with Hybgen remapping, or a
+                                ! negative value to avoid such filtering altogether.
 
 ! === module MOM_state_initialization ===
 FATAL_INCONSISTENT_RESTART_TIME = False !   [Boolean] default = False
@@ -772,6 +789,13 @@ VERY_SMALL_FREQUENCY = 1.0E-17  !   [s-1] default = 1.0E-17
 KD_SMOOTH = 1.0E-06             !   [m2 s-1] default = 1.0E-06
                                 ! A diapycnal diffusivity that is used to interpolate more sensible values of T
                                 ! & S into thin layers.
+INTERNAL_WAVE_SPEED_TOL = 0.001 !   [nondim] default = 0.001
+                                ! The fractional tolerance for finding the wave speeds.
+INTERNAL_WAVE_SPEED_MIN = 0.0   !   [m s-1] default = 0.0
+                                ! A floor in the first mode speed below which 0 used instead.
+INTERNAL_WAVE_SPEED_BETTER_EST = True !   [Boolean] default = True
+                                ! If true, use a more robust estimate of the first mode wave speed as the
+                                ! starting point for iterations.
 USE_QG_LEITH_GM = False         !   [Boolean] default = False
                                 ! If true, use the QG Leith viscosity as the GM coefficient.
 
@@ -962,7 +986,7 @@ CORIOLIS_EN_DIS = True          !   [Boolean] default = False
                                 ! If true, two estimates of the thickness fluxes are used to estimate the
                                 ! Coriolis term, and the one that dissipates energy relative to the other one is
                                 ! used.
-CORIOLIS_SCHEME = "SADOURNY75_ENERGY" ! default = "SADOURNY75_ENERGY"
+CORIOLIS_SCHEME = "SADOURNY75_ENSTRO" ! default = "SADOURNY75_ENERGY"
                                 ! CORIOLIS_SCHEME selects the discretization for the Coriolis terms. Valid
                                 ! values are:
                                 !    SADOURNY75_ENERGY - Sadourny, 1975; energy cons.
@@ -974,8 +998,8 @@ CORIOLIS_SCHEME = "SADOURNY75_ENERGY" ! default = "SADOURNY75_ENERGY"
 BOUND_CORIOLIS = True           !   [Boolean] default = False
                                 ! If true, the Coriolis terms at u-points are bounded by the four estimates of
                                 ! (f+rv)v from the four neighboring v-points, and similarly at v-points.  This
-                                ! option is always effectively false with CORIOLIS_EN_DIS defined and
-                                ! CORIOLIS_SCHEME set to SADOURNY75_ENERGY.
+                                ! option would have no effect on the SADOURNY Coriolis scheme if it were
+                                ! possible to use centered difference thickness fluxes.
 KE_SCHEME = "KE_ARAKAWA"        ! default = "KE_ARAKAWA"
                                 ! KE_SCHEME selects the discretization for acceleration due to the kinetic
                                 ! energy gradient. Valid values are:
@@ -1344,7 +1368,7 @@ MIXEDLAYER_RESTRAT = True       !   [Boolean] default = False
                                 ! If true, a density-gradient dependent re-stratifying flow is imposed in the
                                 ! mixed layer. Can be used in ALE mode without restriction but in layer mode can
                                 ! only be used if BULKMIXEDLAYER is true.
-FOX_KEMPER_ML_RESTRAT_COEF = 20.0 !   [nondim] default = 0.0
+FOX_KEMPER_ML_RESTRAT_COEF = 1.0 !   [nondim] default = 0.0
                                 ! A nondimensional coefficient that is proportional to the ratio of the
                                 ! deformation radius to the dominant lengthscale of the submesoscale mixed layer
                                 ! instabilities, times the minimum of the ratio of the mesoscale eddy kinetic
@@ -1354,7 +1378,7 @@ FOX_KEMPER_ML_RESTRAT_COEF = 20.0 !   [nondim] default = 0.0
 FOX_KEMPER_ML_RESTRAT_COEF2 = 0.0 !   [nondim] default = 0.0
                                 ! As for FOX_KEMPER_ML_RESTRAT_COEF but used in a second application of the MLE
                                 ! restratification parameterization.
-MLE_FRONT_LENGTH = 0.0          !   [m] default = 0.0
+MLE_FRONT_LENGTH = 1000.0       !   [m] default = 0.0
                                 ! If non-zero, is the frontal-length scale used to calculate the upscaling of
                                 ! buoyancy gradients that is otherwise represented by the parameter
                                 ! FOX_KEMPER_ML_RESTRAT_COEF. If MLE_FRONT_LENGTH is non-zero, it is recommended
@@ -1363,7 +1387,7 @@ MLE_USE_PBL_MLD = True          !   [Boolean] default = False
                                 ! If true, the MLE parameterization will use the mixed-layer depth provided by
                                 ! the active PBL parameterization. If false, MLE will estimate a MLD based on a
                                 ! density difference with the surface using the parameter MLE_DENSITY_DIFF.
-MLE_MLD_DECAY_TIME = 0.0        !   [s] default = 0.0
+MLE_MLD_DECAY_TIME = 2.592E+06  !   [s] default = 0.0
                                 ! The time-scale for a running-mean filter applied to the mixed-layer depth used
                                 ! in the MLE restratification parameterization. When the MLD deepens below the
                                 ! current running-mean the running-mean is instantaneously set to the current
@@ -1387,13 +1411,6 @@ DIAG_EBT_MONO_N2_COLUMN_FRACTION = 0.0 !   [nondim] default = 0.0
 DIAG_EBT_MONO_N2_DEPTH = -1.0   !   [m] default = -1.0
                                 ! The depth below which N2 is limited as monotonic for the purposes of
                                 ! calculating the equivalent barotropic wave speed.
-INTERNAL_WAVE_SPEED_TOL = 0.001 !   [nondim] default = 0.001
-                                ! The fractional tolerance for finding the wave speeds.
-INTERNAL_WAVE_SPEED_MIN = 0.0   !   [m s-1] default = 0.0
-                                ! A floor in the first mode speed below which 0 used instead.
-INTERNAL_WAVE_SPEED_BETTER_EST = True !   [Boolean] default = True
-                                ! If true, use a more robust estimate of the first mode wave speed as the
-                                ! starting point for iterations.
 
 ! === module MOM_diabatic_driver ===
 ! The following parameters are used for diabatic processes.
