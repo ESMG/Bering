@@ -1,6 +1,9 @@
 ! This file was written by the model and records the non-default parameters used at run-time.
 
 ! === module MOM ===
+DIABATIC_FIRST = True           !   [Boolean] default = False
+                                ! If true, apply diabatic and thermodynamic processes, including buoyancy
+                                ! forcing and mass gain or loss, before stepping the dynamics forward.
 USE_REGRIDDING = True           !   [Boolean] default = False
                                 ! If True, use the ALE algorithm (regridding/remapping). If False, use the
                                 ! layered isopycnal algorithm.
@@ -273,6 +276,9 @@ SPONGE_IDAMP_U_var = "Idamp_u"  ! default = "Idamp"
 SPONGE_IDAMP_V_var = "Idamp_v"  ! default = "Idamp"
                                 ! The name of the inverse damping rate variable in SPONGE_UV_DAMPING_FILE for
                                 ! the velocities.
+INTERPOLATE_SPONGE_TIME_SPACE = True !   [Boolean] default = False
+                                ! If True, perform on-the-fly regridding in lat-lon-time of sponge restoring
+                                ! data.
 
 ! === module MOM_sponge ===
 SPONGE_DATA_ONGRID = True       !   [Boolean] default = False
