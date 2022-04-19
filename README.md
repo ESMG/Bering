@@ -7,3 +7,7 @@ I took the 6.6x13 one which uses 72 cores.
 or (doesn't change answers)
 
 check_mask --grid_file INPUT/ocean_mosaic.nc --ocean_topog INPUT/ocean_topog.nc --min_pe 24 --max_pe 80 --halo 4 --nobc 4 --direction north,west,south,east --is 192,1,1,237 --ie 237,1,230,237 --js 277,1,1,143 --je 277,275,1,277 --model ocean
+            ncar_ocean_flux_multilevel = .true.
+            bulk_zu = 10.
+            bulk_zt = 2.
+            bulk_zq = 2.

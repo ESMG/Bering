@@ -449,7 +449,7 @@ BASAL_STRESS_MU_S = 0.1         !   [nondim] default = 0.1
 BASAL_STRESS_PUNY = 1.0E-20     !   [nondim] default = 1.0E-20
                                 ! Small number in ITD landfast ice.
 BASAL_STRESS_SCALE = 1.0        !   [m] default = 1.0
-                                ! Scale factor in ITD landfast ice.
+                                ! Parameter to make units work in landfast ice.
 BASAL_STRESS_CUTOFF = 1.943     !   [nondim] default = 1.943
                                 ! Scale factor in ITD landfast ice.
 H2_FILE = "ocean_topoh2.nc"     !
@@ -459,9 +459,11 @@ BATHY_ROUGHNESS_MIN = 2.5       !   [m] default = 2.5
                                 ! Minimum bathymetric roughness.
 BATHY_ROUGHNESS_MAX = 2.5       !   [m] default = 2.5
                                 ! Maximum bathymetric roughness.
-BASAL_STRESS_NCAT_B = 100       ! default = 100
+BASAL_STRESS_NCAT_B = 10        ! default = 100
                                 ! Number of bathymetric depth categories in landfast ice computation.
 BASAL_STRESS_NCAT_I = 100       ! default = 100
+                                ! Number of ice thickness categories in landfast ice computation.
+BASAL_STRESS_EXTRA_DEPTH = ""   !
                                 ! Number of ice thickness categories in landfast ice computation.
 RECATEGORIZE_ICE = True         !   [Boolean] default = True
                                 ! If true, readjust the distribution into ice thickness categories after

@@ -111,6 +111,10 @@ ITD_LANDFAST = True             !   [Boolean] default = False
 H2_FILE = "ocean_topoh2.nc"     !
                                 ! The path to the file containing the sub-grid-scale topographic roughness
                                 ! amplitude with ITD_LANDFAST.
+BASAL_STRESS_NCAT_B = 10        ! default = 100
+                                ! Number of bathymetric depth categories in landfast ice computation.
+BASAL_STRESS_EXTRA_DEPTH = ""   !
+                                ! Number of ice thickness categories in landfast ice computation.
 ICE_COVER_DISCARD = 1.0E-30     !   [nondim] default = -1.0
                                 ! A tiny fractional ice coverage which if positive causes the mass in categories
                                 ! with less than this coverage to be discarded.
