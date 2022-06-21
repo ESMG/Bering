@@ -75,6 +75,14 @@ OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
 ! === module SIS_tracer_registry ===
 
 ! === module SIS_tracer_flow_control ===
+OBC_SEGMENT_001_DATA = "U=0.0,V=0.0" !
+                                ! OBC segment docs
+OBC_SEGMENT_002_DATA = "U=0.0,V=0.0" !
+                                ! OBC segment docs
+OBC_SEGMENT_003_DATA = "U=0.0,V=0.0" !
+                                ! OBC segment docs
+OBC_SEGMENT_004_DATA = "U=0.0,V=0.0" !
+                                ! OBC segment docs
 
 ! === module SIS_slow_thermo ===
 ! This module calculates the slow evolution of the ice mass, heat, and salt budgets.
