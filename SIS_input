@@ -188,6 +188,10 @@ ICE_DELTA_EDD_R_POND = 1.0      !   [nondimensional] default = 0.0
 ! if any.
 OBC_NUMBER_OF_SEGMENTS = 4      ! default = 0
                                 ! The number of open boundary segments.
+OBC_FREESLIP_VORTICITY = False  !   [Boolean] default = True
+OBC_COMPUTED_VORTICITY = True   !   [Boolean] default = False
+OBC_FREESLIP_STRAIN = False     !   [Boolean] default = True
+OBC_COMPUTED_STRAIN = True      !   [Boolean] default = False
 OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER"
 OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
 OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER" !
