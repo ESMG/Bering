@@ -694,9 +694,9 @@ SPONGE_DATA_ONGRID = True       !   [Boolean] default = False
                                 ! When defined, the incoming sponge data are assumed to be on the model grid
 !Total sponge columns at h points = 6393 !
                                 ! The total number of columns where sponges are applied at h points.
-!Total sponge columns at u points = 6392 !
+!Total sponge columns at u points = 6013 !
                                 ! The total number of columns where sponges are applied at u points.
-!Total sponge columns at v points = 6412 !
+!Total sponge columns at v points = 6174 !
                                 ! The total number of columns where sponges are applied at v points.
 OBC_SEGMENT_001_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu1.nc(uamp),Uphase=file:tu1.nc(uphase),Vamp=file:tu1.nc(vamp),Vphase=file:tu1.nc(vphase),SSHamp=file:tz1.nc(zamp),SSHphase=file:tz1.nc(zphase)" !
                                 ! OBC segment docs
