@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 DEBUG_BT = False
 !VERBOSITY = 9
 !#override INTEGRAL_BT_CONTINUITY = True
