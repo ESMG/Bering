@@ -9,11 +9,11 @@
 /
 
  &SIS_input_nml
-        output_directory = './',
-        input_filename = 'r'
-        restart_input_dir = 'INPUT/',
-        restart_output_dir = 'RESTART/',
-        parameter_filename = 'SIS_input',
+         output_directory = './',
+         input_filename = 'r'
+         restart_input_dir = 'INPUT/',
+         restart_output_dir = 'RESTART/',
+         parameter_filename = 'SIS_input',
                              'SIS_override',
                              'SIS_layout'
  /
@@ -23,9 +23,9 @@
 /
 
  &coupler_nml
-            months = 0,
+            months = 12,
             days   = 0,
-            hours  = 1,
+            hours  = 0,
             current_date = 2011,9,3,0,0,0,
             calendar = 'gregorian',
             dt_cpld = 3600,
@@ -113,8 +113,11 @@
 /
 
  &surface_flux_nml
-            ncar_ocean_flux = .true.
-	    raoult_sat_vap = .false.
+            ncar_ocean_flux_multilevel = .true.
+	    bulk_zu = 10.0
+	    bulk_zt = 2.0
+	    bulk_zq = 2.0
+	    raoult_sat_vap = .true.
 /
 
  &topography_nml
