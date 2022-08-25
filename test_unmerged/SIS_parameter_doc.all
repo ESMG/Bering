@@ -347,7 +347,7 @@ DT_RHEOLOGY = -1.0              !   [seconds] default = -1.0
 NSTEPS_DYN = 432                ! default = 432
                                 ! The number of iterations of the rheology and ice momentum equations for each
                                 ! slow ice time step.
-ICE_TDAMP_ELASTIC = -0.2        !   [s or nondim] default = -0.2
+ICE_TDAMP_ELASTIC = 7200.0      !   [s or nondim] default = -0.2
                                 ! The damping timescale associated with the elastic terms in the sea-ice
                                 ! dynamics equations (if positive) or the fraction of DT_ICE_DYNAMICS (if
                                 ! negative).

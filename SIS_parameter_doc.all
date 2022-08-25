@@ -379,20 +379,20 @@ DT_ICE_DYNAMICS = 1200.0        !   [seconds] default = -1.0
                                 ! The time step used for the slow ice dynamics, including stepping the
                                 ! continuity equation and interactions between the ice mass field and
                                 ! velocities.  If 0 or negative the coupling time step will be used.
-MERGED_CONTINUITY = True        !   [Boolean] default = False
+MERGED_CONTINUITY = False       !   [Boolean] default = False
                                 ! If true, update the continuity equations for the ice, snow, and melt pond
                                 ! water together summed across categories, with proportionate fluxes for each
                                 ! part. Otherwise the media are updated separately.
-DT_ICE_ADVECT = -1.0            !   [seconds] default = -1.0
-                                ! The time step used for the advecting tracers and masses as partitioned by
-                                ! thickness categories when merged_cont it true. If 0 or negative, the coupling
-                                ! time step will be used.
 NSTEPS_ADV = 1                  ! default = 1
                                 ! The number of advective iterations for each slow dynamics time step.
 ICEBERG_WINDSTRESS_BUG = False  !   [Boolean] default = False
                                 ! If true, use older code that applied an old ice-ocean stress to the icebergs
                                 ! in place of the current air-ocean stress.  This option is here for backward
                                 ! compatibility, but should be avoided.
+WARSAW_SUM_ORDER = True         !   [Boolean] default = True
+                                ! If true, use the order of sums in the Warsaw version of SIS2. The default is
+                                ! the opposite of MERGED_CONTINUITY. This option exists for backward
+                                ! compatibilty but may eventually be obsoleted.
 TIMEUNIT = 8.64E+04             !   [s] default = 8.64E+04
                                 ! The time unit for ICE_STATS_INTERVAL.
 ICE_STATS_INTERVAL = 0.0416666666666667 !   [days] default = 1.0
@@ -497,6 +497,9 @@ SIS_THICKNESS_ADVECTION_SCHEME = "PPM:H3" ! default = "UPWIND_2D"
                                 !   PCM    - Directionally split piecewise constant
                                 !   PLM    - Piecewise Linear Method
                                 !   PPM:H3 - Piecewise Parabolic Method (Huyhn 3rd order)
+INCONSISTENT_COVER_BUG = False  !   [Boolean] default = False
+                                ! If true, omit a recalculation of the fractional ice-free areal coverage after
+                                ! the adjustment of the ice categories.
 SIS_CONTINUITY_SCHEME = "PPM:C2PD" ! default = "UPWIND_2D"
                                 ! The horizontal transport scheme used in continuity:
                                 !   UPWIND_2D - Non-directionally split upwind
@@ -517,15 +520,6 @@ CONTINUITY_FRAC_NEGLECT = 1.0E-20 !   [nondim] default = 0.0
                                 ! total mass contributes no flux.  Without MERGED_CONTINUITY, any snow or melt
                                 ! pond transport that is less than this fraction of the ice transport is zeroed
                                 ! out.  A suggested non-default value might be of order 1e-20.
-SIS_COVER_TRANSPORT_SCHEME = "UPWIND_2D" ! default = "UPWIND_2D"
-                                ! The horizontal transport scheme used for projections of ice cover:
-                                !   UPWIND_2D - Non-directionally split upwind
-                                !   PCM       - Directionally split piecewise constant
-                                !   PPM:C2PD  - Positive definite PPM with 2nd order edge values
-                                !   PPM:C2MO  - Monotonic PPM with 2nd order edge values
-COVER_PPM_VOLUME_BASED_CFL = False !   [Boolean] default = False
-                                ! If true, use the ratio of the open face lengths to the cell areas when
-                                ! estimating CFL numbers in ice cover transport.
 
 ! === module SIS_tracer_advect ===
 SIS_TRACER_ADVECTION_SCHEME = "PPM:H3" ! default = "UPWIND_2D"
