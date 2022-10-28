@@ -2,25 +2,25 @@
 
 ! === module MOM_unit_scaling ===
 ! Parameters for doing unit scaling of variables.
-Z_RESCALE_POWER = 25            !   [nondim] default = 0
+Z_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's internal units of
                                 ! depths and heights.  Valid values range from -300 to 300.
-L_RESCALE_POWER = -21           !   [nondim] default = 0
+L_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's internal units of
                                 ! lateral distances.  Valid values range from -300 to 300.
-T_RESCALE_POWER = -41           !   [nondim] default = 0
+T_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's internal units of
                                 ! time.  Valid values range from -300 to 300.
-R_RESCALE_POWER = 14            !   [nondim] default = 0
+R_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's internal units of
                                 ! density.  Valid values range from -300 to 300.
-Q_RESCALE_POWER = 23            !   [nondim] default = 0
+Q_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's internal units of
                                 ! heat content.  Valid values range from -300 to 300.
-C_RESCALE_POWER = -31           !   [nondim] default = 0
+C_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's internal units of
                                 ! temperature.  Valid values range from -300 to 300.
-S_RESCALE_POWER = 37            !   [nondim] default = 0
+S_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's internal units of
                                 ! salinity.  Valid values range from -300 to 300.
 
@@ -43,13 +43,19 @@ DEBUG_CHKSUMS = True            !   [Boolean] default = True
 DEBUG_REDUNDANT = True          !   [Boolean] default = True
                                 ! If true, debug redundant data points during calls to the various vec_chksum
                                 ! routines.
-DEBUG_OBC = False               !   [Boolean] default = False
+DEBUG_OBC = True                !   [Boolean] default = False
                                 ! If true, do additional calls to help debug the performance of the open
                                 ! boundary condition code.
+OBC_SILLY_THICK = 0.0           !   [m] default = 0.0
+                                ! A silly value of thicknesses used outside of open boundary conditions for
+                                ! debugging.
+OBC_SILLY_VEL = 0.0             !   [m/s] default = 0.0
+                                ! A silly value of velocities used outside of open boundary conditions for
+                                ! debugging.
 
 ! === module MOM_verticalGrid ===
 ! Parameters providing information about the vertical grid.
-H_RESCALE_POWER = 103           !   [nondim] default = 0
+H_RESCALE_POWER = 0             !   [nondim] default = 0
                                 ! An integer power of 2 that is used to rescale the model's intenal units of
                                 ! thickness.  Valid values range from -300 to 300.
 
