@@ -631,7 +631,7 @@ EPBL_VEL_SCALE_FACTOR = 0.5477  !   [nondim] default = 1.0
                                 ! the PBL diffusivity.
 VSTAR_SURF_FAC = 1.8258         !   [nondim] default = 1.2
                                 ! The proportionality times ustar to set vstar at the surface.
-USE_LA_LI2016 = True            !   [nondim] default = False
+USE_LA_LI2016 = True            !   [Boolean] default = False
                                 ! A logical to use the Li et al. 2016 (submitted) formula to determine the
                                 ! Langmuir number.
 EPBL_LANGMUIR_SCHEME = "ADDITIVE" ! default = "NONE"
