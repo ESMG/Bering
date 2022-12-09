@@ -400,7 +400,7 @@ LEMIEUX_ALPHA_B = 20.0          !   [Nondim] default = 20.0
                                 ! The value of a third Lemieux landfast ice tuneable parameter.
 LEMIEUX_U0 = 5.0E-05            !   [m s-1] default = 5.0E-05
                                 ! Velocity for Lemieux landfast ice.
-H_ADJ_FILE = "                                        oöÇ            <û•           `ð¤{þ  €ã¤{þ  `ÐÎ             8?                                         (                                             " !
+H_ADJ_FILE = "                                        oöÇ            ¼´Æ           pMRUü  @RUü  `ÐÎ             ðŸ                                         (                                             " !
                                 ! The path to the file containing an adjustment to the bottom depth for the
                                 ! landfast ice.
 ADJUST_DEPTH = False            !   [Boolean] default = False
