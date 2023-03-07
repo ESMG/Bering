@@ -1,0 +1,10 @@
+#override ICE_YIELD_ELLIPTICITY = 1.5
+#override MIN_H_FOR_TEMP_CALC = 1.e-2
+#override ICE_STATS_INTERVAL = 0.041666
+#override WEAK_COAST_STRESS = True
+#override NEW_RIDGE_REDISTRIBUTION = True
+#override NEW_RIDGE_PARTICIPATION = True
+!DO_POND = True
+DEBUG = False
+MERGED_CONTINUITY = False
+BASAL_STRESS_NCAT_B = 10       ! default = 100
