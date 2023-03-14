@@ -35,7 +35,7 @@ OFFLINE_TRACER_MODE = False     !   [Boolean] default = False
 USE_REGRIDDING = True           !   [Boolean] default = False
                                 ! If True, use the ALE algorithm (regridding/remapping). If False, use the
                                 ! layered isopycnal algorithm.
-REMAP_AUXILIARY_VARS = False    !   [Boolean] default = False
+REMAP_AUXILIARY_VARS = True     !   [Boolean] default = False
                                 ! If true, apply ALE remapping to all of the auxiliary 3-dimensional variables
                                 ! that are needed to reproduce across restarts, similarly to what is already
                                 ! being done with the primary state variables.  The default should be changed to
@@ -128,8 +128,23 @@ ALTERNATE_FIRST_DIRECTION = False !   [Boolean] default = False
                                 ! updates occur first in directionally split parts of the calculation. If this
                                 ! is true, FIRST_DIRECTION applies at the start of a new run or if the next
                                 ! first direction can not be found in the restart file.
-CHECK_BAD_SURFACE_VALS = False  !   [Boolean] default = False
+CHECK_BAD_SURFACE_VALS = True   !   [Boolean] default = False
                                 ! If true, check the surface state for ridiculous values.
+BAD_VAL_SSH_MAX = 50.0          !   [m] default = 20.0
+                                ! The value of SSH above which a bad value message is triggered, if
+                                ! CHECK_BAD_SURFACE_VALS is true.
+BAD_VAL_SSS_MAX = 75.0          !   [PPT] default = 45.0
+                                ! The value of SSS above which a bad value message is triggered, if
+                                ! CHECK_BAD_SURFACE_VALS is true.
+BAD_VAL_SST_MAX = 55.0          !   [deg C] default = 45.0
+                                ! The value of SST above which a bad value message is triggered, if
+                                ! CHECK_BAD_SURFACE_VALS is true.
+BAD_VAL_SST_MIN = -3.0          !   [deg C] default = -2.1
+                                ! The value of SST below which a bad value message is triggered, if
+                                ! CHECK_BAD_SURFACE_VALS is true.
+BAD_VAL_COLUMN_THICKNESS = 0.0  !   [m] default = 0.0
+                                ! The value of column thickness below which a bad value message is triggered, if
+                                ! CHECK_BAD_SURFACE_VALS is true.
 DEFAULT_ANSWER_DATE = 99991231  ! default = 99991231
                                 ! This sets the default value for the various _ANSWER_DATE parameters.
 DEFAULT_2018_ANSWERS = False    !   [Boolean] default = False
@@ -147,11 +162,11 @@ SURFACE_ANSWER_DATE = 99991231  ! default = 99991231
 USE_DIABATIC_TIME_BUG = False   !   [Boolean] default = False
                                 ! If true, uses the wrong calendar time for diabatic processes, as was done in
                                 ! MOM6 versions prior to February 2018. This is not recommended.
-SAVE_INITIAL_CONDS = True       !   [Boolean] default = False
+SAVE_INITIAL_CONDS = False      !   [Boolean] default = False
                                 ! If true, write the initial conditions to a file given by IC_OUTPUT_FILE.
 IC_OUTPUT_FILE = "MOM_IC"       ! default = "MOM_IC"
                                 ! The file into which to write the initial conditions.
-WRITE_GEOM = 0                  ! default = 1
+WRITE_GEOM = 1                  ! default = 1
                                 ! If =0, never write the geometry and vertical grid files. If =1, write the
                                 ! geometry and vertical grid files only for a new simulation. If =2, always
                                 ! write the geometry and vertical grid files. Other values are invalid.
@@ -458,10 +473,11 @@ NK = 75                         !   [nondim]
 ! === module MOM_tracer_registry ===
 
 ! === module MOM_EOS ===
-EQN_OF_STATE = "WRIGHT"         ! default = "WRIGHT"
+EQN_OF_STATE = "WRIGHT_FULL"    ! default = "WRIGHT"
                                 ! EQN_OF_STATE determines which ocean equation of state should be used.
-                                ! Currently, the valid choices are "LINEAR", "UNESCO", "WRIGHT", "NEMO" and
-                                ! "TEOS10". This is only used if USE_EOS is true.
+                                ! Currently, the valid choices are "LINEAR", "UNESCO", "JACKETT_MCD", "WRIGHT",
+                                ! "WRIGHT_RED", "WRIGHT_FULL", "NEMO", "ROQUET_RHO", "ROQUET_SPV" and "TEOS10".
+                                ! This is only used if USE_EOS is true.
 EOS_QUADRATURE = False          !   [Boolean] default = False
                                 ! If true, always use the generic (quadrature) code code for the integrals of
                                 ! density.
@@ -862,7 +878,7 @@ KV_TBL_MIN = 1.0E-05            !   [m2 s-1] default = 1.0E-05
 CORRECT_BBL_BOUNDS = False      !   [Boolean] default = False
                                 ! If true, uses the correct bounds on the BBL thickness and viscosity so that
                                 ! the bottom layer feels the intended drag.
-SMAG_CONST_CHANNEL = 0.15       !   [nondim] default = 0.15
+SMAG_CONST_CHANNEL = 2.0        !   [nondim] default = 2.0
                                 ! The nondimensional Laplacian Smagorinsky constant used in calculating the
                                 ! channel drag if it is enabled.  The default is to use the same value as
                                 ! SMAG_LAP_CONST if it is defined, or 0.15 if it is not. The value used is also
@@ -1219,7 +1235,7 @@ AH_TIME_SCALE = 0.0             !   [s] default = 0.0
                                 ! A time scale whose inverse is multiplied by the fourth power of the grid
                                 ! spacing to calculate biharmonic viscosity. The final viscosity is the largest
                                 ! of all viscosity formulations in use. 0.0 means that it's not used.
-SMAGORINSKY_AH = False          !   [Boolean] default = False
+SMAGORINSKY_AH = True           !   [Boolean] default = False
                                 ! If true, use a biharmonic Smagorinsky nonlinear eddy viscosity.
 LEITH_AH = False                !   [Boolean] default = False
                                 ! If true, use a biharmonic Leith nonlinear eddy viscosity.
@@ -1231,6 +1247,18 @@ BETTER_BOUND_AH = True          !   [Boolean] default = True
 RE_AH = 0.0                     !   [nondim] default = 0.0
                                 ! If nonzero, the biharmonic coefficient is scaled so that the biharmonic
                                 ! Reynolds number is equal to this.
+SMAG_BI_CONST = 0.06            !   [nondim] default = 0.0
+                                ! The nondimensional biharmonic Smagorinsky constant, typically 0.015 - 0.06.
+BOUND_CORIOLIS_BIHARM = True    !   [Boolean] default = True
+                                ! If true use a viscosity that increases with the square of the velocity shears,
+                                ! so that the resulting viscous drag is of comparable magnitude to the Coriolis
+                                ! terms when the velocity differences between adjacent grid points is
+                                ! 0.5*BOUND_CORIOLIS_VEL.  The default is the value of BOUND_CORIOLIS (or
+                                ! false).
+BOUND_CORIOLIS_VEL = 6.0        !   [m s-1] default = 6.0
+                                ! The velocity scale at which BOUND_CORIOLIS_BIHARM causes the biharmonic drag
+                                ! to have comparable magnitude to the Coriolis acceleration.  The default is set
+                                ! by MAXVEL.
 USE_LAND_MASK_FOR_HVISC = True  !   [Boolean] default = True
                                 ! If true, use the land mask for the computation of thicknesses at velocity
                                 ! locations. This eliminates the dependence on arbitrary values over land or
@@ -1455,7 +1483,7 @@ USE_STANLEY_ML = False          !   [Boolean] default = False
 FOX_KEMPER_ML_RESTRAT_COEF2 = 0.0 !   [nondim] default = 0.0
                                 ! As for FOX_KEMPER_ML_RESTRAT_COEF but used in a second application of the MLE
                                 ! restratification parameterization.
-MLE_FRONT_LENGTH = 1000.0       !   [m] default = 0.0
+MLE_FRONT_LENGTH = 200.0        !   [m] default = 0.0
                                 ! If non-zero, is the frontal-length scale used to calculate the upscaling of
                                 ! buoyancy gradients that is otherwise represented by the parameter
                                 ! FOX_KEMPER_ML_RESTRAT_COEF. If MLE_FRONT_LENGTH is non-zero, it is recommended
@@ -1679,7 +1707,7 @@ ML_RADIATION = False            !   [Boolean] default = False
                                 ! If true, allow a fraction of TKE available from wind work to penetrate below
                                 ! the base of the mixed layer with a vertical decay scale determined by the
                                 ! minimum of: (1) The depth of the mixed layer, (2) an Ekman length scale.
-BBL_EFFIC = 0.2                 !   [nondim] default = 0.2
+BBL_EFFIC = 0.01                !   [nondim] default = 0.2
                                 ! The efficiency with which the energy extracted by bottom drag drives BBL
                                 ! diffusion.  This is only used if BOTTOMDRAGLAW is true.
 BBL_MIXING_MAX_DECAY = 200.0    !   [m] default = 200.0
@@ -2083,7 +2111,7 @@ KHTR_PASSIVITY_MIN = 0.5        !   [nondim] default = 0.5
 DIFFUSE_ML_TO_INTERIOR = False  !   [Boolean] default = False
                                 ! If true, enable epipycnal mixing between the surface boundary layer and the
                                 ! interior.
-CHECK_DIFFUSIVE_CFL = False     !   [Boolean] default = False
+CHECK_DIFFUSIVE_CFL = True      !   [Boolean] default = False
                                 ! If true, use enough iterations the diffusion to ensure that the diffusive
                                 ! equivalent of the CFL limit is not violated.  If false, always use the greater
                                 ! of 1 or MAX_TR_DIFFUSION_CFL iteration.
