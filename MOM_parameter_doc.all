@@ -687,13 +687,13 @@ ODA_INCUPD = False              !   [Boolean] default = False
 SPONGE = False                  !   [Boolean] default = False
                                 ! If true, sponges may be applied anywhere in the domain. The exact location and
                                 ! properties of those sponges are specified via SPONGE_CONFIG.
-OBC_SEGMENT_001_DATA = "U=file:OBC_whole.nc(u),V=file:OBC_whole.nc(v),SSH=file:OBC_whole.nc(zeta),TEMP=file:OBC_whole.nc(temp),SALT=file:OBC_whole.nc(salt),Uamp=file:tu1_whole.nc(uamp),Uphase=file:tu1_whole.nc(uphase),Vamp=file:tu1_whole.nc(vamp),Vphase=file:tu1_whole.nc(vphase),SSHamp=file:tz1_whole.nc(zamp),SSHphase=file:tz1_whole.nc(zphase)" !
+OBC_SEGMENT_001_DATA = "U=file:OBC_whole.nc(u),V=file:OBC_whole.nc(v),SSH=file:OBC_whole.nc(zeta),TEMP=file:OBC_whole.nc(temp),SALT=file:OBC_whole.nc(salt),Uamp=file:tu1.nc(uamp),Uphase=file:tu1.nc(uphase),Vamp=file:tu1.nc(vamp),Vphase=file:tu1.nc(vphase),SSHamp=file:tz1.nc(zamp),SSHphase=file:tz1.nc(zphase)" !
                                 ! OBC segment docs
 OBC_SEGMENT_002_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu2.nc(uamp),Uphase=file:tu2.nc(uphase),Vamp=file:tu2.nc(vamp),Vphase=file:tu2.nc(vphase),SSHamp=file:tz2.nc(zamp),SSHphase=file:tz2.nc(zphase)" !
                                 ! OBC segment docs
 OBC_SEGMENT_003_DATA = "U=file:OBC.nc(u),V=file:OBC.nc(v),SSH=file:OBC.nc(zeta),TEMP=file:OBC.nc(temp),SALT=file:OBC.nc(salt),Uamp=file:tu3.nc(uamp),Uphase=file:tu3.nc(uphase),Vamp=file:tu3.nc(vamp),Vphase=file:tu3.nc(vphase),SSHamp=file:tz3.nc(zamp),SSHphase=file:tz3.nc(zphase)" !
                                 ! OBC segment docs
-OBC_SEGMENT_004_DATA = "U=file:OBC_whole.nc(u),V=file:OBC_whole.nc(v),SSH=file:OBC_whole.nc(zeta),TEMP=file:OBC_whole.nc(temp),SALT=file:OBC_whole.nc(salt),Uamp=file:tu4_whole.nc(uamp),Uphase=file:tu4_whole.nc(uphase),Vamp=file:tu4_whole.nc(vamp),Vphase=file:tu4_whole.nc(vphase),SSHamp=file:tz4_whole.nc(zamp),SSHphase=file:tz4_whole.nc(zphase)" !
+OBC_SEGMENT_004_DATA = "U=file:OBC_whole.nc(u),V=file:OBC_whole.nc(v),SSH=file:OBC_whole.nc(zeta),TEMP=file:OBC_whole.nc(temp),SALT=file:OBC_whole.nc(salt),Uamp=file:tu4.nc(uamp),Uphase=file:tu4.nc(uphase),Vamp=file:tu4.nc(vamp),Vphase=file:tu4.nc(vphase),SSHamp=file:tz4.nc(zamp),SSHphase=file:tz4.nc(zphase)" !
                                 ! OBC segment docs
 OBC_USER_CONFIG = "none"        ! default = "none"
                                 ! A string that sets how the user code is invoked to set open boundary data:
