@@ -4,6 +4,8 @@ Bering 50 vertical levels
 "ocean_daily",            1, "days",   1, "hours", "time"
 "ice_daily",              1, "days",   1, "hours", "time"
 "ocean_Bering_Strait",    1, "days",   1, "days", "time"
+"ocean_Shpanberg",     1, "days",   1, "days", "time"
+#"ocean_Anadyr",          1, "days",   1, "days", "time"
 
 # Bering Strait (east-west section)
 "ocean_model_z", "volcello", "volcello", "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
@@ -11,6 +13,20 @@ Bering 50 vertical levels
 "ocean_model_z", "so",   "so",           "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
 "ocean_model_z", "umo",  "umo",          "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
 "ocean_model_z", "uo",   "uo",           "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
+
+## Shpanberg Strait (east-west section)
+#"ocean_model_z", "volcello", "volcello", "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "thetao","thetao",      "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "so",   "so",           "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "umo",  "umo",          "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "uo",   "uo",           "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+
+## Anadyr (east-west section)
+#"ocean_model_z", "volcello", "volcello", "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "thetao","thetao",      "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "so",   "so",           "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "umo",  "umo",          "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "uo",   "uo",           "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
 
 #"ocean_model", "eta_hifreq",          "eta",              "ocean_bt", "all", "mean", "none",2
 

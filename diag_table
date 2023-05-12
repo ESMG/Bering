@@ -4,7 +4,7 @@ Bering 50 vertical levels
 "ocean_daily",            1, "days",   1, "hours", "time"
 "ice_daily",              1, "days",   1, "hours", "time"
 "ocean_Bering_Strait",    1, "days",   1, "days", "time"
-"ocean_Shpanberg",     1, "days",   1, "days", "time"
+#"ocean_Shpanberg",        1, "days",   1, "days", "time"
 #"ocean_Anadyr",          1, "days",   1, "days", "time"
 
 # Bering Strait (east-west section)
@@ -71,7 +71,11 @@ Bering 50 vertical levels
 "ocean_model",  "taux",       "taux",               "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "tauy",       "tauy",               "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "ustar",      "ustar",              "ocean_daily", "all", "mean", "none",2  # friction vel
-#"ocean_model",  "Kd_interface",  "Kd_interface",   "ocean_daily", "all", "mean", "none",2  # friction vel
+#"ocean_model",  "Kd_interface",  "Kd_interface",   "ocean_daily", "all", "mean", "none",2
+#"ocean_model",  "T_adx_2d",      "T_adx_2d",              "ocean_daily", "all", "mean", "none",2
+#"ocean_model",  "T_ady_2d",      "T_ady_2d",              "ocean_daily", "all", "mean", "none",2
+#"ocean_model",  "S_adx_2d",      "S_adx_2d",              "ocean_daily", "all", "mean", "none",2
+#"ocean_model",  "S_ady_2d",      "S_ady_2d",              "ocean_daily", "all", "mean", "none",2
 "ice_model",  "siconc",   "aice",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "UI",       "uice",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "VI",       "vice",      "ice_daily", "all", "mean", "none",2

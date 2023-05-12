@@ -34,9 +34,6 @@ DEBUG_CHKSUMS = True            !   [Boolean] default = True
 DEBUG_REDUNDANT = True          !   [Boolean] default = True
                                 ! If true, debug redundant data points during calls to the various vec_chksum
                                 ! routines.
-DEBUG_OBC = False               !   [Boolean] default = False
-                                ! If true, do additional calls to help debug the performance of the open
-                                ! boundary condition code.
 COLUMN_CHECK = False            !   [Boolean] default = False
                                 ! If true, add code to allow debugging of conservation column-by-column.  This
                                 ! does not change answers, but can increase model run time.
