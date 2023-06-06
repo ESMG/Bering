@@ -46,6 +46,7 @@ Bering 50 vertical levels
 #"ice_model",  "VI",        "vice",      "ocean_hourly", "all", ".false.", "none", 2
 "ice_model",  "HI",         "hice",      "ocean_hourly", "all", ".false.", "none", 2
 "ice_model",  "sispeed",    "sispeed",   "ocean_hourly", "all", ".false.", "none", 2
+"ice_model",  "itheta",     "itheta",    "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "MIS_tot",    "mis",       "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "SWDN",      "swdn",      "ocean_hourly", "all", ".false.", "none", 2
 
@@ -72,10 +73,10 @@ Bering 50 vertical levels
 "ocean_model",  "tauy",       "tauy",               "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "ustar",      "ustar",              "ocean_daily", "all", "mean", "none",2  # friction vel
 #"ocean_model",  "Kd_interface",  "Kd_interface",   "ocean_daily", "all", "mean", "none",2
-#"ocean_model",  "T_adx_2d",      "T_adx_2d",              "ocean_daily", "all", "mean", "none",2
-#"ocean_model",  "T_ady_2d",      "T_ady_2d",              "ocean_daily", "all", "mean", "none",2
-#"ocean_model",  "S_adx_2d",      "S_adx_2d",              "ocean_daily", "all", "mean", "none",2
-#"ocean_model",  "S_ady_2d",      "S_ady_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "T_adx_2d",      "T_adx_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "T_ady_2d",      "T_ady_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "S_adx_2d",      "S_adx_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "S_ady_2d",      "S_ady_2d",              "ocean_daily", "all", "mean", "none",2
 "ice_model",  "siconc",   "aice",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "UI",       "uice",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "VI",       "vice",      "ice_daily", "all", "mean", "none",2
