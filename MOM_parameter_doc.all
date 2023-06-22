@@ -11,7 +11,7 @@ ENABLE_THERMODYNAMICS = True    !   [Boolean] default = True
 USE_EOS = True                  !   [Boolean] default = True
                                 ! If true,  density is calculated from temperature and salinity with an equation
                                 ! of state.  If USE_EOS is true, ENABLE_THERMODYNAMICS must be true as well.
-DIABATIC_FIRST = False          !   [Boolean] default = False
+DIABATIC_FIRST = True           !   [Boolean] default = False
                                 ! If true, apply diabatic and thermodynamic processes, including buoyancy
                                 ! forcing and mass gain or loss, before stepping the dynamics forward.
 USE_CONTEMP_ABSSAL = False      !   [Boolean] default = False
@@ -1277,7 +1277,9 @@ VERT_FRICTION_ANSWER_DATE = 99991231 ! default = 99991231
                                 ! The vintage of the order of arithmetic and expressions in the viscous
                                 ! calculations.  Values below 20190101 recover the answers from the end of 2018,
                                 ! while higher values use expressions that do not use an arbitrary hard-coded
-                                ! maximum viscous coupling coefficient  between layers.  If both
+                                ! maximum viscous coupling coefficient between layers.  Values below 20230601
+                                ! recover a form of the viscosity within the mixed layer that breaks up the
+                                ! magnitude of the wind stress in some non-Boussinesq cases.  If both
                                 ! VERT_FRICTION_2018_ANSWERS and VERT_FRICTION_ANSWER_DATE are specified, the
                                 ! latter takes precedence.
 DIRECT_STRESS = True            !   [Boolean] default = False
@@ -1907,6 +1909,10 @@ USE_RIVER_HEAT_CONTENT = False  !   [Boolean] default = False
 USE_CALVING_HEAT_CONTENT = False !   [Boolean] default = False
                                 ! If true, use the fluxes%calving_Hflx field to set the heat carried by runoff,
                                 ! instead of using SST*CP*froz_runoff.
+DO_BRINE_PLUME = True           !   [Boolean] default = False
+                                ! If true, use a brine plume parameterization from Nguyen et al., 2009.
+BRINE_PLUME_EXPONENT = 5        ! default = 5
+                                ! If using the brine plume parameterization, set the integer exponent.
 VAR_PEN_SW = False              !   [Boolean] default = False
                                 ! If true, use one of the CHL_A schemes specified by OPACITY_SCHEME to determine
                                 ! the e-folding depth of incoming short wave radiation.

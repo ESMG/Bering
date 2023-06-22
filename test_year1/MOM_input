@@ -332,32 +332,32 @@ SURFACE_HEIGHT_IC_FILE = "SODA3_sept.nc" !
                                 ! The initial condition file for the surface height.
 SURFACE_HEIGHT_IC_VAR = "ssh"   ! default = "SSH"
                                 ! The initial condition variable for the surface height.
-SPONGE = True                   !   [Boolean] default = False
+!SPONGE = True                   !   [Boolean] default = False
                                 ! If true, sponges may be applied anywhere in the domain. The exact location and
                                 ! properties of those sponges are specified via SPONGE_CONFIG.
-SPONGE_DAMPING_FILE = "Bering_idamp.nc" !
+!SPONGE_DAMPING_FILE = "Bering_idamp.nc" !
                                 ! The name of the file with the sponge damping rates.
-SPONGE_STATE_FILE = "bering_soda_mnClim_2011-2012.nc" ! default = "Bering_idamp.nc"
+!SPONGE_STATE_FILE = "bering_soda_mnClim_2011-2012.nc" ! default = "Bering_idamp.nc"
                                 ! The name of the file with the state to damp toward.
-SPONGE_PTEMP_VAR = "temp"       ! default = "PTEMP"
+!SPONGE_PTEMP_VAR = "temp"       ! default = "PTEMP"
                                 ! The name of the potential temperature variable in SPONGE_STATE_FILE.
-SPONGE_SALT_VAR = "salt"        ! default = "SALT"
+!SPONGE_SALT_VAR = "salt"        ! default = "SALT"
                                 ! The name of the salinity variable in SPONGE_STATE_FILE.
-SPONGE_UV = True                !   [Boolean] default = False
+!SPONGE_UV = True                !   [Boolean] default = False
                                 ! Apply sponges in u and v, in addition to tracers.
-SPONGE_UV_STATE_FILE = "bering_soda_mnClim_2011-2012.nc" ! default = "Bering_idamp.nc"
+!SPONGE_UV_STATE_FILE = "bering_soda_mnClim_2011-2012.nc" ! default = "Bering_idamp.nc"
                                 ! The name of the file with the state to damp UV toward.
-SPONGE_U_VAR = "u"              ! default = "UVEL"
+!SPONGE_U_VAR = "u"              ! default = "UVEL"
                                 ! The name of the zonal velocity variable in SPONGE_UV_STATE_FILE.
-SPONGE_V_VAR = "v"              ! default = "VVEL"
+!SPONGE_V_VAR = "v"              ! default = "VVEL"
                                 ! The name of the vertical velocity variable in SPONGE_UV_STATE_FILE.
-SPONGE_IDAMP_U_var = "Idamp_u"  ! default = "Idamp"
+!SPONGE_IDAMP_U_var = "Idamp_u"  ! default = "Idamp"
                                 ! The name of the inverse damping rate variable in SPONGE_UV_DAMPING_FILE for
                                 ! the velocities.
-SPONGE_IDAMP_V_var = "Idamp_v"  ! default = "Idamp"
+!SPONGE_IDAMP_V_var = "Idamp_v"  ! default = "Idamp"
                                 ! The name of the inverse damping rate variable in SPONGE_UV_DAMPING_FILE for
                                 ! the velocities.
-INTERPOLATE_SPONGE_TIME_SPACE = True
+!INTERPOLATE_SPONGE_TIME_SPACE = True
 
 ! === module MOM_sponge ===
 SPONGE_DATA_ONGRID = True       !   [Boolean] default = False

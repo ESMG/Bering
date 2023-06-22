@@ -41,44 +41,6 @@ MASKING_DEPTH = 1.0             !   [m] default = -9999.0
                                 ! zeroed out. MASKING_DEPTH is ignored if it has the special default value.
 MAXIMUM_DEPTH = 6500.0          !   [m]
                                 ! The maximum depth of the ocean.
-
-! === module SIS_open_boundary ===
-! Controls where open boundaries are located, what kind of boundary condition to impose, and what data to apply,
-! if any.
-OBC_NUMBER_OF_SEGMENTS = 4      ! default = 0
-                                ! The number of open boundary segments.
-OBC_FREESLIP_VORTICITY = False  !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the
-                                ! relative vorticity on open boundaries. This cannot be true if another
-                                ! OBC_XXX_VORTICITY option is True.
-OBC_COMPUTED_VORTICITY = True   !   [Boolean] default = False
-                                ! If true, uses the external values of tangential velocity in the relative
-                                ! vorticity on open boundaries. This cannot be true if another OBC_XXX_VORTICITY
-                                ! option is True.
-OBC_FREESLIP_STRAIN = False     !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_COMPUTED_STRAIN = True      !   [Boolean] default = False
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the tracer concentration at the
-                                ! boundaries to externally imposed values when the flow is exiting the domain.
-OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the tracer concentration at the
-                                ! boundaries to values from the interior when the flow is entering the domain.
-BRUSHCUTTER_MODE = True         !   [Boolean] default = False
-                                ! If true, read external OBC data on the supergrid.
 OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
                                 ! The rotation rate of the earth.
 
@@ -91,14 +53,26 @@ OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
 ! === module SIS_tracer_registry ===
 
 ! === module SIS_tracer_flow_control ===
-OBC_SEGMENT_001_DATA = "U=0.0,V=0.0" !
-                                ! OBC segment docs
-OBC_SEGMENT_002_DATA = "U=0.0,V=0.0" !
-                                ! OBC segment docs
-OBC_SEGMENT_003_DATA = "U=0.0,V=0.0" !
-                                ! OBC segment docs
-OBC_SEGMENT_004_DATA = "U=0.0,V=0.0" !
-                                ! OBC segment docs
+CONCENTRATION_INIT_CONFIG = "latitudes" ! default = "data_override"
+                                ! A string that determines how the initial total sea ice concentration is
+                                ! initialized for a new run:
+                                !     file - read sea ice concentrations from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     zero - there is no sea ice anywhere
+                                !     latitudes - initial sea ice concentration is a function of latitude.
+ICE_THICKNESS_INIT_CONFIG = "uniform" ! default = "data_override"
+                                ! A string that determines how the initial sea ice thickness is initialized for
+                                ! a new run:
+                                !     file - read sea ice thickesses from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     uniform - sea ice has uniform thickness where the concentration is
+                                !       nonzero.
+ARCTIC_ICE_EDGE_IC = 72.0       !   [degrees of latitude] default = 91.0
+                                ! The southern latitude of Arctic ice in an initial condition.
+ICE_INIT_MASS = 900.0           !   [kg m-2] default = 0.0
+                                ! A uniform initial sea ice mass per unit area where there is sea ice.
+ICE_SALINITY_IC = 4.0           !   [g kg-1] default = 0.0
+                                ! The uniform sea ice salinity used for the initial condition
 
 ! === module SIS_slow_thermo ===
 ! This module calculates the slow evolution of the ice mass, heat, and salt budgets.
@@ -107,6 +81,8 @@ ICE_BULK_SALINITY = 0.0         !   [g/kg] default = 4.0
 ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
                                 ! The initial salinity of sea ice as a fraction of the salinity of the seawater
                                 ! from which it formed.
+DO_BRINE_PLUME = True           !   [Boolean] default = False
+                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
@@ -119,16 +95,9 @@ DT_ICE_DYNAMICS = 1200.0        !   [seconds] default = -1.0
                                 ! The time step used for the slow ice dynamics, including stepping the
                                 ! continuity equation and interactions between the ice mass field and
                                 ! velocities.  If 0 or negative the coupling time step will be used.
-MERGED_CONTINUITY = True        !   [Boolean] default = False
-                                ! If true, update the continuity equations for the ice, snow, and melt pond
-                                ! water together summed across categories, with proportionate fluxes for each
-                                ! part. Otherwise the media are updated separately.
 ICE_STATS_INTERVAL = 0.0416666666666667 !   [days] default = 1.0
                                 ! The interval in units of TIMEUNIT between writes of the globally summed ice
                                 ! statistics and conservation checks.
-WEAK_COAST_STRESS = True        !   [Boolean] default = False
-                                ! If true, do not use land masks in determining the area for stress convergence,
-                                ! which acts to weaken the stress-driven acceleration in coastal points.
 ICE_YIELD_ELLIPTICITY = 1.5     !   [Nondim] default = 2.0
                                 ! The ellipticity coefficient for the plastic yield curve in the sea-ice
                                 ! rheology.  For an infinite ellipticity (i.e., a cavitating fluid rheology),
@@ -140,8 +109,6 @@ H2_FILE = "ocean_topoh2.nc"     !
                                 ! amplitude with ITD_LANDFAST.
 BASAL_STRESS_NCAT_B = 10        ! default = 100
                                 ! Number of bathymetric depth categories in landfast ice computation.
-BASAL_STRESS_EXTRA_DEPTH = ""   !
-                                ! Number of ice thickness categories in landfast ice computation.
 ICE_COVER_DISCARD = 1.0E-30     !   [nondim] default = -1.0
                                 ! A tiny fractional ice coverage which if positive causes the mass in categories
                                 ! with less than this coverage to be discarded.

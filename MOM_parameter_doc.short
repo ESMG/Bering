@@ -1,6 +1,9 @@
 ! This file was written by the model and records the non-default parameters used at run-time.
 
 ! === module MOM ===
+DIABATIC_FIRST = True           !   [Boolean] default = False
+                                ! If true, apply diabatic and thermodynamic processes, including buoyancy
+                                ! forcing and mass gain or loss, before stepping the dynamics forward.
 USE_REGRIDDING = True           !   [Boolean] default = False
                                 ! If True, use the ALE algorithm (regridding/remapping). If False, use the
                                 ! layered isopycnal algorithm.
@@ -566,6 +569,8 @@ DO_RIVERMIX = True              !   [Boolean] default = False
                                 ! down to RIVERMIX_DEPTH if the ocean is that deep.
 RIVERMIX_DEPTH = 10.0           !   [m] default = 0.0
                                 ! The depth to which rivers are mixed if DO_RIVERMIX is defined.
+DO_BRINE_PLUME = True           !   [Boolean] default = False
+                                ! If true, use a brine plume parameterization from Nguyen et al., 2009.
 
 ! === module MOM_energetic_PBL ===
 ML_OMEGA_FRAC = 0.001           !   [nondim] default = 0.0
