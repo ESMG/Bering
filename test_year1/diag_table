@@ -4,7 +4,7 @@ Bering 50 vertical levels
 "ocean_daily",            1, "days",   1, "hours", "time"
 "ice_daily",              1, "days",   1, "hours", "time"
 "ocean_Bering_Strait",    1, "days",   1, "days", "time"
-"ocean_Shpanberg",     1, "days",   1, "days", "time"
+#"ocean_Shpanberg",     1, "days",   1, "days", "time"
 #"ocean_Anadyr",          1, "days",   1, "days", "time"
 
 # Bering Strait (east-west section)
@@ -89,3 +89,19 @@ Bering 50 vertical levels
 #"ice_model",  "RDG_FRAC_TOT", "RDG_FRAC_TOT",  "ice_daily", "all", "mean", "none",2
 "ice_model",  "cn",       "cn",        "ice_daily", "all", "mean", "none",2
 "ice_model",  "simass_n", "simass_n",  "ice_daily", "all", "mean", "none",2
+"ocean_model",  "T_adx_2d",      "T_adx_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "T_ady_2d",      "T_ady_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "S_adx_2d",      "S_adx_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "S_ady_2d",      "S_ady_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "Kd_interface", "Kd_interface", "ocean_daily",        "all", "mean", "none",2
+"ocean_model",  "Kd_ePBL",      "Kd_ePBL",      "ocean_daily",        "all", "mean", "none",2
+#"ocean_model",  "Kd_itides",    "Kd_itides",    "ocean_daily",        "all", "mean", "none",2
+#"ocean_model",  "Kd_lowmode",   "Kd_lowmode",   "ocean_daily",        "all", "mean", "none",2
+"ocean_model",  "Kd_BBL",       "Kd_BBL",       "ocean_daily",        "all", "mean", "none",2
+#"ocean_model",  "Kd_bkgnd",     "Kd_bkgnd",     "ocean_daily",        "all", "mean", "none",2
+"ocean_model",  "Kd_shear",     "Kd_shear",     "ocean_daily",        "all", "mean", "none",2
+"ocean_model",  "Kd_salt",      "Kd_salt",      "ocean_daily",        "all", "mean", "none",2
+"ocean_model",  "Kd_heat",      "Kd_heat",      "ocean_daily",        "all", "mean", "none",2
+"ocean_model",  "KT_extra",     "KT_extra",     "ocean_daily",        "all", "mean", "none",2
+"ocean_model",  "KS_extra",     "KS_extra",     "ocean_daily",        "all", "mean", "none",2
+
