@@ -1,9 +1,6 @@
 ! This file was written by the model and records the non-default parameters used at run-time.
 
 ! === module MOM ===
-DIABATIC_FIRST = True           !   [Boolean] default = False
-                                ! If true, apply diabatic and thermodynamic processes, including buoyancy
-                                ! forcing and mass gain or loss, before stepping the dynamics forward.
 USE_REGRIDDING = True           !   [Boolean] default = False
                                 ! If True, use the ALE algorithm (regridding/remapping). If False, use the
                                 ! layered isopycnal algorithm.
@@ -180,7 +177,7 @@ OBC_TIDE_ADD_NODAL = True       !   [Boolean] default = False
                                 ! If true, include 18.6 year nodal modulation in the boundary tidal forcing.
 OBC_TIDE_REF_DATE = 1980, 1, 1  !
                                 ! Reference date to use for tidal calculations and equilibrium phase.
-OBC_TIDE_NODAL_REF_DATE = 2012, 7, 2 ! default = 0
+OBC_TIDE_NODAL_REF_DATE = 2011, 7, 2 ! default = 0
                                 ! Fixed reference date to use for nodal modulation of boundary tides.
 
 ! === module MOM_verticalGrid ===
@@ -197,6 +194,13 @@ EQN_OF_STATE = "WRIGHT_FULL"    ! default = "WRIGHT"
 DTFREEZE_DP = -7.75E-08         !   [deg C Pa-1] default = 0.0
                                 ! When TFREEZE_FORM=LINEAR, this is the derivative of the freezing potential
                                 ! temperature with pressure.
+
+! === module MOM_restart ===
+RESTART_CHECKSUMS_REQUIRED = False !   [Boolean] default = True
+                                ! If true, require the restart checksums to match and error out otherwise. Users
+                                ! may want to avoid this comparison if for example the restarts are made from a
+                                ! run with a different mask_table than the current run, in which case the
+                                ! checksums will not match and cause crash.
 
 ! === module MOM_tracer_flow_control ===
 
@@ -413,10 +417,6 @@ SMAG_BI_CONST = 0.06            !   [nondim] default = 0.0
                                 ! The nondimensional biharmonic Smagorinsky constant, typically 0.015 - 0.06.
 
 ! === module MOM_vert_friction ===
-DIRECT_STRESS = True            !   [Boolean] default = False
-                                ! If true, the wind stress is distributed over the topmost HMIX_STRESS of fluid
-                                ! (like in HYCOM), and an added mixed layer viscosity or a physically based
-                                ! boundary layer turbulence parameterization is not needed for stability.
 HMIX_FIXED = 0.9                !   [m]
                                 ! The prescribed depth over which the near-surface viscosity and diffusivity are
                                 ! elevated when the bulk mixed layer is not used.
@@ -445,6 +445,12 @@ BT_NONLIN_STRESS = True         !   [Boolean] default = False
                                 ! acclerations.  Otherwise use the depth based on bathyT.
 DYNAMIC_SURFACE_PRESSURE = True !   [Boolean] default = False
                                 ! If true, add a dynamic pressure due to a viscous ice shelf, for instance.
+TIDAL_SAL_FLATHER = True        !   [Boolean] default = False
+                                ! If true, then apply adjustments to the external gravity wave speed used with
+                                ! the Flather OBC routine consistent with the barotropic solver. This applies to
+                                ! cases with  tidal forcing using the scalar self-attraction approximation. The
+                                ! default is currently False in order to retain previous answers but should be
+                                ! set to True for new experiments
 BT_STRONG_DRAG = True           !   [Boolean] default = False
                                 ! If true, use a stronger estimate of the retarding effects of strong bottom
                                 ! drag, by making it implicit with the barotropic time-step instead of implicit
@@ -509,25 +515,6 @@ EPBL_IS_ADDITIVE = False        !   [Boolean] default = True
                                 ! Otherwise, the larger of kappa-shear and ePBL diffusivities are used.
 
 ! === module MOM_set_diffusivity ===
-
-! === module MOM_tidal_mixing ===
-! Vertical Tidal Mixing Parameterization
-INT_TIDE_DISSIPATION = True     !   [Boolean] default = False
-                                ! If true, use an internal tidal dissipation scheme to drive diapycnal mixing,
-                                ! along the lines of St. Laurent et al. (2002) and Simmons et al. (2004).
-INT_TIDE_PROFILE = "POLZIN_09"  ! default = "STLAURENT_02"
-                                ! INT_TIDE_PROFILE selects the vertical profile of energy dissipation with
-                                ! INT_TIDE_DISSIPATION. Valid values are:
-                                !    STLAURENT_02 - Use the St. Laurent et al exponential
-                                !                   decay profile.
-                                !    POLZIN_09 - Use the Polzin WKB-stretched algebraic
-                                !                   decay profile.
-INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
-                                ! The decay scale away from the bottom for tidal TKE with the new coding when
-                                ! INT_TIDE_DISSIPATION is used.
-H2_FILE = "ocean_topoh2.nc"     !
-                                ! The path to the file containing the sub-grid-scale topographic roughness
-                                ! amplitude with INT_TIDE_DISSIPATION.
 BBL_EFFIC = 0.01                !   [nondim] default = 0.2
                                 ! The efficiency with which the energy extracted by bottom drag drives BBL
                                 ! diffusion.  This is only used if BOTTOMDRAGLAW is true.
@@ -537,11 +524,14 @@ BBL_MIXING_AS_MAX = False       !   [Boolean] default = True
 
 ! === module MOM_bkgnd_mixing ===
 ! Adding static vertical background mixing coefficients
-KD = 1.0E-05                    !   [m2 s-1] default = 0.0
+KD = 2.0E-06                    !   [m2 s-1] default = 0.0
                                 ! The background diapycnal diffusivity of density in the interior. Zero or the
                                 ! molecular value, ~1e-7 m2 s-1, may be used.
-KD_MIN = 2.0E-07                !   [m2 s-1] default = 1.0E-07
+KD_MIN = 2.0E-07                !   [m2 s-1] default = 2.0E-08
                                 ! The minimum diapycnal diffusivity.
+KD_MAX = 0.1                    !   [m2 s-1] default = -1.0
+                                ! The maximum permitted increment for the diapycnal diffusivity from TKE-based
+                                ! parameterizations, or a negative value for no limit.
 DOUBLE_DIFFUSION = True         !   [Boolean] default = False
                                 ! If true, increase diffusivites for temperature or salinity based on the
                                 ! double-diffusive parameterization described in Large et al. (1994).
@@ -571,8 +561,6 @@ DO_RIVERMIX = True              !   [Boolean] default = False
                                 ! down to RIVERMIX_DEPTH if the ocean is that deep.
 RIVERMIX_DEPTH = 10.0           !   [m] default = 0.0
                                 ! The depth to which rivers are mixed if DO_RIVERMIX is defined.
-DO_BRINE_PLUME = True           !   [Boolean] default = False
-                                ! If true, use a brine plume parameterization from Nguyen et al., 2009.
 
 ! === module MOM_energetic_PBL ===
 ML_OMEGA_FRAC = 0.001           !   [nondim] default = 0.0
@@ -700,3 +688,5 @@ USE_RIGID_SEA_ICE = True        !   [Boolean] default = False
 SEA_ICE_RIGID_MASS = 100.0      !   [kg m-2] default = 1000.0
                                 ! The mass of sea-ice per unit area at which the sea-ice starts to exhibit
                                 ! rigidity
+
+! === module MOM_restart ===

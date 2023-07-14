@@ -14,6 +14,13 @@ NJGLOBAL = 277                  !
                                 ! The total number of thickness grid points in the y-direction in the physical
                                 ! domain. With STATIC_MEMORY_ this is set in SIS2_memory.h at compile time.
 
+! === module SIS_restart ===
+RESTART_CHECKSUMS_REQUIRED = False !   [Boolean] default = True
+                                ! If true, require the restart checksums to match and error out otherwise. Users
+                                ! may want to avoid this comparison if for example the restarts are made from a
+                                ! run with a different mask_table than the current run, in which case the
+                                ! checksums will not match.
+
 ! === module SIS_initialize_fixed ===
 INPUTDIR = "INPUT"              ! default = "."
                                 ! The directory in which input files are found.
@@ -61,8 +68,6 @@ ICE_BULK_SALINITY = 0.0         !   [g/kg] default = 4.0
 ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
                                 ! The initial salinity of sea ice as a fraction of the salinity of the seawater
                                 ! from which it formed.
-DO_BRINE_PLUME = True           !   [Boolean] default = False
-                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.

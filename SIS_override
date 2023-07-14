@@ -11,3 +11,4 @@ DEBUG = False
 !MERGED_CONTINUITY = True
 BASAL_STRESS_NCAT_B = 10       ! default = 100
 #override DO_BRINE_PLUME = True
+#override RESTART_CHECKSUMS_REQUIRED = False

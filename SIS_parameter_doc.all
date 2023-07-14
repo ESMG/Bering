@@ -130,7 +130,7 @@ PARALLEL_RESTARTFILES = False   !   [Boolean] default = False
                                 ! restart file is generated
 MAX_FIELDS = 100                ! default = 100
                                 ! The maximum number of restart fields that can be used.
-RESTART_CHECKSUMS_REQUIRED = True !   [Boolean] default = True
+RESTART_CHECKSUMS_REQUIRED = False !   [Boolean] default = True
                                 ! If true, require the restart checksums to match and error out otherwise. Users
                                 ! may want to avoid this comparison if for example the restarts are made from a
                                 ! run with a different mask_table than the current run, in which case the
@@ -281,8 +281,6 @@ NUDGE_SEA_ICE = False           !   [Boolean] default = False
 TRANSMUTE_SEA_ICE = False       !   [Boolean] default = False
                                 ! If true, allow ice to be transmuted directly into seawater with a spatially
                                 ! varying rate as a form of outflow open boundary condition.
-DO_BRINE_PLUME = True           !   [Boolean] default = False
-                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
