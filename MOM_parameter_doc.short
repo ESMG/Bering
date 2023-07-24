@@ -445,12 +445,6 @@ BT_NONLIN_STRESS = True         !   [Boolean] default = False
                                 ! acclerations.  Otherwise use the depth based on bathyT.
 DYNAMIC_SURFACE_PRESSURE = True !   [Boolean] default = False
                                 ! If true, add a dynamic pressure due to a viscous ice shelf, for instance.
-TIDAL_SAL_FLATHER = True        !   [Boolean] default = False
-                                ! If true, then apply adjustments to the external gravity wave speed used with
-                                ! the Flather OBC routine consistent with the barotropic solver. This applies to
-                                ! cases with  tidal forcing using the scalar self-attraction approximation. The
-                                ! default is currently False in order to retain previous answers but should be
-                                ! set to True for new experiments
 BT_STRONG_DRAG = True           !   [Boolean] default = False
                                 ! If true, use a stronger estimate of the retarding effects of strong bottom
                                 ! drag, by making it implicit with the barotropic time-step instead of implicit
