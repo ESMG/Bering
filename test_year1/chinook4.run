@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH -t 1:00:00
-#SBATCH --ntasks=40
+#SBATCH -t 10:00:00
+#SBATCH --ntasks=80
 #SBATCH --job-name=BERING
 #SBATCH --account=akwaters
 #SBATCH --output=BERING.%j
 #SBATCH --no-requeue
-#SBATCH -p debug
-###SBATCH -p t1standard
+##SBATCH -p debug
+#SBATCH -p t1small
 ###SBATCH -t 44:00:00
 
 cd $SLURM_SUBMIT_DIR
@@ -15,6 +15,8 @@ module purge
 module load slurm/22.05.4
 module load foss/2022a
 module load netCDF-Fortran/4.5.4
+#module load slurm
+#module load toolchain/foss/2019b
 #module list
 
 rm ocean.stats.gnu* seaice.stats.gnu
