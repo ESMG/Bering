@@ -68,6 +68,8 @@ ICE_BULK_SALINITY = 0.0         !   [g/kg] default = 4.0
 ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
                                 ! The initial salinity of sea ice as a fraction of the salinity of the seawater
                                 ! from which it formed.
+DO_BRINE_PLUME = True           !   [Boolean] default = False
+                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.

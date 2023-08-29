@@ -1418,6 +1418,12 @@ BAROTROPIC_TIDAL_SAL_BUG = False !   [Boolean] default = False
                                 ! If true, the tidal self-attraction and loading anomaly in the barotropic
                                 ! solver has the wrong sign, replicating a long-standing bug with a scalar
                                 ! self-attraction and loading term or the SAL term from a previous simulation.
+TIDAL_SAL_FLATHER = True        !   [Boolean] default = False
+                                ! If true, then apply adjustments to the external gravity wave speed used with
+                                ! the Flather OBC routine consistent with the barotropic solver. This applies to
+                                ! cases with  tidal forcing using the scalar self-attraction approximation. The
+                                ! default is currently False in order to retain previous answers but should be
+                                ! set to True for new experiments
 SADOURNY = True                 !   [Boolean] default = True
                                 ! If true, the Coriolis terms are discretized with the Sadourny (1975) energy
                                 ! conserving scheme, otherwise the Arakawa & Hsu scheme is used.  If the
@@ -1659,6 +1665,9 @@ USE_LOTW_BBL_DIFFUSIVITY = False !   [Boolean] default = False
                                 ! If true, uses a simple, imprecise but non-coordinate dependent, model of BBL
                                 ! mixing diffusivity based on Law of the Wall. Otherwise, uses the original BBL
                                 ! scheme.
+DZ_BBL_AVG_MIN = 0.0            !   [m] default = 0.0
+                                ! A minimal distance over which to average to determine the average bottom
+                                ! boundary layer density.
 SIMPLE_TKE_TO_KD = False        !   [Boolean] default = False
                                 ! If true, uses a simple estimate of Kd/TKE that will work for arbitrary
                                 ! vertical coordinates. If false, calculates Kd/TKE and bounds based on exact
@@ -2245,6 +2254,9 @@ VON_KARMAN_WAVES = 0.4          !   [nondim] default = 0.4
                                 ! The value the von Karman constant as used for surface wave calculations.
 RHO_AIR = 1.225                 !   [kg m-3] default = 1.225
                                 ! A typical density of air at sea level, as used in wave calculations
+RHO_SFC_WAVES = 1035.0          !   [kg m-3] default = 1035.0
+                                ! A typical surface density of seawater, as used in wave calculations in
+                                ! comparison with the density of air.  The default is RHO_0.
 WAVE_HEIGHT_SCALE_FACTOR = 0.0246 !   [s2 m-1] default = 0.0246
                                 ! A factor relating the square of the 10 m wind speed to the significant wave
                                 ! height, with a default value based on the Pierson-Moskowitz spectrum.

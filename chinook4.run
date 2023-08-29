@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -t 1:00:00
-#SBATCH --ntasks=40
+#SBATCH --ntasks=24
 #SBATCH --job-name=BERING
 #SBATCH --account=akwaters
 #SBATCH --output=BERING.%j
