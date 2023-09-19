@@ -1,6 +1,6 @@
  &MOM_input_nml
         output_directory = '.',
-        input_filename = 'r'
+        input_filename = 'n'
         restart_input_dir = 'INPUT',
         restart_output_dir = 'RESTART',
         parameter_filename = 'MOM_input',
@@ -10,7 +10,7 @@
 
  &SIS_input_nml
         output_directory = './',
-        input_filename = 'r'
+        input_filename = 'n'
         restart_input_dir = 'INPUT/',
         restart_output_dir = 'RESTART/',
         parameter_filename = 'SIS_input',
@@ -31,7 +31,7 @@
  &coupler_nml
         months = 0,
         days   = 0,
-        hours  = 9,
+        hours  = 2,
         current_date = 2011,9,3,0,0,0,
         calendar = 'gregorian',
         dt_cpld = 3600,
@@ -123,10 +123,10 @@
 
  &surface_flux_nml
         ncar_ocean_flux_multilevel = .true.
-	bulk_zu = 10.0
-	bulk_zt = 2.0
-	bulk_zq = 2.0
-	raoult_sat_vap = .true.
+        bulk_zu = 10.
+        bulk_zt = 2.
+        bulk_zq = 2.
+        raoult_sat_vap = .true.
 /
 
  &topography_nml
