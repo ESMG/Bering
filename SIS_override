@@ -10,7 +10,7 @@
 DEBUG = False
 !MERGED_CONTINUITY = True
 BASAL_STRESS_NCAT_B = 10       ! default = 100
-#override DO_BRINE_PLUME = True
+!#override DO_BRINE_PLUME = True
 #override BRINE_PLUME_EXPONENT = 1
 #override BRINE_PLUME_FRACTION = 0.9
 #override RESTART_CHECKSUMS_REQUIRED = False
