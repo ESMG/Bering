@@ -13,11 +13,12 @@ cd $SLURM_SUBMIT_DIR
 . /usr/share/Modules/init/bash
 module purge
 module load slurm/22.05.4
-module load foss/2022a
+module load intel/2022a
+#module load foss/2022a
 module load netCDF-Fortran/4.5.4
 #module list
 
-rm ocean.stats.gnu* seaice.stats.gnu
+rm ocean.stats.intel* seaice.stats.intel
 #
 #  Prolog
 #
@@ -29,10 +30,9 @@ echo " "
 TBEGIN=`echo "print time();" | perl`
 
 #srun -l /bin/hostname | sort -n | awk '{print $2}' > ./nodes
-mpirun -np $SLURM_NTASKS --mca mpi_paffinity_alone 1 /import/c1/AKWATERS/kshedstrom/MOM6_22/build/gnu/SYM_ice_ocean_SIS2/repro/MOM6
+mpirun -np $SLURM_NTASKS /import/c1/AKWATERS/kshedstrom/MOM6_22/build/intel/SYM_ice_ocean_SIS2/repro/MOM6
+#mpirun -np $SLURM_NTASKS --mca mpi_paffinity_alone 1 /import/c1/AKWATERS/kshedstrom/MOM6_22/build/gnu/SYM_ice_ocean_SIS2/repro/MOM6
 #mpirun -np $SLURM_NTASKS --mca mpi_paffinity_alone 1 /import/c1/AKWATERS/kshedstrom/MOM6_22/build/gnu/SYM_ice_ocean_SIS2/debug/MOM6
-#mpirun -np $SLURM_NTASKS --mca mpi_paffinity_alone 1 /import/c1/AKWATERS/kshedstrom/MOM6_4/build/gnu/SYM_ice_ocean_SIS2/repro/MOM6
-#mpirun -np $SLURM_NTASKS --mca mpi_paffinity_alone 1 /import/c1/AKWATERS/kshedstrom/MOM6_4/build/gnu/SYM_ice_ocean_SIS2/debug/MOM6
 
 #
 #  Epilog
