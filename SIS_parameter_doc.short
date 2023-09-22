@@ -3,6 +3,10 @@
 ! === module ice_model ===
 DO_RIDGING = True               !   [Boolean] default = False
                                 ! If true, call the ridging routines.
+READ_HLIM_VALS = True           !   [Boolean] default = False
+                                ! If true, read the lower limits on the ice thicknesscategories.
+HLIM_VALS = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5, 3.5, 4.5" ! default = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5"
+                                ! This sets the list of lower limits on the ice thickness categories.
 
 ! === module MOM_domains ===
 REENTRANT_X = False             !   [Boolean] default = True
