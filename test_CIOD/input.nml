@@ -46,9 +46,9 @@
         use_lag_fluxes=.false.,
         check_stocks = 0,
         do_chksum = .false.,
-	concurrent_ice = .true.,
-	slow_ice_with_ocean = .true.,
-	combined_ice_and_ocean = .true.
+        concurrent_ice = .true.,
+        slow_ice_with_ocean = .true.,
+        combined_ice_and_ocean = .true.
 /
 
  &diag_manager_nml
@@ -123,9 +123,9 @@
 
  &surface_flux_nml
         ncar_ocean_flux_multilevel = .true.
-        bulk_zu = 10.
-        bulk_zt = 2.
-        bulk_zq = 2.
+        bulk_zu = 10.0
+        bulk_zt = 2.0
+        bulk_zq = 2.0
         raoult_sat_vap = .true.
 /
 

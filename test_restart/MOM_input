@@ -140,27 +140,27 @@ OBC_RAMP_TIMESCALE = 2.0        !   [days] default = 1.0
                                 ! If RAMP_OBCS is true, this sets the ramping timescale.
 OBC_TIDE_N_CONSTITUENTS = 10    ! default = 0
                                 ! Number of tidal constituents being added to the open boundary.
-!OBC_SEGMENT_001 = "J=N,I=N:185,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
-OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+!OBC_SEGMENT_001 = "J=N,I=N:185,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
+OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_002_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_003_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-!OBC_SEGMENT_004 = "I=N,J=140:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
-OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+!OBC_SEGMENT_004 = "I=N,J=140:N,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
+OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
@@ -413,7 +413,7 @@ BBL_THICK_MIN = 0.1             !   [m] default = 0.0
                                 ! The minimum bottom boundary layer thickness that can be used with
                                 ! BOTTOMDRAGLAW. This might be Kv/(cdrag*drag_bg_vel) to give Kv as the minimum
                                 ! near-bottom viscosity.
-KV = 1.0E-05                    !   [m2 s-1]
+KV = 0.0                        !   [m2 s-1]
                                 ! The background kinematic viscosity in the interior. The molecular value, ~1e-6
                                 ! m2 s-1, may be used.
 
@@ -612,7 +612,7 @@ MLE_USE_PBL_MLD = True          !   [Boolean] default = False
                                 ! If true, the MLE parameterization will use the mixed-layer depth provided by
                                 ! the active PBL parameterization. If false, MLE will estimate a MLD based on a
                                 ! density difference with the surface using the parameter MLE_DENSITY_DIFF.
-MLE_MLD_DECAY_TIME = 86400.     !   [s] default = 0.0
+MLE_MLD_DECAY_TIME = 86400.0    !   [s] default = 0.0
                                 ! The time-scale for a running-mean filter applied to the mixed-layer depth used
                                 ! in the MLE restratification parameterization. When the MLD deepens below the
                                 ! current running-mean the running-mean is instantaneously set to the current
@@ -633,35 +633,12 @@ EPBL_IS_ADDITIVE = False        !   [Boolean] default = True
                                 ! Otherwise, the larger of kappa-shear and ePBL diffusivities are used.
 
 ! === module MOM_set_diffusivity ===
-
-! === module MOM_tidal_mixing ===
-! Vertical Tidal Mixing Parameterization
-INT_TIDE_DISSIPATION = True     !   [Boolean] default = False
-                                ! If true, use an internal tidal dissipation scheme to drive diapycnal mixing,
-                                ! along the lines of St. Laurent et al. (2002) and Simmons et al. (2004).
-INT_TIDE_PROFILE = "POLZIN_09"  ! default = "STLAURENT_02"
-                                ! INT_TIDE_PROFILE selects the vertical profile of energy dissipation with
-                                ! INT_TIDE_DISSIPATION. Valid values are:
-                                !    STLAURENT_02 - Use the St. Laurent et al exponential
-                                !                   decay profile.
-                                !    POLZIN_09 - Use the Polzin WKB-stretched algebraic
-                                !                   decay profile.
-INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
-                                ! The decay scale away from the bottom for tidal TKE with the new coding when
-                                ! INT_TIDE_DISSIPATION is used.
-H2_FILE = "ocean_topoh2.nc"     !
-                                ! The path to the file containing the sub-grid-scale topographic roughness
-                                ! amplitude with INT_TIDE_DISSIPATION.
 BBL_EFFIC = 0.01                !   [nondim] default = 0.2
                                 ! The efficiency with which the energy extracted by bottom drag drives BBL
                                 ! diffusion.  This is only used if BOTTOMDRAGLAW is true.
 BBL_MIXING_AS_MAX = False       !   [Boolean] default = True
                                 ! If true, take the maximum of the diffusivity from the BBL mixing and the other
                                 ! diffusivities. Otherwise, diffusivity from the BBL_mixing is simply added.
-!USE_LOTW_BBL_DIFFUSIVITY = True !   [Boolean] default = False
-                                ! If true, uses a simple, imprecise but non-coordinate dependent, model of BBL
-                                ! mixing diffusivity based on Law of the Wall. Otherwise, uses the original BBL
-                                ! scheme.
 
 ! === module MOM_bkgnd_mixing ===
 ! Adding static vertical background mixing coefficients

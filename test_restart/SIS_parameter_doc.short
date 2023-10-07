@@ -3,9 +3,10 @@
 ! === module ice_model ===
 DO_RIDGING = True               !   [Boolean] default = False
                                 ! If true, call the ridging routines.
-FAST_ICE_RESTARTFILE = "ice_model_fast.res.nc" ! default = "ice_model.res.nc"
-                                ! The name of the restart file for those elements of the the sea ice that are
-                                ! handled by the fast ice PEs.
+READ_HLIM_VALS = True           !   [Boolean] default = False
+                                ! If true, read the lower limits on the ice thicknesscategories.
+HLIM_VALS = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5, 3.5, 4.5" ! default = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5"
+                                ! This sets the list of lower limits on the ice thickness categories.
 
 ! === module MOM_domains ===
 REENTRANT_X = False             !   [Boolean] default = True
@@ -63,11 +64,26 @@ OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
 ! === module SIS_tracer_registry ===
 
 ! === module SIS_tracer_flow_control ===
-
-! === module SIS_restart ===
-
-! === module SIS2_ice_thm (thermo) ===
-! This sub-module calculates ice thermodynamic quantities.
+CONCENTRATION_INIT_CONFIG = "latitudes" ! default = "data_override"
+                                ! A string that determines how the initial total sea ice concentration is
+                                ! initialized for a new run:
+                                !     file - read sea ice concentrations from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     zero - there is no sea ice anywhere
+                                !     latitudes - initial sea ice concentration is a function of latitude.
+ICE_THICKNESS_INIT_CONFIG = "uniform" ! default = "data_override"
+                                ! A string that determines how the initial sea ice thickness is initialized for
+                                ! a new run:
+                                !     file - read sea ice thickesses from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     uniform - sea ice has uniform thickness where the concentration is
+                                !       nonzero.
+ARCTIC_ICE_EDGE_IC = 72.0       !   [degrees of latitude] default = 91.0
+                                ! The southern latitude of Arctic ice in an initial condition.
+ICE_INIT_MASS = 900.0           !   [kg m-2] default = 0.0
+                                ! A uniform initial sea ice mass per unit area where there is sea ice.
+ICE_SALINITY_IC = 4.0           !   [g kg-1] default = 0.0
+                                ! The uniform sea ice salinity used for the initial condition
 
 ! === module SIS_slow_thermo ===
 ! This module calculates the slow evolution of the ice mass, heat, and salt budgets.
@@ -88,10 +104,6 @@ DT_ICE_DYNAMICS = 1200.0        !   [seconds] default = -1.0
                                 ! The time step used for the slow ice dynamics, including stepping the
                                 ! continuity equation and interactions between the ice mass field and
                                 ! velocities.  If 0 or negative the coupling time step will be used.
-MERGED_CONTINUITY = True        !   [Boolean] default = False
-                                ! If true, update the continuity equations for the ice, snow, and melt pond
-                                ! water together summed across categories, with proportionate fluxes for each
-                                ! part. Otherwise the media are updated separately.
 ICE_STATS_INTERVAL = 0.0416666666666667 !   [days] default = 1.0
                                 ! The interval in units of TIMEUNIT between writes of the globally summed ice
                                 ! statistics and conservation checks.
@@ -173,13 +185,3 @@ ICE_DELTA_EDD_R_POND = 1.0      !   [nondimensional] default = 0.0
                                 ! A dreadfully documented tuning parameter for the radiative propeties of
                                 ! meltwater ponds on sea ice with the delta-Eddington radiative transfer
                                 ! calculation.
-
-! === module SIS_fast_thermo ===
-! This module applies rapidly varying heat fluxes to the ice and does an implicit surface temperature
-! calculation.
-
-! === module SIS2_ice_thm (updates) ===
-! This sub-module does updates of the sea-ice due to thermodynamic changes.
-
-! === module SIS_optics ===
-! This module calculates the albedo and absorption profiles for shortwave radiation.

@@ -88,6 +88,8 @@ REDO_FAST_ICE_UPDATE = False    !   [Boolean] default = False
                                 ! If true, recalculate the thermal updates from the fast dynamics on the slowly
                                 ! evolving ice state, rather than copying over the slow ice state to the fast
                                 ! ice state.
+READ_HLIM_VALS = True           !   [Boolean] default = False
+                                ! If true, read the lower limits on the ice thicknesscategories.
 NCAT_ICE = 5                    !   [nondim] default = 5
                                 ! The number of sea ice thickness categories.
 NK_ICE = 4                      !   [nondim] default = 4
@@ -99,6 +101,8 @@ MIN_OCEAN_PARTSIZE = 0.0        !   [nondim] default = 0.0
                                 ! some purposes it may be useful to set this to a miniscule value (like 1e-40)
                                 ! that will be lost to roundoff during any sums so that the open ocean fluxes
                                 ! can be used in with new categories.
+HLIM_VALS = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5, 3.5, 4.5" ! default = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5"
+                                ! This sets the list of lower limits on the ice thickness categories.
 
 ! === module MOM_domains ===
 REENTRANT_X = False             !   [Boolean] default = True
@@ -281,6 +285,8 @@ NUDGE_SEA_ICE = False           !   [Boolean] default = False
 TRANSMUTE_SEA_ICE = False       !   [Boolean] default = False
                                 ! If true, allow ice to be transmuted directly into seawater with a spatially
                                 ! varying rate as a form of outflow open boundary condition.
+DO_BRINE_PLUME = False          !   [Boolean] default = False
+                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
@@ -400,6 +406,11 @@ LEMIEUX_ALPHA_B = 20.0          !   [Nondim] default = 20.0
                                 ! The value of a third Lemieux landfast ice tuneable parameter.
 LEMIEUX_U0 = 5.0E-05            !   [m s-1] default = 5.0E-05
                                 ! Velocity for Lemieux landfast ice.
+H_ADJ_FILE = ""                 ! default = ""
+                                ! The path to the file containing an adjustment to the bottom depth for the
+                                ! landfast ice.
+ADJUST_DEPTH = False            !   [Boolean] default = False
+                                ! If true, read in a depth adjustment for landfast ice.
 BASAL_STRESS_MIN_THICK = 0.01   !   [m] default = 0.01
                                 ! Minimum ice thickness for grounding in ITD landfast ice.
 BASAL_STRESS_MAX_DEPTH = 50.0   !   [m] default = 50.0

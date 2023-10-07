@@ -11,7 +11,7 @@ ENABLE_THERMODYNAMICS = True    !   [Boolean] default = True
 USE_EOS = True                  !   [Boolean] default = True
                                 ! If true,  density is calculated from temperature and salinity with an equation
                                 ! of state.  If USE_EOS is true, ENABLE_THERMODYNAMICS must be true as well.
-DIABATIC_FIRST = True           !   [Boolean] default = False
+DIABATIC_FIRST = False          !   [Boolean] default = False
                                 ! If true, apply diabatic and thermodynamic processes, including buoyancy
                                 ! forcing and mass gain or loss, before stepping the dynamics forward.
 USE_CONTEMP_ABSSAL = False      !   [Boolean] default = False
@@ -317,25 +317,25 @@ OBC_RAMP_TIMESCALE = 2.0        !   [days] default = 1.0
                                 ! If RAMP_OBCS is true, this sets the ramping timescale.
 OBC_TIDE_N_CONSTITUENTS = 10    ! default = 0
                                 ! Number of tidal constituents being added to the open boundary.
-OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_002_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_003_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
+OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER,OBLIQUE,NUDGED,OBLIQUE_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
@@ -671,6 +671,95 @@ FATAL_INCONSISTENT_RESTART_TIME = False !   [Boolean] default = False
                                 ! If true and a time_in value is provided to MOM_initialize_state, verify that
                                 ! the time read from a restart file is the same as time_in, and issue a fatal
                                 ! error if it is not.  Otherwise, simply set the time to time_in if present.
+INIT_LAYERS_FROM_Z_FILE = False !   [Boolean] default = False
+                                ! If true, initialize the layer thicknesses, temperatures, and salinities from a
+                                ! Z-space file on a latitude-longitude grid.
+THICKNESS_CONFIG = "coord"      ! default = "uniform"
+                                ! A string that determines how the initial layer thicknesses are specified for a
+                                ! new run:
+                                !     file - read interface heights from the file specified
+                                !       by (THICKNESS_FILE).
+                                !     thickness_file - read thicknesses from the file specified
+                                !       by (THICKNESS_FILE).
+                                !     mass_file - read thicknesses in units of mass per unit area from the file
+                                !       specified by (THICKNESS_FILE).
+                                !     coord - determined by ALE coordinate.
+                                !     uniform - uniform thickness layers evenly distributed
+                                !       between the surface and MAXIMUM_DEPTH.
+                                !     list - read a list of positive interface depths.
+                                !     DOME - use a slope and channel configuration for the
+                                !       DOME sill-overflow test case.
+                                !     ISOMIP - use a configuration for the
+                                !       ISOMIP test case.
+                                !     benchmark - use the benchmark test case thicknesses.
+                                !     Neverworld - use the Neverworld test case thicknesses.
+                                !     search - search a density profile for the interface
+                                !       densities. This is not yet implemented.
+                                !     circle_obcs - the circle_obcs test case is used.
+                                !     DOME2D - 2D version of DOME initialization.
+                                !     adjustment2d - 2D lock exchange thickness ICs.
+                                !     sloshing - sloshing gravity thickness ICs.
+                                !     seamount - no motion test with seamount ICs.
+                                !     dumbbell - sloshing channel ICs.
+                                !     soliton - Equatorial Rossby soliton.
+                                !     rossby_front - a mixed layer front in thermal wind balance.
+                                !     USER - call a user modified routine.
+TS_CONFIG = "file"              !
+                                ! A string that determines how the initial temperatures and salinities are
+                                ! specified for a new run:
+                                !     file - read velocities from the file specified
+                                !       by (TS_FILE).
+                                !     fit - find the temperatures that are consistent with
+                                !       the layer densities and salinity S_REF.
+                                !     TS_profile - use temperature and salinity profiles
+                                !       (read from TS_FILE) to set layer densities.
+                                !     benchmark - use the benchmark test case T & S.
+                                !     linear - linear in logical layer space.
+                                !     DOME2D - 2D DOME initialization.
+                                !     ISOMIP - ISOMIP initialization.
+                                !     adjustment2d - 2d lock exchange T/S ICs.
+                                !     sloshing - sloshing mode T/S ICs.
+                                !     seamount - no motion test with seamount ICs.
+                                !     dumbbell - sloshing channel ICs.
+                                !     rossby_front - a mixed layer front in thermal wind balance.
+                                !     SCM_CVMix_tests - used in the SCM CVMix tests.
+                                !     USER - call a user modified routine.
+TS_FILE = "SODA3_sept.nc"       !
+                                ! The initial condition file for temperature.
+TEMP_IC_VAR = "temp"            ! default = "PTEMP"
+                                ! The initial condition variable for potential temperature.
+SALT_IC_VAR = "salt"            ! default = "SALT"
+                                ! The initial condition variable for salinity.
+SALT_FILE = "SODA3_sept.nc"     ! default = "SODA3_sept.nc"
+                                ! The initial condition file for salinity.
+DEPRESS_INITIAL_SURFACE = True  !   [Boolean] default = False
+                                ! If true,  depress the initial surface to avoid huge tsunamis when a large
+                                ! surface pressure is applied.
+TRIM_IC_FOR_P_SURF = False      !   [Boolean] default = False
+                                ! If true, cuts way the top of the column for initial conditions at the depth
+                                ! where the hydrostatic pressure matches the imposed surface pressure which is
+                                ! read from file.
+SURFACE_HEIGHT_IC_FILE = "SODA3_sept.nc" !
+                                ! The initial condition file for the surface height.
+SURFACE_HEIGHT_IC_VAR = "ssh"   ! default = "SSH"
+                                ! The initial condition variable for the surface height.
+SURFACE_HEIGHT_IC_SCALE = 1.0   !   [variable] default = 1.0
+                                ! A scaling factor to convert SURFACE_HEIGHT_IC_VAR into units of m
+REGRID_ACCELERATE_INIT = False  !   [Boolean] default = False
+                                ! If true, runs REGRID_ACCELERATE_ITERATIONS iterations of the regridding
+                                ! algorithm to push the initial grid to be consistent with the initial
+                                ! condition. Useful only for state-based and iterative coordinates.
+VELOCITY_CONFIG = "zero"        ! default = "zero"
+                                ! A string that determines how the initial velocities are specified for a new
+                                ! run:
+                                !     file - read velocities from the file specified
+                                !       by (VELOCITY_FILE).
+                                !     zero - the fluid is initially at rest.
+                                !     uniform - the flow is uniform (determined by
+                                !       parameters INITIAL_U_CONST and INITIAL_V_CONST).
+                                !     rossby_front - a mixed layer front in thermal wind balance.
+                                !     soliton - Equatorial Rossby soliton.
+                                !     USER - call a user modified routine.
 ODA_INCUPD = False              !   [Boolean] default = False
                                 ! If true, oda incremental updates will be applied everywhere in the domain.
 SPONGE = False                  !   [Boolean] default = False
@@ -851,12 +940,12 @@ HTBL_SHELF_MIN = 0.1            !   [m] default = 0.1
 HTBL_SHELF = 10.0               !   [m] default = 10.0
                                 ! The thickness over which near-surface velocities are averaged for the drag law
                                 ! under an ice shelf.  By default this is the same as HBBL
-KV = 1.0E-05                    !   [m2 s-1]
+KV = 0.0                        !   [m2 s-1]
                                 ! The background kinematic viscosity in the interior. The molecular value, ~1e-6
                                 ! m2 s-1, may be used.
-KV_BBL_MIN = 1.0E-05            !   [m2 s-1] default = 1.0E-05
+KV_BBL_MIN = 0.0                !   [m2 s-1] default = 0.0
                                 ! The minimum viscosities in the bottom boundary layer.
-KV_TBL_MIN = 1.0E-05            !   [m2 s-1] default = 1.0E-05
+KV_TBL_MIN = 0.0                !   [m2 s-1] default = 0.0
                                 ! The minimum viscosities in the top boundary layer.
 CORRECT_BBL_BOUNDS = False      !   [Boolean] default = False
                                 ! If true, uses the correct bounds on the BBL thickness and viscosity so that
@@ -1054,7 +1143,7 @@ PV_ADV_SCHEME = "PV_ADV_CENTERED" ! default = "PV_ADV_CENTERED"
 SAL_SCALAR_APPROX = True        !   [Boolean] default = True
                                 ! If true, use the scalar approximation to calculate self-attraction and
                                 ! loading.
-SAL_SCALAR_VALUE = 0.094        !   [m m-1] default = 0.094
+SAL_SCALAR_VALUE = 0.094        !   [m m-1] default = 0.0
                                 ! The constant of proportionality between sea surface height (really it should
                                 ! be bottom pressure) anomalies and bottom geopotential anomalies. This is only
                                 ! used if USE_SAL_SCALAR is true or USE_PREVIOUS_TIDES is true.
@@ -1612,82 +1701,9 @@ SET_DIFF_ANSWER_DATE = 99991231 ! default = 99991231
 ! Vertical Tidal Mixing Parameterization
 USE_CVMix_TIDAL = False         !   [Boolean] default = False
                                 ! If true, turns on tidal mixing via CVMix
-INT_TIDE_DISSIPATION = True     !   [Boolean] default = False
+INT_TIDE_DISSIPATION = False    !   [Boolean] default = False
                                 ! If true, use an internal tidal dissipation scheme to drive diapycnal mixing,
                                 ! along the lines of St. Laurent et al. (2002) and Simmons et al. (2004).
-TIDAL_MIXING_ANSWER_DATE = 99991231 ! default = 99991231
-                                ! The vintage of the order of arithmetic and expressions in the tidal mixing
-                                ! calculations.  Values below 20190101 recover the answers from the end of 2018,
-                                ! while higher values use updated and more robust forms of the same expressions.
-INT_TIDE_PROFILE = "POLZIN_09"  ! default = "STLAURENT_02"
-                                ! INT_TIDE_PROFILE selects the vertical profile of energy dissipation with
-                                ! INT_TIDE_DISSIPATION. Valid values are:
-                                !    STLAURENT_02 - Use the St. Laurent et al exponential
-                                !                   decay profile.
-                                !    POLZIN_09 - Use the Polzin WKB-stretched algebraic
-                                !                   decay profile.
-LEE_WAVE_DISSIPATION = False    !   [Boolean] default = False
-                                ! If true, use an lee wave driven dissipation scheme to drive diapycnal mixing,
-                                ! along the lines of Nikurashin (2010) and using the St. Laurent et al. (2002)
-                                ! and Simmons et al. (2004) vertical profile
-INT_TIDE_LOWMODE_DISSIPATION = False !   [Boolean] default = False
-                                ! If true, consider mixing due to breaking low modes that have been remotely
-                                ! generated; as with itidal drag on the barotropic tide, use an internal tidal
-                                ! dissipation scheme to drive diapycnal mixing, along the lines of St. Laurent
-                                ! et al. (2002) and Simmons et al. (2004).
-NU_POLZIN = 0.0697              !   [nondim] default = 0.0697
-                                ! When the Polzin decay profile is used, this is a non-dimensional constant in
-                                ! the expression for the vertical scale of decay for the tidal energy
-                                ! dissipation.
-NBOTREF_POLZIN = 9.61E-04       !   [s-1] default = 9.61E-04
-                                ! When the Polzin decay profile is used, this is the reference value of the
-                                ! buoyancy frequency at the ocean bottom in the Polzin formulation for the
-                                ! vertical scale of decay for the tidal energy dissipation.
-POLZIN_DECAY_SCALE_FACTOR = 1.0 !   [nondim] default = 1.0
-                                ! When the Polzin decay profile is used, this is a scale factor for the vertical
-                                ! scale of decay of the tidal energy dissipation.
-POLZIN_SCALE_MAX_FACTOR = 1.0   !   [nondim] default = 1.0
-                                ! When the Polzin decay profile is used, this is a factor to limit the vertical
-                                ! scale of decay of the tidal energy dissipation to
-                                ! POLZIN_DECAY_SCALE_MAX_FACTOR times the depth of the ocean.
-POLZIN_MIN_DECAY_SCALE = 0.0    !   [m] default = 0.0
-                                ! When the Polzin decay profile is used, this is the minimum vertical decay
-                                ! scale for the vertical profile
-                                ! of internal tide dissipation with the Polzin (2009) formulation
-INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
-                                ! The decay scale away from the bottom for tidal TKE with the new coding when
-                                ! INT_TIDE_DISSIPATION is used.
-MU_ITIDES = 0.2                 !   [nondim] default = 0.2
-                                ! A dimensionless turbulent mixing efficiency used with INT_TIDE_DISSIPATION,
-                                ! often 0.2.
-GAMMA_ITIDES = 0.3333           !   [nondim] default = 0.3333
-                                ! The fraction of the internal tidal energy that is dissipated locally with
-                                ! INT_TIDE_DISSIPATION. THIS NAME COULD BE BETTER.
-MIN_ZBOT_ITIDES = 0.0           !   [m] default = 0.0
-                                ! Turn off internal tidal dissipation when the total ocean depth is less than
-                                ! this value.
-KAPPA_ITIDES = 6.283185307179586E-04 !   [m-1] default = 6.283185307179586E-04
-                                ! A topographic wavenumber used with INT_TIDE_DISSIPATION. The default is 2pi/10
-                                ! km, as in St.Laurent et al. 2002.
-UTIDE = 0.0                     !   [m s-1] default = 0.0
-                                ! The constant tidal amplitude used with INT_TIDE_DISSIPATION.
-KAPPA_H2_FACTOR = 1.0           !   [nondim] default = 1.0
-                                ! A scaling factor for the roughness amplitude with INT_TIDE_DISSIPATION.
-TKE_ITIDE_MAX = 1000.0          !   [W m-2] default = 1000.0
-                                ! The maximum internal tide energy source available to mix above the bottom
-                                ! boundary layer with INT_TIDE_DISSIPATION.
-READ_TIDEAMP = False            !   [Boolean] default = False
-                                ! If true, read a file (given by TIDEAMP_FILE) containing the tidal amplitude
-                                ! with INT_TIDE_DISSIPATION.
-H2_FILE = "ocean_topoh2.nc"     !
-                                ! The path to the file containing the sub-grid-scale topographic roughness
-                                ! amplitude with INT_TIDE_DISSIPATION.
-ROUGHNESS_VARNAME = "h2"        ! default = "h2"
-                                ! The name in the input file of the squared sub-grid-scale topographic roughness
-                                ! amplitude variable.
-FRACTIONAL_ROUGHNESS_MAX = 0.1  !   [nondim] default = 0.1
-                                ! The maximum topographic roughness amplitude as a fraction of the mean depth,
-                                ! or a negative value for no limitations on roughness.
 ML_RADIATION = False            !   [Boolean] default = False
                                 ! If true, allow a fraction of TKE available from wind work to penetrate below
                                 ! the base of the mixed layer with a vertical decay scale determined by the
@@ -2220,6 +2236,11 @@ WIND_STRESS_MULTIPLIER = 1.0    !   [nondim] default = 1.0
                                 ! is used for testing and should be =1.0 for any production runs.
 CD_TIDES = 0.0018               !   [nondim] default = 1.0E-04
                                 ! The drag coefficient that applies to the tides.
+READ_TIDEAMP = False            !   [Boolean] default = False
+                                ! If true, read a file (given by TIDEAMP_FILE) containing the tidal amplitude
+                                ! with INT_TIDE_DISSIPATION.
+UTIDE = 0.0                     !   [m s-1] default = 0.0
+                                ! The constant tidal amplitude used with INT_TIDE_DISSIPATION.
 READ_GUST_2D = False            !   [Boolean] default = False
                                 ! If true, use a 2-dimensional gustiness supplied from an input file
 GUST_CONST = 0.0                !   [Pa] default = 0.0

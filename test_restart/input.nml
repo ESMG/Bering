@@ -1,6 +1,6 @@
  &MOM_input_nml
         output_directory = '.',
-        input_filename = 'r'
+        input_filename = 'n'
         restart_input_dir = 'INPUT',
         restart_output_dir = 'RESTART',
         parameter_filename = 'MOM_input',
@@ -10,19 +10,13 @@
 
  &SIS_input_nml
         output_directory = './',
-        input_filename = 'r'
+        input_filename = 'n'
         restart_input_dir = 'INPUT/',
         restart_output_dir = 'RESTART/',
         parameter_filename = 'SIS_input',
                              'SIS_override',
                              'SIS_layout'
  /
-
- &ice_ocean_driver_nml
-        output_directory = './',
-        parameter_filename = 'CIOD_input',
-                             'CIOD_override'
-/
 
  &atmos_model_nml
         layout = 0, 0
@@ -31,7 +25,7 @@
  &coupler_nml
         months = 0,
         days   = 0,
-        hours  = 9,
+        hours  = 2,
         current_date = 2011,9,3,0,0,0,
         calendar = 'gregorian',
         dt_cpld = 3600,
@@ -46,9 +40,6 @@
         use_lag_fluxes=.false.,
         check_stocks = 0,
         do_chksum = .false.,
-	concurrent_ice = .true.,
-	slow_ice_with_ocean = .true.,
-	combined_ice_and_ocean = .true.
 /
 
  &diag_manager_nml
@@ -123,10 +114,10 @@
 
  &surface_flux_nml
         ncar_ocean_flux_multilevel = .true.
-	bulk_zu = 10.0
-	bulk_zt = 2.0
-	bulk_zq = 2.0
-	raoult_sat_vap = .true.
+        bulk_zu = 10.0
+        bulk_zt = 2.0
+        bulk_zq = 2.0
+        raoult_sat_vap = .true.
 /
 
  &topography_nml
