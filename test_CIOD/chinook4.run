@@ -1,19 +1,19 @@
 #!/bin/bash
 #SBATCH -t 1:00:00
-#SBATCH --ntasks=40
+#SBATCH --ntasks=72
 #SBATCH --job-name=BERING
 #SBATCH --account=akwaters
 #SBATCH --output=BERING.%j
 #SBATCH --no-requeue
-#SBATCH -p debug
-###SBATCH -p t1standard
+#SBATCH -p t1standard
+##SBATCH -p debug
 ###SBATCH -t 44:00:00
 
 cd $SLURM_SUBMIT_DIR
 #. /usr/share/Modules/init/bash
 module purge
 module load slurm/22.05.4
-module load intel/2022a
+module load intel/2023a
 #module load foss/2022a
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kshedstrom/intel_23/lib
 #module load netCDF-Fortran/4.5.4
