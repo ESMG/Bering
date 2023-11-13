@@ -88,6 +88,8 @@ REDO_FAST_ICE_UPDATE = False    !   [Boolean] default = False
                                 ! If true, recalculate the thermal updates from the fast dynamics on the slowly
                                 ! evolving ice state, rather than copying over the slow ice state to the fast
                                 ! ice state.
+READ_HLIM_VALS = True           !   [Boolean] default = False
+                                ! If true, read the lower limits on the ice thicknesscategories.
 NCAT_ICE = 5                    !   [nondim] default = 5
                                 ! The number of sea ice thickness categories.
 NK_ICE = 4                      !   [nondim] default = 4
@@ -99,6 +101,8 @@ MIN_OCEAN_PARTSIZE = 0.0        !   [nondim] default = 0.0
                                 ! some purposes it may be useful to set this to a miniscule value (like 1e-40)
                                 ! that will be lost to roundoff during any sums so that the open ocean fluxes
                                 ! can be used in with new categories.
+HLIM_VALS = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5, 3.5, 4.5" ! default = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5"
+                                ! This sets the list of lower limits on the ice thickness categories.
 
 ! === module MOM_domains ===
 REENTRANT_X = False             !   [Boolean] default = True
@@ -130,7 +134,7 @@ PARALLEL_RESTARTFILES = False   !   [Boolean] default = False
                                 ! restart file is generated
 MAX_FIELDS = 100                ! default = 100
                                 ! The maximum number of restart fields that can be used.
-RESTART_CHECKSUMS_REQUIRED = True !   [Boolean] default = True
+RESTART_CHECKSUMS_REQUIRED = False !   [Boolean] default = True
                                 ! If true, require the restart checksums to match and error out otherwise. Users
                                 ! may want to avoid this comparison if for example the restarts are made from a
                                 ! run with a different mask_table than the current run, in which case the
@@ -189,57 +193,8 @@ MAXIMUM_DEPTH = 6500.0          !   [m]
 ! === module SIS_open_boundary ===
 ! Controls where open boundaries are located, what kind of boundary condition to impose, and what data to apply,
 ! if any.
-OBC_NUMBER_OF_SEGMENTS = 4      ! default = 0
+OBC_NUMBER_OF_SEGMENTS = 0      ! default = 0
                                 ! The number of open boundary segments.
-OBC_ZERO_VORTICITY = False      !   [Boolean] default = False
-                                ! If true, sets relative vorticity to zero on open boundaries.
-OBC_FREESLIP_VORTICITY = True   !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the
-                                ! relative vorticity on open boundaries. This cannot be true if another
-                                ! OBC_XXX_VORTICITY option is True.
-OBC_COMPUTED_VORTICITY = False  !   [Boolean] default = False
-                                ! If true, uses the external values of tangential velocity in the relative
-                                ! vorticity on open boundaries. This cannot be true if another OBC_XXX_VORTICITY
-                                ! option is True.
-OBC_SPECIFIED_VORTICITY = False !   [Boolean] default = False
-                                ! If true, uses the external values of tangential velocity in the relative
-                                ! vorticity on open boundaries. This cannot be true if another OBC_XXX_VORTICITY
-                                ! option is True.
-OBC_ZERO_STRAIN = False         !   [Boolean] default = False
-                                ! If true, sets the strain used in the stress tensor to zero on open boundaries.
-OBC_FREESLIP_STRAIN = True      !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_COMPUTED_STRAIN = False     !   [Boolean] default = False
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_SPECIFIED_STRAIN = False    !   [Boolean] default = False
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_ZERO_BIHARMONIC = False     !   [Boolean] default = False
-                                ! If true, zeros the Laplacian of flow on open boundaries in the biharmonic
-                                ! viscosity term.
-MASK_OUTSIDE_OBCS = False       !   [Boolean] default = False
-                                ! If true, set the areas outside open boundaries to be land.
-OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the tracer concentration at the
-                                ! boundaries to externally imposed values when the flow is exiting the domain.
-OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the tracer concentration at the
-                                ! boundaries to values from the interior when the flow is entering the domain.
-BRUSHCUTTER_MODE = True         !   [Boolean] default = False
-                                ! If true, read external OBC data on the supergrid.
 CHANNEL_CONFIG = "none"         ! default = "none"
                                 ! A parameter that determines which set of channels are restricted to specific
                                 ! widths.  Options are:
@@ -306,6 +261,59 @@ USE_ICE_AGE_TRACER = False      !   [Boolean] default = False
 SIS_FAST_AVAILABLE_DIAGS_FILE = "SIS_fast.available_diags" ! default = "SIS_fast.available_diags"
                                 ! A file into which to write a list of all available sea ice diagnostics that
                                 ! can be included in a diag_table.
+CONCENTRATION_INIT_CONFIG = "latitudes" ! default = "data_override"
+                                ! A string that determines how the initial total sea ice concentration is
+                                ! initialized for a new run:
+                                !     file - read sea ice concentrations from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     zero - there is no sea ice anywhere
+                                !     latitudes - initial sea ice concentration is a function of latitude.
+ICE_THICKNESS_INIT_CONFIG = "uniform" ! default = "data_override"
+                                ! A string that determines how the initial sea ice thickness is initialized for
+                                ! a new run:
+                                !     file - read sea ice thickesses from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     uniform - sea ice has uniform thickness where the concentration is
+                                !       nonzero.
+SNOW_THICKNESS_INIT_CONFIG = "data_override" ! default = "data_override"
+                                ! A string that determines how the initial total snow thickness is initialized
+                                ! for a new run:
+                                !     file - read sea ice concentrations from a specified file
+                                !     data_override - use the data_override capability or zero everywhere
+                                !     uniform - snow has uniform thickness where the concentration is nonzero.
+ARCTIC_ICE_EDGE_IC = 72.0       !   [degrees of latitude] default = 91.0
+                                ! The southern latitude of Arctic ice in an initial condition.
+ANTARCTIC_ICE_EDGE_IC = -91.0   !   [degrees of latitude] default = -91.0
+                                ! The northern latitude of Antarctic ice in an initial condition.
+ICE_INIT_MASS = 900.0           !   [kg m-2] default = 0.0
+                                ! A uniform initial sea ice mass per unit area where there is sea ice.
+ICE_SALINITY_INIT_CONFIG = "uniform" ! default = "uniform"
+                                ! A string that determines how the sea ice salinity is initialized for a new
+                                ! run:
+                                !     uniform -  Use a constant ice salinity initial condition
+                                !     file - Read sea ice salinities from a specified file
+                                !     data_override - use the data_override capability or zero everywhere.
+ICE_ENTHALPY_INIT_CONFIG = "uniform_temp" ! default = "uniform_temp"
+                                ! A string that determines how the sea ice enthalpy is initialized for a new
+                                ! run:
+                                !     uniform_temp - Use a constant ice temperature initial condition
+                                !     relative_temp - Use an ice temperature initial condition with a
+                                !       specified depression below the bulk ice freezing point
+                                !     file - Read sea ice temperatures or enthalpies from a specified file
+                                !     data_override - use the data_override capability or freezing enthalpy
+                                !       everywhere.
+SNOW_ENTHALPY_INIT_CONFIG = "uniform_temp" ! default = "uniform_temp"
+                                ! A string that determines how the snow enthalpy is initialized for a new run:
+                                !     uniform_temp - Use a constant ice temperature initial condition
+                                !     relative_temp - Use an ice temperature initial condition with a
+                                !       specified depression below the bulk ice freezing point
+                                !     file - Read sea ice temperatures or enthalpies from a specified file
+                                !     data_override - use the data_override capability or freezing enthalpy
+                                !       everywhere.
+ICE_SALINITY_IC = 4.0           !   [g kg-1] default = 0.0
+                                ! The uniform sea ice salinity used for the initial condition
+ICE_TEMPERATURE_IC = -4.0       !   [degC] default = -4.0
+                                ! The uniform sea ice and snow temperature used for the initial condition
 
 ! === module SIS_slow_thermo ===
 ! This module calculates the slow evolution of the ice mass, heat, and salt budgets.
@@ -330,6 +338,8 @@ NUDGE_SEA_ICE = False           !   [Boolean] default = False
 TRANSMUTE_SEA_ICE = False       !   [Boolean] default = False
                                 ! If true, allow ice to be transmuted directly into seawater with a spatially
                                 ! varying rate as a form of outflow open boundary condition.
+DO_BRINE_PLUME = False          !   [Boolean] default = False
+                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
@@ -449,11 +459,6 @@ LEMIEUX_ALPHA_B = 20.0          !   [Nondim] default = 20.0
                                 ! The value of a third Lemieux landfast ice tuneable parameter.
 LEMIEUX_U0 = 5.0E-05            !   [m s-1] default = 5.0E-05
                                 ! Velocity for Lemieux landfast ice.
-H_ADJ_FILE = ""                 ! default = ""
-                                ! The path to the file containing an adjustment to the bottom depth for the
-                                ! landfast ice.
-ADJUST_DEPTH = False            !   [Boolean] default = False
-                                ! If true, read in a depth adjustment for landfast ice.
 BASAL_STRESS_MIN_THICK = 0.01   !   [m] default = 0.01
                                 ! Minimum ice thickness for grounding in ITD landfast ice.
 BASAL_STRESS_MAX_DEPTH = 50.0   !   [m] default = 50.0

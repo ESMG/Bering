@@ -4,6 +4,8 @@ Bering 50 vertical levels
 "ocean_daily",            1, "days",   1, "hours", "time"
 "ice_daily",              1, "days",   1, "hours", "time"
 "ocean_Bering_Strait",    1, "days",   1, "days", "time"
+#"ocean_Shpanberg",        1, "days",   1, "days", "time"
+#"ocean_Anadyr",          1, "days",   1, "days", "time"
 
 # Bering Strait (east-west section)
 "ocean_model_z", "volcello", "volcello", "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
@@ -12,24 +14,38 @@ Bering 50 vertical levels
 "ocean_model_z", "umo",  "umo",          "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
 "ocean_model_z", "uo",   "uo",           "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
 
+## Shpanberg Strait (east-west section)
+#"ocean_model_z", "volcello", "volcello", "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "thetao","thetao",      "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "so",   "so",           "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "umo",  "umo",          "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+#"ocean_model_z", "uo",   "uo",           "ocean_Shpanberg",    "all", "mean", "165 165  105 126 -1 -1", 2
+
+## Anadyr (east-west section)
+#"ocean_model_z", "volcello", "volcello", "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "thetao","thetao",      "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "so",   "so",           "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "umo",  "umo",          "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+#"ocean_model_z", "uo",   "uo",           "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+
 #"ocean_model", "eta_hifreq",          "eta",              "ocean_bt", "all", "mean", "none",2
 
-#"ocean_model","u","u","ocean_hourly","all",.false.,"none", 2
-#"ocean_model","v","v","ocean_hourly","all",.false.,"none", 2
+"ocean_model","u","u","ocean_hourly","all",.false.,"none", 2
+"ocean_model","v","v","ocean_hourly","all",.false.,"none", 2
 #"ocean_model","h","h","ocean_hourly","all",.false.,"none", 1
 #"ocean_model","e","e","ocean_hourly","all",.false.,"none", 2
 "ocean_model","SSH","ssh","ocean_hourly","all",.false.,"none", 2
 "ocean_model","ubt","ubt","ocean_hourly","all",.false.,"none", 2
 "ocean_model","vbt","vbt","ocean_hourly","all",.false.,"none", 2
-#"ocean_model","temp","temp","ocean_hourly","all",.false.,"none", 2
+"ocean_model","temp","temp","ocean_hourly","all",.false.,"none", 2
 #"ocean_model","salt","salt","ocean_hourly","all",.false.,"none", 2
-#"ocean_model",  "taux",     "taux",      "ocean_hourly", "all", ".false.", "none", 2
-#"ocean_model",  "tauy",     "tauy",      "ocean_hourly", "all", ".false.", "none", 2
+#"ocean_model",  "tau_mag",  "tau_mag",   "ocean_hourly", "all", ".false.", "none", 2
 "ice_model",  "siconc",     "siconc",    "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "UI",        "uice",      "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "VI",        "vice",      "ocean_hourly", "all", ".false.", "none", 2
 "ice_model",  "HI",         "hice",      "ocean_hourly", "all", ".false.", "none", 2
 "ice_model",  "sispeed",    "sispeed",   "ocean_hourly", "all", ".false.", "none", 2
+"ice_model",  "itheta",     "itheta",    "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "MIS_tot",    "mis",       "ocean_hourly", "all", ".false.", "none", 2
 #"ice_model",  "SWDN",      "swdn",      "ocean_hourly", "all", ".false.", "none", 2
 
@@ -52,10 +68,13 @@ Bering 50 vertical levels
 #"ocean_model",  "rsdo",       "rsdo",              "ocean_daily", "all", "mean", "none",2  # penetratie shortwave
 "ocean_model",  "hfds",       "hfds",               "ocean_daily", "all", "mean", "none",2  # total heat entering ocean surface
 "ocean_model",  "ePBL_h_ML",  "ePBL_h_ML",          "ocean_daily", "all", "mean", "none",2  # boundary layer thickness
-"ocean_model",  "taux",       "taux",               "ocean_daily", "all", "mean", "none",2
-"ocean_model",  "tauy",       "tauy",               "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "tau_mag",    "tau_mag",            "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "ustar",      "ustar",              "ocean_daily", "all", "mean", "none",2  # friction vel
-#"ocean_model",  "Kd_interface",  "Kd_interface",   "ocean_daily", "all", "mean", "none",2  # friction vel
+#"ocean_model",  "Kd_interface",  "Kd_interface",   "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "T_adx_2d",      "T_adx_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "T_ady_2d",      "T_ady_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "S_adx_2d",      "S_adx_2d",              "ocean_daily", "all", "mean", "none",2
+"ocean_model",  "S_ady_2d",      "S_ady_2d",              "ocean_daily", "all", "mean", "none",2
 "ice_model",  "siconc",   "aice",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "UI",       "uice",      "ice_daily", "all", "mean", "none",2
 "ice_model",  "VI",       "vice",      "ice_daily", "all", "mean", "none",2

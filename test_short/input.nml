@@ -1,6 +1,6 @@
  &MOM_input_nml
         output_directory = '.',
-        input_filename = 'r'
+        input_filename = 'n'
         restart_input_dir = 'INPUT',
         restart_output_dir = 'RESTART',
         parameter_filename = 'MOM_input',
@@ -10,7 +10,7 @@
 
  &SIS_input_nml
         output_directory = './',
-        input_filename = 'r'
+        input_filename = 'n'
         restart_input_dir = 'INPUT/',
         restart_output_dir = 'RESTART/',
         parameter_filename = 'SIS_input',
@@ -114,9 +114,9 @@
 
  &surface_flux_nml
         ncar_ocean_flux_multilevel = .true.
-        bulk_zu = 10.0
-        bulk_zt = 2.0
-        bulk_zq = 2.0
+        bulk_zu = 10.
+        bulk_zt = 2.
+        bulk_zq = 2.
         raoult_sat_vap = .true.
 /
 

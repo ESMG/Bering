@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 DEBUG_BT = False
 !VERBOSITY = 9
 !#override INTEGRAL_BT_CONTINUITY = True
@@ -13,4 +13,4 @@ DEBUG_BT = False
 !C_RESCALE_POWER = -31
 !S_RESCALE_POWER = 37
 !#override DO_BRINE_PLUME = True
-#override RESTART_CHECKSUMS_REQUIRED = False
+!#override RESTART_CHECKSUMS_REQUIRED = False
