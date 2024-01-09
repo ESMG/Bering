@@ -5,7 +5,7 @@ import sys
 ncfile = sys.argv[1]
 nc = netCDF4.Dataset(ncfile, 'r')
 
-v = nc.variables['u'][2,:,:,:]
+v = nc.variables['v'][1,:,:,:]
 
 dims = v.shape
 
