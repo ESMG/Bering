@@ -1562,7 +1562,7 @@ MLE%
 USE_BODNER23 = True             !   [Boolean] default = False
                                 ! If true, use the Bodner et al., 2023, formulation of the re-stratifying
                                 ! mixed-layer restratification parameterization. This only works in ALE mode.
-CR = 0.03                       !   [nondim] default = 0.0
+CR = 0.3                        !   [nondim] default = 0.0
                                 ! The efficiency coefficient in eq 27 of Bodner et al., 2023.
 BODNER_NSTAR = 0.066            !   [nondim] default = 0.066
                                 ! The n* value used to estimate the turbulent vertical momentum flux in Bodner

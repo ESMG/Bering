@@ -538,7 +538,7 @@ MLE%
 USE_BODNER23 = True             !   [Boolean] default = False
                                 ! If true, use the Bodner et al., 2023, formulation of the re-stratifying
                                 ! mixed-layer restratification parameterization. This only works in ALE mode.
-CR = 0.03                       !   [nondim] default = 0.0
+CR = 0.3                        !   [nondim] default = 0.0
                                 ! The efficiency coefficient in eq 27 of Bodner et al., 2023.
 BLD_DECAYING_TFILTER = 8.64E+04 !   [s] default = 0.0
                                 ! The time-scale for a running-mean filter applied to the boundary layer depth
