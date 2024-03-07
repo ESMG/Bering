@@ -156,9 +156,6 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
                                 ! If true use the Adcroft reciprocal of the cell mass when calculating the
                                 ! advective CFL numbers used in PPM tracer advection schemes, rather than adding
                                 ! a small mass in the denominator of the advective CFL ratio.
-NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = True
-                                ! Participation function used in ridging, .false. for Thorndike et al. 1975
-                                ! .true. for Lipscomb et al. 2007
 
 ! === module SIS_sum_output ===
 MAXTRUNC = 200                  !   [truncations save_interval-1] default = 0

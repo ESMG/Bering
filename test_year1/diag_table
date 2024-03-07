@@ -84,6 +84,8 @@ Bering 50 vertical levels
 "ice_model",  "RDG_RATE", "RDG_RATE",  "ice_daily", "all", "mean", "none",2
 "ice_model",  "BHEAT",    "BHEAT",     "ice_daily", "all", "mean", "none",2
 "ice_model",  "SN2IC",    "SN2IC",     "ice_daily", "all", "mean", "none",2
+"ice_model",  "SIGI",     "SIGI",      "ice_daily", "all", "mean", "none",2
+"ice_model",  "SIGII",    "SIGII",     "ice_daily", "all", "mean", "none",2
 "ice_model",  "RDG_HEIGHT", "RDG_HEIGHT", "ice_daily", "all", "mean", "none",2
 #"ice_model",  "RDG_FRAC", "RDG_FRAC",  "ice_daily", "all", "mean", "none",2
 #"ice_model",  "RDG_FRAC_TOT", "RDG_FRAC_TOT",  "ice_daily", "all", "mean", "none",2

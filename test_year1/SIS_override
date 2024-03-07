@@ -12,3 +12,4 @@ DEBUG = False
 BASAL_STRESS_NCAT_B = 10       ! default = 100
 !DO_BRINE_PLUME = True
 #override RESTART_CHECKSUMS_REQUIRED = False
+#override TEARDROP_YIELD_CURVE = True
