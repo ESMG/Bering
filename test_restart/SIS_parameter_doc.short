@@ -52,44 +52,6 @@ MASKING_DEPTH = 1.0             !   [m] default = -9999.0
                                 ! zeroed out. MASKING_DEPTH is ignored if it has the special default value.
 MAXIMUM_DEPTH = 6500.0          !   [m]
                                 ! The maximum depth of the ocean.
-
-! === module SIS_open_boundary ===
-! Controls where open boundaries are located, what kind of boundary condition to impose, and what data to apply,
-! if any.
-OBC_NUMBER_OF_SEGMENTS = 4      ! default = 0
-                                ! The number of open boundary segments.
-OBC_FREESLIP_VORTICITY = False  !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the
-                                ! relative vorticity on open boundaries. This cannot be true if another
-                                ! OBC_XXX_VORTICITY option is True.
-OBC_COMPUTED_VORTICITY = True   !   [Boolean] default = False
-                                ! If true, uses the external values of tangential velocity in the relative
-                                ! vorticity on open boundaries. This cannot be true if another OBC_XXX_VORTICITY
-                                ! option is True.
-OBC_FREESLIP_STRAIN = False     !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_COMPUTED_STRAIN = True      !   [Boolean] default = False
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER" !
-                                ! Documentation needs to be dynamic?????
-OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the tracer concentration at the
-                                ! boundaries to externally imposed values when the flow is exiting the domain.
-OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the tracer concentration at the
-                                ! boundaries to values from the interior when the flow is entering the domain.
-BRUSHCUTTER_MODE = True         !   [Boolean] default = False
-                                ! If true, read external OBC data on the supergrid.
 OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
                                 ! The rotation rate of the earth.
 
@@ -102,26 +64,6 @@ OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
 ! === module SIS_tracer_registry ===
 
 ! === module SIS_tracer_flow_control ===
-CONCENTRATION_INIT_CONFIG = "latitudes" ! default = "data_override"
-                                ! A string that determines how the initial total sea ice concentration is
-                                ! initialized for a new run:
-                                !     file - read sea ice concentrations from a specified file
-                                !     data_override - use the data_override capability or zero everywhere
-                                !     zero - there is no sea ice anywhere
-                                !     latitudes - initial sea ice concentration is a function of latitude.
-ICE_THICKNESS_INIT_CONFIG = "uniform" ! default = "data_override"
-                                ! A string that determines how the initial sea ice thickness is initialized for
-                                ! a new run:
-                                !     file - read sea ice thickesses from a specified file
-                                !     data_override - use the data_override capability or zero everywhere
-                                !     uniform - sea ice has uniform thickness where the concentration is
-                                !       nonzero.
-ARCTIC_ICE_EDGE_IC = 72.0       !   [degrees of latitude] default = 91.0
-                                ! The southern latitude of Arctic ice in an initial condition.
-ICE_INIT_MASS = 900.0           !   [kg m-2] default = 0.0
-                                ! A uniform initial sea ice mass per unit area where there is sea ice.
-ICE_SALINITY_IC = 4.0           !   [g kg-1] default = 0.0
-                                ! The uniform sea ice salinity used for the initial condition
 
 ! === module SIS_slow_thermo ===
 ! This module calculates the slow evolution of the ice mass, heat, and salt budgets.

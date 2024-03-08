@@ -140,7 +140,6 @@ OBC_RAMP_TIMESCALE = 2.0        !   [days] default = 1.0
                                 ! If RAMP_OBCS is true, this sets the ramping timescale.
 OBC_TIDE_N_CONSTITUENTS = 10    ! default = 0
                                 ! Number of tidal constituents being added to the open boundary.
-!OBC_SEGMENT_001 = "J=N,I=N:185,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
 OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
@@ -159,7 +158,6 @@ OBC_SEGMENT_003_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
-!OBC_SEGMENT_004 = "I=N,J=140:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
 OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
@@ -201,11 +199,6 @@ DTFREEZE_DP = -7.75E-08         !   [deg C Pa-1] default = 0.0
                                 ! temperature with pressure.
 
 ! === module MOM_restart ===
-RESTART_CHECKSUMS_REQUIRED = False !   [Boolean] default = True
-                                ! If true, require the restart checksums to match and error out otherwise. Users
-                                ! may want to avoid this comparison if for example the restarts are made from a
-                                ! run with a different mask_table than the current run, in which case the
-                                ! checksums will not match and cause crash.
 
 ! === module MOM_tracer_flow_control ===
 
@@ -282,8 +275,11 @@ THICKNESS_CONFIG = "coord"      ! default = "uniform"
                                 ! A string that determines how the initial layer thicknesses are specified for a
                                 ! new run:
                                 !     file - read interface heights from the file specified
+                                !       by (THICKNESS_FILE).
                                 !     thickness_file - read thicknesses from the file specified
                                 !       by (THICKNESS_FILE).
+                                !     mass_file - read thicknesses in units of mass per unit area from the file
+                                !       specified by (THICKNESS_FILE).
                                 !     coord - determined by ALE coordinate.
                                 !     uniform - uniform thickness layers evenly distributed
                                 !       between the surface and MAXIMUM_DEPTH.
@@ -306,7 +302,7 @@ THICKNESS_CONFIG = "coord"      ! default = "uniform"
                                 !     rossby_front - a mixed layer front in thermal wind balance.
                                 !     USER - call a user modified routine.
 TS_CONFIG = "file"              !
-                                ! A string that determines how the initial tempertures and salinities are
+                                ! A string that determines how the initial temperatures and salinities are
                                 ! specified for a new run:
                                 !     file - read velocities from the file specified
                                 !       by (TS_FILE).
@@ -338,6 +334,8 @@ SURFACE_HEIGHT_IC_FILE = "SODA3_sept.nc" !
                                 ! The initial condition file for the surface height.
 SURFACE_HEIGHT_IC_VAR = "ssh"   ! default = "SSH"
                                 ! The initial condition variable for the surface height.
+!VELOCITY_CONFIG = "file"
+!VELOCITY_FILE = "SODA3_sept.nc"
 !SPONGE = True                   !   [Boolean] default = False
                                 ! If true, sponges may be applied anywhere in the domain. The exact location and
                                 ! properties of those sponges are specified via SPONGE_CONFIG.
@@ -593,9 +591,26 @@ MIXEDLAYER_RESTRAT = True       !   [Boolean] default = False
                                 ! If true, a density-gradient dependent re-stratifying flow is imposed in the
                                 ! mixed layer. Can be used in ALE mode without restriction but in layer mode can
                                 ! only be used if BULKMIXEDLAYER is true.
-DYNAMIC_SURFACE_PRESSURE = True !   [Boolean] default = False
-                                ! If true, add a dynamic pressure due to a viscous ice shelf, for instance.
 MLE%
+USE_BODNER23 = True             !   [Boolean] default = False
+                                ! If true, use the Bodner et al., 2023, formulation of the re-stratifying
+                                ! mixed-layer restratification parameterization. This only works in ALE mode.
+CR = 0.3                        !   [nondim] default = 0.0
+                                ! The efficiency coefficient in eq 27 of Bodner et al., 2023.
+BLD_DECAYING_TFILTER = 8.64E+04 !   [s] default = 0.0
+                                ! The time-scale for a running-mean filter applied to the boundary layer depth
+                                ! (BLD) when the BLD is shallower than the running mean. A value of 0
+                                ! instantaneously sets the running mean to the current value of BLD.
+MLD_DECAYING_TFILTER = 2.592E+06 !   [s] default = 0.0
+                                ! The time-scale for a running-mean filter applied to the time-filtered BLD,
+                                ! when the latter is shallower than the running mean. A value of 0
+                                ! instantaneously sets the running mean to the current value filtered BLD.
+MIN_WSTAR2 = 1.0E-09            !   [m2 s-2] default = 1.0E-24
+                                ! The minimum lower bound to apply to the vertical momentum flux, w'u', in the
+                                ! Bodner et al., restratification parameterization. This avoids a
+                                ! division-by-zero in the limit when u* and the buoyancy flux are zero.  The
+                                ! default is less than the molecular viscosity of water times the Coriolis
+                                ! parameter a micron away from the equator.
 %MLE
 FOX_KEMPER_ML_RESTRAT_COEF = 1.0 !   [nondim] default = 0.0
                                 ! A nondimensional coefficient that is proportional to the ratio of the
@@ -640,20 +655,20 @@ BBL_EFFIC = 0.01                !   [nondim] default = 0.2
 
 ! === module MOM_tidal_mixing ===
 ! Vertical Tidal Mixing Parameterization
-!!INT_TIDE_DISSIPATION = True     !   [Boolean] default = False
+!INT_TIDE_DISSIPATION = True     !   [Boolean] default = False
                                 ! If true, use an internal tidal dissipation scheme to drive diapycnal mixing,
                                 ! along the lines of St. Laurent et al. (2002) and Simmons et al. (2004).
-!!INT_TIDE_PROFILE = "POLZIN_09"  ! default = "STLAURENT_02"
+!INT_TIDE_PROFILE = "POLZIN_09"  ! default = "STLAURENT_02"
                                 ! INT_TIDE_PROFILE selects the vertical profile of energy dissipation with
                                 ! INT_TIDE_DISSIPATION. Valid values are:
                                 !    STLAURENT_02 - Use the St. Laurent et al exponential
                                 !                   decay profile.
                                 !    POLZIN_09 - Use the Polzin WKB-stretched algebraic
                                 !                   decay profile.
-!!INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
+!INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
                                 ! The decay scale away from the bottom for tidal TKE with the new coding when
                                 ! INT_TIDE_DISSIPATION is used.
-!!H2_FILE = "ocean_topoh2.nc"     !
+!H2_FILE = "ocean_topoh2.nc"     !
                                 ! The path to the file containing the sub-grid-scale topographic roughness
                                 ! amplitude with INT_TIDE_DISSIPATION.
 BBL_MIXING_AS_MAX = False       !   [Boolean] default = True
@@ -833,6 +848,3 @@ SEA_ICE_RIGID_MASS = 100.0      !   [kg m-2] default = 1000.0
                                 ! rigidity
 
 ! === module MOM_restart ===
-LA_DEPTH_RATIO = 0.2            !   [nondim] default = 0.04
-                                ! The depth (normalized by BLD) to average Stokes drift over in Langmuir number
-                                ! calculation, where La = sqrt(ust/Stokes).
