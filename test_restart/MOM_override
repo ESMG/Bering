@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 DEBUG_BT = False
 DEBUG_OBC = False
 !VERBOSITY = 9
