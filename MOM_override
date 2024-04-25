@@ -14,3 +14,4 @@ DEBUG_BT = False
 !S_RESCALE_POWER = 37
 !#override DO_BRINE_PLUME = True
 !#override RESTART_CHECKSUMS_REQUIRED = False
+SPLIT_RK2B = True

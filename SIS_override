@@ -17,3 +17,5 @@ BASAL_STRESS_NCAT_B = 10       ! default = 100
 #override READ_HLIM_VALS = True
 #override HLIM_VALS = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5, 3.5, 4.5"
 !#override TEARDROP_YIELD_CURVE = True
+#override NEW_RIDGE_PARTICIPATION = False
+#override NEW_RIDGE_REDISTRIBUTION = False

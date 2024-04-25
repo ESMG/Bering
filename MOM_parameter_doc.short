@@ -1,6 +1,10 @@
 ! This file was written by the model and records the non-default parameters used at run-time.
 
 ! === module MOM ===
+SPLIT_RK2B = True               !   [Boolean] default = False
+                                ! If true, use a version of the split explicit time stepping scheme that
+                                ! exchanges velocities with step_MOM that have the average barotropic phase over
+                                ! a baroclinic timestep rather than the instantaneous barotropic phase.
 USE_REGRIDDING = True           !   [Boolean] default = False
                                 ! If True, use the ALE algorithm (regridding/remapping). If False, use the
                                 ! layered isopycnal algorithm.
@@ -387,7 +391,7 @@ KHTH_MAX_CFL = 0.1              !   [nondimensional] default = 0.8
 
 ! === module MOM_porous_barriers ===
 
-! === module MOM_dynamics_split_RK2 ===
+! === module MOM_dynamics_split_RK2b ===
 TIDES = True                    !   [Boolean] default = False
                                 ! If true, apply tidal momentum forcing.
 

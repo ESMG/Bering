@@ -1,5 +1,6 @@
 Bering 50 vertical levels
 1900 1 1 0 0 0
+"atm_hourly",             1, "hours",  1, "hours", "time"
 "ocean_hourly",           1, "hours",  1, "hours", "time"
 "ocean_daily",            1, "days",   1, "hours", "time"
 "ice_daily",              1, "days",   1, "hours", "time"
@@ -29,6 +30,9 @@ Bering 50 vertical levels
 #"ocean_model_z", "uo",   "uo",           "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
 
 #"ocean_model", "eta_hifreq",          "eta",              "ocean_bt", "all", "mean", "none",2
+
+"data_override",  "u_bot",    "uas",      "atm_hourly", "all", .false., "none", 2
+"data_override",  "v_bot",    "vas",      "atm_hourly", "all", .false., "none", 2
 
 "ocean_model",  "u",        "u",         "ocean_hourly", "all", .false., "none", 2
 "ocean_model",  "v",        "v",         "ocean_hourly", "all", .false., "none", 2

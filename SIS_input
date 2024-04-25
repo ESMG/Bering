@@ -164,7 +164,7 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
 NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = False
                                 ! Participation function used in ridging, .false. for Thorndike et al. 1975
                                 ! .true. for Lipscomb et al. 2007
-!NEW_RIDGE_REDISTRIBUTION = True !   [Boolean] default = False
+NEW_RIDGE_REDISTRIBUTION = False !   [Boolean] default = False
                                 ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
                                 ! Lipscomb et al. 2007
 
