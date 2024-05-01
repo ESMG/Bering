@@ -7,6 +7,7 @@ Bering 50 vertical levels
 "ocean_Bering_Strait",    1, "days",   1, "days", "time"
 #"ocean_Shpanberg",        1, "days",   1, "days", "time"
 #"ocean_Anadyr",          1, "days",   1, "days", "time"
+"boem_hourly",               1, "hours",   1, "hours", "time"
 
 # Bering Strait (east-west section)
 "ocean_model_z", "volcello", "volcello", "ocean_Bering_Strait",    "all", "mean", "-148.057 -148.057  55.01 55.34 -1 -1", 2
@@ -28,6 +29,21 @@ Bering 50 vertical levels
 #"ocean_model_z", "so",   "so",           "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
 #"ocean_model_z", "umo",  "umo",          "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
 #"ocean_model_z", "uo",   "uo",           "ocean_Anadyr",    "all", "mean", "165 165  135 150 -1 -1", 2
+
+"ocean_model", "ssu_east",     "ssu_east",         "boem_hourly", "all", .false., "none",2
+"ocean_model", "ssv_north",    "ssv_north",        "boem_hourly", "all", .false., "none",2
+"ocean_model", "ssu",          "ssu",              "boem_hourly", "all", .false., "none",2
+"ocean_model", "ssv",          "ssv",              "boem_hourly", "all", .false., "none",2
+"ocean_model", "taux",         "taux",             "boem_hourly", "all", .false., "none",2
+"ocean_model", "tauy",         "tauy",             "boem_hourly", "all", .false., "none",2
+"ice_model",   "UI",           "UI",               "boem_hourly", "all", .false., "none",2
+"ice_model",   "VI",           "VI",               "boem_hourly", "all", .false., "none",2
+"ice_model",   "ui_east",      "ui_east",          "boem_hourly", "all", .false., "none",2
+"ice_model",   "vi_north",     "vi_north",         "boem_hourly", "all", .false., "none",2
+"flux",        "u_atm",        "u_atm",            "boem_hourly", "all", .false., "none",2
+"flux",        "v_atm",        "v_atm",            "boem_hourly", "all", .false., "none",2
+"flux",        "lwflx",        "lw_flux",          "boem_hourly", "all", .false., "none",2
+"flux",        "shflx",        "shflx",            "boem_hourly", "all", .false., "none",2
 
 #"ocean_model", "eta_hifreq",          "eta",              "ocean_bt", "all", "mean", "none",2
 
