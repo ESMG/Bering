@@ -69,6 +69,10 @@ Bering 50 vertical levels
 "ice_model",  "itheta",     "itheta",    "ocean_hourly", "all", .false., "none", 2
 #"ice_model",  "MIS_tot",    "mis",       "ocean_hourly", "all", .false., "none", 2
 #"ice_model",  "SWDN",      "swdn",      "ocean_hourly", "all", .false., "none", 2
+"ocean_model",  "Kd_interface", "Kd_interface",     "ocean_hourly", "all", .false., "none",2
+"ocean_model",  "Kd_heat",      "Kd_heat",          "ocean_hourly", "all", .false., "none",2
+"ocean_model",  "Kd_shear",     "Kd_shear",         "ocean_hourly", "all", .false., "none",2
+"ocean_model",  "Kd_ePBL",      "Kd_ePBL",          "ocean_hourly", "all", .false., "none",2
 
 
 #"ocean_model", "SSU",          "ssu",              "ocean_daily", "all", "mean", "none",2
@@ -91,7 +95,6 @@ Bering 50 vertical levels
 "ocean_model",  "ePBL_h_ML",  "ePBL_h_ML",          "ocean_daily", "all", "mean", "none",2  # boundary layer thickness
 "ocean_model",  "tau_mag",    "tau_mag",            "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "ustar",      "ustar",              "ocean_daily", "all", "mean", "none",2  # friction vel
-#"ocean_model",  "Kd_interface",  "Kd_interface",   "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "T_adx_2d",      "T_adx_2d",              "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "T_ady_2d",      "T_ady_2d",              "ocean_daily", "all", "mean", "none",2
 "ocean_model",  "S_adx_2d",      "S_adx_2d",              "ocean_daily", "all", "mean", "none",2
