@@ -855,3 +855,5 @@ SEA_ICE_RIGID_MASS = 100.0      !   [kg m-2] default = 1000.0
                                 ! rigidity
 
 ! === module MOM_restart ===
+FRICTWORK_BUG = False
+BACKSCATTER_UNDERBOUND = False

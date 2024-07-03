@@ -13,3 +13,10 @@ In input.nml for ERA5
             bulk_zu = 10.
             bulk_zt = 2.
             bulk_zq = 2.
+
+mppnccombine 20110903.ocean_Bering_Strait.nc 20110903.ocean_Bering_Strait.nc.*
+
+
+conda activate snowy
+rm diag_table.yaml
+diag-table-to-yaml -f diag_table
