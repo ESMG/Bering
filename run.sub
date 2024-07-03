@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH -n 72
+## if you prefer to specify nodes, use instead:
+##SBATCH -N 10
+#SBATCH --time=0:60:00
+#SBATCH --job-name="Bering"
+#SBATCH --output=Bering.out.%j
+#SBATCH --error=Bering.err.%j
+#SBATCH --qos=normal
+#SBATCH --partition=batch
+#SBATCH --clusters=c4
+## obviously use your group account:
+#SBATCH --account=cpo_rmom6
+
+srun -n 72 /lustre/f2/dev/gfdl/Katherine.Hedstrom/ESMG/ESMG-configs/build/intel/SYM_ice_ocean_SIS2/repro/MOM6
