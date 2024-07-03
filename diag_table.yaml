@@ -6,14 +6,12 @@ diag_files:
   unlimdim: time
   freq: 1 hours
   varlist:
-  - module: data_override
-    var_name: u_bot
-    output_name: uas
+  - module: flux
+    var_name: u_atm
     reduction: none
     kind: r4
-  - module: data_override
-    var_name: v_bot
-    output_name: vas
+  - module: flux
+    var_name: v_atm
     reduction: none
     kind: r4
 - file_name: ocean_hourly
