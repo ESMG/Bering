@@ -172,6 +172,10 @@ OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
                                 ! boundaries to values from the interior when the flow is entering the domain.
 BRUSHCUTTER_MODE = True         !   [Boolean] default = False
                                 ! If true, read external OBC data on the supergrid.
+OBC_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+                                ! If true, use the OM4 remapping-via-subcells algorithm for neutral diffusion.
+                                ! See REMAPPING_USE_OM4_SUBCELLS for more details. We recommend setting this
+                                ! option to false.
 OBC_TIDE_CONSTITUENTS = "M2,S2,N2,K2,K1,O1,P1,Q1,MM,MF" !
                                 ! Names of tidal constituents being added to the open boundaries.
 OBC_TIDE_ADD_EQ_PHASE = True    !   [Boolean] default = False
@@ -194,11 +198,9 @@ EQN_OF_STATE = "WRIGHT_FULL"    ! default = "WRIGHT"
                                 ! Currently, the valid choices are "LINEAR", "UNESCO", "JACKETT_MCD", "WRIGHT",
                                 ! "WRIGHT_REDUCED", "WRIGHT_FULL", "NEMO", "ROQUET_RHO", "ROQUET_SPV" and
                                 ! "TEOS10".  This is only used if USE_EOS is true.
-DTFREEZE_DP = -7.75E-08         !   [deg C Pa-1] default = 0.0
+DTFREEZE_DP = -7.75E-08         !   [degC Pa-1] default = 0.0
                                 ! When TFREEZE_FORM=LINEAR, this is the derivative of the freezing potential
                                 ! temperature with pressure.
-
-! === module MOM_restart ===
 
 ! === module MOM_tracer_flow_control ===
 
@@ -269,6 +271,11 @@ REMAPPING_SCHEME = "PPM_H4"     ! default = "PLM"
                                 ! WENO_HYBGEN (3rd-order accurate)
                                 ! PQM_IH4IH3  (4th-order accurate)
                                 ! PQM_IH6IH5  (5th-order accurate)
+REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+                                ! This selects the remapping algorithm used in OM4 that does not use the full
+                                ! reconstruction for the top- and lower-most sub-layers, but instead assumes
+                                ! they are always vanished (untrue) and so just uses their edge values. We
+                                ! recommend setting this option to false.
 
 ! === module MOM_state_initialization ===
 THICKNESS_CONFIG = "coord"      ! default = "uniform"
@@ -376,6 +383,10 @@ OBC_SEGMENT_004_DATA = "U=file:OBC_whole.nc(u),V=file:OBC_whole.nc(v),SSH=file:O
                                 ! OBC segment docs
 
 ! === module MOM_diag_mediator ===
+DIAG_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+                                ! If true, use the OM4 remapping-via-subcells algorithm for diagnostics. See
+                                ! REMAPPING_USE_OM4_SUBCELLS for details. We recommend setting this option to
+                                ! false.
 
 ! === module MOM_lateral_mixing_coeffs ===
 USE_VARIABLE_MIXING = True      !   [Boolean] default = False
@@ -387,6 +398,10 @@ USE_STORED_SLOPES = True        !   [Boolean] default = False
                                 ! If true, the isopycnal slopes are calculated once and stored for re-use. This
                                 ! uses more memory but avoids calling the equation of state more times than
                                 ! should be necessary.
+EBT_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+                                ! If true, use the OM4 remapping-via-subcells algorithm for calculating EBT
+                                ! structure. See REMAPPING_USE_OM4_SUBCELLS for details. We recommend setting
+                                ! this option to false.
 
 ! === module MOM_set_visc ===
 CHANNEL_DRAG = True             !   [Boolean] default = False
@@ -434,8 +449,6 @@ VISC_REM_BUG = False            !   [Boolean] default = True
                                 ! VISC_REM_BT_WEIGHT_FIX in MOM_barotropic, and VISC_REM_CONT_HVEL_FIX in
                                 ! MOM_continuity_PPM. Eventually, the three individual flags should be removed
                                 ! after tests and the default of VISC_REM_BUG should be to False.
-
-! === module MOM_continuity ===
 
 ! === module MOM_continuity_PPM ===
 ETA_TOLERANCE = 1.0E-06         !   [m] default = 3.75E-09
@@ -526,11 +539,10 @@ SMAGORINSKY_AH = True           !   [Boolean] default = False
                                 ! If true, use a biharmonic Smagorinsky nonlinear eddy viscosity.
 SMAG_BI_CONST = 0.06            !   [nondim] default = 0.0
                                 ! The nondimensional biharmonic Smagorinsky constant, typically 0.015 - 0.06.
-BIHARMONIC = True               !   [Boolean] default = True
-                                ! If true, use a biharmonic horizontal viscosity.
-                                ! BIHARMONIC may be used with LAPLACIAN.
-AH = 0.0                        !   [m4 s-1] default = 0.0
-                                ! The background biharmonic horizontal viscosity.
+FRICTWORK_BUG = False           !   [Boolean] default = True
+                                ! If true, retain an answer-changing bug in calculating the FrictWork, which
+                                ! cancels the h in thickness flux and the h at velocity point. This isnot
+                                ! recommended.
 USE_LAND_MASK_FOR_HVISC = True  !   [Boolean] default = False
                                 ! If true, use Use the land mask for the computation of thicknesses
                                 ! at velocity locations. This eliminates the dependence on arbitrary
@@ -642,6 +654,10 @@ MLE_MLD_DECAY_TIME = 86400.0    !   [s] default = 0.0
                                 ! MLD.
 
 ! === module MOM_diagnostics ===
+INTWAVE_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+                                ! If true, use the OM4 remapping-via-subcells algorithm for calculating EBT
+                                ! structure. See REMAPPING_USE_OM4_SUBCELLS for details. We recommend setting
+                                ! this option to false.
 
 ! === module MOM_diabatic_driver ===
 ! The following parameters are used for diabatic processes.
@@ -662,26 +678,26 @@ BBL_EFFIC = 0.01                !   [nondim] default = 0.2
 
 ! === module MOM_tidal_mixing ===
 ! Vertical Tidal Mixing Parameterization
-!INT_TIDE_DISSIPATION = True     !   [Boolean] default = False
+INT_TIDE_DISSIPATION = True     !   [Boolean] default = False
                                 ! If true, use an internal tidal dissipation scheme to drive diapycnal mixing,
                                 ! along the lines of St. Laurent et al. (2002) and Simmons et al. (2004).
-!INT_TIDE_PROFILE = "POLZIN_09"  ! default = "STLAURENT_02"
+INT_TIDE_PROFILE = "POLZIN_09"  ! default = "STLAURENT_02"
                                 ! INT_TIDE_PROFILE selects the vertical profile of energy dissipation with
                                 ! INT_TIDE_DISSIPATION. Valid values are:
                                 !    STLAURENT_02 - Use the St. Laurent et al exponential
                                 !                   decay profile.
                                 !    POLZIN_09 - Use the Polzin WKB-stretched algebraic
                                 !                   decay profile.
-!INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
+INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
                                 ! The decay scale away from the bottom for tidal TKE with the new coding when
                                 ! INT_TIDE_DISSIPATION is used.
-!H2_FILE = "ocean_topoh2.nc"     !
+H2_FILE = "ocean_topoh2.nc"     !
                                 ! The path to the file containing the sub-grid-scale topographic roughness
                                 ! amplitude with INT_TIDE_DISSIPATION.
 BBL_MIXING_AS_MAX = False       !   [Boolean] default = True
                                 ! If true, take the maximum of the diffusivity from the BBL mixing and the other
                                 ! diffusivities. Otherwise, diffusivity from the BBL_mixing is simply added.
-!USE_LOTW_BBL_DIFFUSIVITY = True !   [Boolean] default = False
+USE_LOTW_BBL_DIFFUSIVITY = True !   [Boolean] default = False
                                 ! If true, uses a simple, imprecise but non-coordinate dependent, model of BBL
                                 ! mixing diffusivity based on Law of the Wall. Otherwise, uses the original BBL
                                 ! scheme.
@@ -799,7 +815,6 @@ LT_MOD_LAC4 = 0.8               !   [nondim] default = 0.95
 LT_MOD_LAC5 = 0.8               !   [nondim] default = 0.95
                                 ! Coefficient for modification of Langmuir number due to ratio of Ekman to
                                 ! unstable Obukhov depth.
-LA_DEPTH_RATIO = 0.2
 
 ! === module MOM_opacity ===
 PEN_SW_SCALE = 10.0             !   [m] default = 0.0
@@ -853,7 +868,6 @@ USE_RIGID_SEA_ICE = True        !   [Boolean] default = False
 SEA_ICE_RIGID_MASS = 100.0      !   [kg m-2] default = 1000.0
                                 ! The mass of sea-ice per unit area at which the sea-ice starts to exhibit
                                 ! rigidity
-
-! === module MOM_restart ===
-FRICTWORK_BUG = False
-BACKSCATTER_UNDERBOUND = False
+LA_DEPTH_RATIO = 0.2            !   [nondim] default = 0.04
+                                ! The depth (normalized by BLD) to average Stokes drift over in Langmuir number
+                                ! calculation, where La = sqrt(ust/Stokes).
