@@ -672,9 +672,6 @@ EPBL_IS_ADDITIVE = False        !   [Boolean] default = True
                                 ! Otherwise, the larger of kappa-shear and ePBL diffusivities are used.
 
 ! === module MOM_set_diffusivity ===
-BBL_EFFIC = 0.01                !   [nondim] default = 0.2
-                                ! The efficiency with which the energy extracted by bottom drag drives BBL
-                                ! diffusion.  This is only used if BOTTOMDRAGLAW is true.
 
 ! === module MOM_tidal_mixing ===
 ! Vertical Tidal Mixing Parameterization
@@ -694,6 +691,9 @@ INT_TIDE_DECAY_SCALE = 300.0    !   [m] default = 500.0
 H2_FILE = "ocean_topoh2.nc"     !
                                 ! The path to the file containing the sub-grid-scale topographic roughness
                                 ! amplitude with INT_TIDE_DISSIPATION.
+BBL_EFFIC = 0.01                !   [nondim] default = 0.2
+                                ! The efficiency with which the energy extracted by bottom drag drives BBL
+                                ! diffusion.  This is only used if BOTTOMDRAGLAW is true.
 BBL_MIXING_AS_MAX = False       !   [Boolean] default = True
                                 ! If true, take the maximum of the diffusivity from the BBL mixing and the other
                                 ! diffusivities. Otherwise, diffusivity from the BBL_mixing is simply added.
@@ -701,6 +701,11 @@ USE_LOTW_BBL_DIFFUSIVITY = True !   [Boolean] default = False
                                 ! If true, uses a simple, imprecise but non-coordinate dependent, model of BBL
                                 ! mixing diffusivity based on Law of the Wall. Otherwise, uses the original BBL
                                 ! scheme.
+LOTW_BBL_ANSWER_DATE = 99991231 ! default = 20190101
+                                ! The vintage of the order of arithmetic and expressions in the LOTW_BBL
+                                ! calculations.  Values below 20240630 recover the original answers, while
+                                ! higher values use more accurate expressions.  This only applies when
+                                ! USE_LOTW_BBL_DIFFUSIVITY is true.
 
 ! === module MOM_bkgnd_mixing ===
 ! Adding static vertical background mixing coefficients
