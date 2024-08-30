@@ -1,0 +1,774 @@
+---
+title: Bering 50 vertical levels
+base_date: 1900 1 1 0 0 0
+diag_files:
+- file_name: atm_hourly
+  freq: 1
+  freq_units: hours
+  time_units: hours
+  unlimdim: time
+  new_file_freq: 
+  new_file_freq_units: 
+  start_time: 
+  file_duration: 
+  file_duration_units: 
+  varlist:
+  - module: flux
+    var_name: u_atm
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time lat lon
+  - module: flux
+    var_name: v_atm
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time lat lon
+  sub_region:
+  - grid_type: 
+    tile: 
+    corner1: 
+    corner2: 
+    corner3: 
+    corner4: 
+  global_meta:
+  - {}
+- file_name: ocean_hourly
+  freq: 1
+  freq_units: hours
+  time_units: hours
+  unlimdim: time
+  new_file_freq: 
+  new_file_freq_units: 
+  start_time: 
+  file_duration: 
+  file_duration_units: 
+  varlist:
+  - module: ocean_model
+    var_name: u
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yh xq
+  - module: ocean_model
+    var_name: v
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yq xh
+  - module: ocean_model
+    var_name: SSH
+    reduction: none
+    kind: r4
+    output_name: ssh
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: ubt
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xq
+  - module: ocean_model
+    var_name: vbt
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yq xh
+  - module: ocean_model
+    var_name: temp
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yh xh
+  - module: ocean_model
+    var_name: salt
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yh xh
+  - module: ocean_model
+    var_name: tau_mag
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: lf_bodner
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ice_model
+    var_name: siconc
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: HI
+    reduction: none
+    kind: r4
+    output_name: hice
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: sispeed
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: itheta
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ocean_model
+    var_name: Kd_interface
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zi yh xh
+  - module: ocean_model
+    var_name: Kd_heat
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zi yh xh
+  - module: ocean_model
+    var_name: Kd_shear
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zi yh xh
+  - module: ocean_model
+    var_name: Kd_ePBL
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zi yh xh
+  sub_region:
+  - grid_type: 
+    tile: 
+    corner1: 
+    corner2: 
+    corner3: 
+    corner4: 
+  global_meta:
+  - {}
+- file_name: ocean_daily
+  freq: 1
+  freq_units: days
+  time_units: hours
+  unlimdim: time
+  new_file_freq: 
+  new_file_freq_units: 
+  start_time: 
+  file_duration: 
+  file_duration_units: 
+  varlist:
+  - module: ocean_model
+    var_name: SSH
+    reduction: average
+    kind: r4
+    output_name: ssh
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: thetao
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yh xh
+  - module: ocean_model
+    var_name: so
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yh xh
+  - module: ocean_model
+    var_name: uo
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yh xq
+  - module: ocean_model
+    var_name: vo
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yq xh
+  - module: ocean_model
+    var_name: RV
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zl yq xq
+  - module: ocean_model
+    var_name: e
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time zi yh xh
+  - module: ocean_model
+    var_name: hfds
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: ePBL_h_ML
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: tau_mag
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: ustar
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: T_adx_2d
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xq
+  - module: ocean_model
+    var_name: T_ady_2d
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yq xh
+  - module: ocean_model
+    var_name: S_adx_2d
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xq
+  - module: ocean_model
+    var_name: S_ady_2d
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yq xh
+  sub_region:
+  - grid_type: 
+    tile: 
+    corner1: 
+    corner2: 
+    corner3: 
+    corner4: 
+  global_meta:
+  - {}
+- file_name: ice_daily
+  freq: 1
+  freq_units: days
+  time_units: hours
+  unlimdim: time
+  new_file_freq: 
+  new_file_freq_units: 
+  start_time: 
+  file_duration: 
+  file_duration_units: 
+  varlist:
+  - module: ice_model
+    var_name: siconc
+    reduction: average
+    kind: r4
+    output_name: aice
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: UI
+    reduction: average
+    kind: r4
+    output_name: uice
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xB
+  - module: ice_model
+    var_name: VI
+    reduction: average
+    kind: r4
+    output_name: vice
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yB xT
+  - module: ice_model
+    var_name: HI
+    reduction: average
+    kind: r4
+    output_name: hice
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: HS
+    reduction: average
+    kind: r4
+    output_name: hsnow
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: sispeed
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: sh_d_hf
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: SWDN
+    reduction: average
+    kind: r4
+    output_name: swdn
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: STRENGTH
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: RDG_RATE
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: BHEAT
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: SN2IC
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: RDG_HEIGHT
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time ct yT xT
+  - module: ice_model
+    var_name: cn
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time ct yT xT
+  - module: ice_model
+    var_name: simass_n
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time ct yT xT
+  sub_region:
+  - grid_type: 
+    tile: 
+    corner1: 
+    corner2: 
+    corner3: 
+    corner4: 
+  global_meta:
+  - {}
+- file_name: ocean_Bering_Strait
+  freq: 1
+  freq_units: hours
+  time_units: days
+  unlimdim: time
+  new_file_freq: 
+  new_file_freq_units: 
+  start_time: 
+  file_duration: 
+  file_duration_units: 
+  varlist:
+  - module: ocean_model_z
+    var_name: volcello
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time z_l yh_sub01 xh_sub01
+  - module: ocean_model_z
+    var_name: thetao
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time z_l yh_sub01 xh_sub01
+  - module: ocean_model_z
+    var_name: so
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time z_l yh_sub01 xh_sub01
+  - module: ocean_model_z
+    var_name: umo
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time z_l yh_sub01 xq_sub01
+  - module: ocean_model_z
+    var_name: uo
+    reduction: average
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time z_l yh_sub01 xq_sub01
+  sub_region:
+  - grid_type: latlon
+    tile: 
+    corner1: -148.057007 55.0099983
+    corner2: -148.057007 55.0099983
+    corner3: -148.057007 55.3400002
+    corner4: -148.057007 55.3400002
+  global_meta:
+  - {}
+- file_name: boem_hourly
+  freq: 1
+  freq_units: hours
+  time_units: hours
+  unlimdim: time
+  new_file_freq: 
+  new_file_freq_units: 
+  start_time: 
+  file_duration: 
+  file_duration_units: 
+  varlist:
+  - module: ocean_model
+    var_name: ssu_east
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ocean_model
+    var_name: ssv_north
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yh xh
+  - module: ice_model
+    var_name: ui_east
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: vi_north
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  - module: ice_model
+    var_name: siconc
+    reduction: none
+    kind: r4
+    output_name: 
+    long_name: 
+    units: 
+    zbounds: 
+    n_diurnal: 
+    pow_value: 
+    dimensions: time yT xT
+  sub_region:
+  - grid_type: 
+    tile: 
+    corner1: 
+    corner2: 
+    corner3: 
+    corner4: 
+  global_meta:
+  - {}
+...

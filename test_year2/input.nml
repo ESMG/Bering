@@ -1,6 +1,6 @@
  &MOM_input_nml
         output_directory = '.',
-        input_filename = 'n'
+        input_filename = 'r',
         restart_input_dir = 'INPUT',
         restart_output_dir = 'RESTART',
         parameter_filename = 'MOM_input',
@@ -10,7 +10,7 @@
 
  &SIS_input_nml
         output_directory = './',
-        input_filename = 'n'
+        input_filename = 'r',
         restart_input_dir = 'INPUT/',
         restart_output_dir = 'RESTART/',
         parameter_filename = 'SIS_input',
@@ -23,9 +23,9 @@
 /
 
  &coupler_nml
-        months = 3,
-        days   = 29,
-        hours  = 0,
+        months = 0,
+        days   = 0,
+        hours  = 3,
         current_date = 2011,9,3,0,0,0,
         calendar = 'gregorian',
         dt_cpld = 3600,

@@ -1,14 +1,12 @@
 ! This file was written by the model and records the non-default parameters used at run-time.
 
 ! === module ice_model ===
-
-! === module MOM_unit_scaling ===
-! Parameters for doing unit scaling of variables.
-CGRID_ICE_DYNAMICS = True       !   [Boolean] default = False
-                                ! If true, use a C-grid discretization of the sea-ice dynamics; if false use a
-                                ! B-grid discretization.
 DO_RIDGING = True               !   [Boolean] default = False
                                 ! If true, call the ridging routines.
+READ_HLIM_VALS = True           !   [Boolean] default = False
+                                ! If true, read the lower limits on the ice thicknesscategories.
+HLIM_VALS = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5, 3.5, 4.5" ! default = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5"
+                                ! This sets the list of lower limits on the ice thickness categories.
 
 ! === module MOM_domains ===
 REENTRANT_X = False             !   [Boolean] default = True
@@ -20,31 +18,17 @@ NJGLOBAL = 277                  !
                                 ! The total number of thickness grid points in the y-direction in the physical
                                 ! domain. With STATIC_MEMORY_ this is set in SIS2_memory.h at compile time.
 
+! === module SIS_restart ===
+RESTART_CHECKSUMS_REQUIRED = False !   [Boolean] default = True
+                                ! If true, require the restart checksums to match and error out otherwise. Users
+                                ! may want to avoid this comparison if for example the restarts are made from a
+                                ! run with a different mask_table than the current run, in which case the
+                                ! checksums will not match.
+
 ! === module SIS_initialize_fixed ===
 INPUTDIR = "INPUT"              ! default = "."
                                 ! The directory in which input files are found.
-CONCENTRATION_INIT_CONFIG = "latitudes" ! default = "data_override"
-                                ! A string that determines how the initial total sea ice concentration is
-                                ! initialized for a new run:
-                                !     file - read sea ice concentrations from a specified file
-                                !     data_override - use the data_override capability or zero everywhere
-                                !     zero - there is no sea ice anywhere.
-                                !     latitudes - initial sea ice concentration is a function of latitude.
-ICE_THICKNESS_INIT_CONFIG = "uniform" ! default = "data_override"
-                                ! A string that determines how the initial total sea ice concentration is
-                                ! initialized for a new run:
-                                !     file - read sea ice concentrations from a specified file
-                                !     data_override - use the data_override capability or zero everywhere
-                                !     uniform - sea ice has uniform thickness where the concentration is
-                                !       nonzero.
-ARCTIC_ICE_EDGE_IC = 72.0       !   [degrees of latitude] default = 91.0
-                                ! The southern latitude of Arctic ice in an initial condition.
-ICE_INIT_MASS = 900.0           !   [kg m-2] default = 0.0
-                                ! A uniform initial sea ice mass per unit area where there is sea ice.
-ICE_SALINITY_IC = 4.0           !   [g kg-1] default = 0.0
-                                ! The uniform sea ice salinity used for the initial condition
-ICE_TEMPERATURE_IC = -4.0       !   [degC] default = 0.0
-                                ! The uniform sea ice and snow temperature used for the initial condition
+
 ! === module MOM_grid_init ===
 GRID_CONFIG = "mosaic"          !
                                 ! A character string that determines the method for defining the horizontal
@@ -70,16 +54,9 @@ MAXIMUM_DEPTH = 6500.0          !   [m]
                                 ! The maximum depth of the ocean.
 OMEGA = 7.292E-05               !   [s-1] default = 7.2921E-05
                                 ! The rotation rate of the earth.
-GRID_ROTATION_ANGLE_BUGS = False !   [Boolean] default = True
-                                ! If true, use an older algorithm to calculate the sine and cosines needed
-                                ! rotate between grid-oriented directions and true north and east.  Differences
-                                ! arise at the tripolar fold.
 
 ! === module hor_grid ===
 ! Parameters providing information about the lateral grid.
-
-! === module MOM_hor_index ===
-! Sets the horizontal array index types.
 
 ! === module SIS2_ice_thm (thermo) ===
 ! This sub-module calculates ice thermodynamic quantities.
@@ -95,15 +72,6 @@ ICE_BULK_SALINITY = 0.0         !   [g/kg] default = 4.0
 ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
                                 ! The initial salinity of sea ice as a fraction of the salinity of the seawater
                                 ! from which it formed.
-TRANSMUTE_SEA_ICE = False       !   [Boolean] default = False
-                                ! If true, allow ice to be transmuted directly into seawater with a spatially
-                                ! spatially varying rate as a form of outflow open boundary condition.
-TRANSMUTATION_RATE_FILE = "ice_outflow.nc" !
-                                ! The file from which the transmutation rate should be read.
-TRANSMUTATION_RATE_VAR = "rate" ! default = "transmute_rate"
-                                ! The variable with the map of sea-ice transmutation rate.  No transmutation
-                                ! occurs where this field is 0.
-!SIS2_FILLING_FRAZIL = False     !   [Boolean] default = True
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
@@ -116,13 +84,20 @@ DT_ICE_DYNAMICS = 1200.0        !   [seconds] default = -1.0
                                 ! The time step used for the slow ice dynamics, including stepping the
                                 ! continuity equation and interactions between the ice mass field and
                                 ! velocities.  If 0 or negative the coupling time step will be used.
-LEMIEUX_LANDFAST = False        !   [Boolean] default = False
-                                ! If true, turn on Lemieux landfast ice parameterization.
+ICE_STATS_INTERVAL = 0.0416666666666667 !   [days] default = 1.0
+                                ! The interval in units of TIMEUNIT between writes of the globally summed ice
+                                ! statistics and conservation checks.
+ICE_YIELD_ELLIPTICITY = 1.5     !   [Nondim] default = 2.0
+                                ! The ellipticity coefficient for the plastic yield curve in the sea-ice
+                                ! rheology.  For an infinite ellipticity (i.e., a cavitating fluid rheology),
+                                ! use 0.
 ITD_LANDFAST = True             !   [Boolean] default = False
-                                ! If true, turn on Lemieux landfast ice parameterization.
-H2_FILE = "ocean_topoh2.nc"
-LEMIEUX_K2 = 300.0              !   [N m-3] default = 15.0
-                                ! The value of the second Lemieux landfast ice tuneable parameter.
+                                ! If true, turn on probabilistic landfast ice parameterization.
+H2_FILE = "ocean_topoh2.nc"     !
+                                ! The path to the file containing the sub-grid-scale topographic roughness
+                                ! amplitude with ITD_LANDFAST.
+BASAL_STRESS_NCAT_B = 10        ! default = 100
+                                ! Number of bathymetric depth categories in landfast ice computation.
 ICE_COVER_DISCARD = 1.0E-30     !   [nondim] default = -1.0
                                 ! A tiny fractional ice coverage which if positive causes the mass in categories
                                 ! with less than this coverage to be discarded.
@@ -161,12 +136,6 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
                                 ! If true use the Adcroft reciprocal of the cell mass when calculating the
                                 ! advective CFL numbers used in PPM tracer advection schemes, rather than adding
                                 ! a small mass in the denominator of the advective CFL ratio.
-NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = False
-                                ! Participation function used in ridging, .false. for Thorndike et al. 1975
-                                ! .true. for Lipscomb et al. 2007
-NEW_RIDGE_REDISTRIBUTION = False !   [Boolean] default = False
-                                ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
-                                ! Lipscomb et al. 2007
 
 ! === module SIS_sum_output ===
 MAXTRUNC = 200                  !   [truncations save_interval-1] default = 0
@@ -196,27 +165,3 @@ ICE_DELTA_EDD_R_POND = 1.0      !   [nondimensional] default = 0.0
                                 ! A dreadfully documented tuning parameter for the radiative propeties of
                                 ! meltwater ponds on sea ice with the delta-Eddington radiative transfer
                                 ! calculation.
-! === module SIS_open_boundary ===
-! Controls where open boundaries are located, what kind of boundary condition to impose, and what data to apply,
-! if any.
-!OBC_NUMBER_OF_SEGMENTS = 4      ! default = 0
-                                ! The number of open boundary segments.
-!OBC_FREESLIP_VORTICITY = False  !   [Boolean] default = True
-!OBC_COMPUTED_VORTICITY = True   !   [Boolean] default = False
-!OBC_FREESLIP_STRAIN = False     !   [Boolean] default = True
-!OBC_COMPUTED_STRAIN = True      !   [Boolean] default = False
-!OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER"
-!OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
-!OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER" !
-!OBC_SEGMENT_002_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
-!OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER" !
-!OBC_SEGMENT_003_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
-!OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER"
-!OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
-!OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
-!OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
-!BRUSHCUTTER_MODE = True         !   [Boolean] default = False
-!OBC_SEGMENT_001_DATA = "U=0.0,V=0.0"
-!OBC_SEGMENT_002_DATA = "U=0.0,V=0.0"
-!OBC_SEGMENT_003_DATA = "U=0.0,V=0.0"
-!OBC_SEGMENT_004_DATA = "U=0.0,V=0.0"

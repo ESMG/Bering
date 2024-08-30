@@ -1,0 +1,288 @@
+title: Bering 50 vertical levels
+base_date: 1900 1 1 0 0 0
+diag_files:
+- file_name: atm_hourly
+  time_units: hours
+  unlimdim: time
+  freq: 1 hours
+  varlist:
+  - module: flux
+    var_name: u_atm
+    reduction: none
+    kind: r4
+  - module: flux
+    var_name: v_atm
+    reduction: none
+    kind: r4
+- file_name: ocean_hourly
+  time_units: hours
+  unlimdim: time
+  is_ocean: true
+  freq: 1 hours
+  varlist:
+  - module: ocean_model
+    var_name: u
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: v
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: SSH
+    output_name: ssh
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: ubt
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: vbt
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: temp
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: salt
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: tau_mag
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: lf_bodner
+    reduction: none
+    kind: r4
+  - module: ice_model
+    var_name: siconc
+    reduction: none
+    kind: r4
+  - module: ice_model
+    var_name: HI
+    output_name: hice
+    reduction: none
+    kind: r4
+  - module: ice_model
+    var_name: sispeed
+    reduction: none
+    kind: r4
+  - module: ice_model
+    var_name: itheta
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: Kd_interface
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: Kd_heat
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: Kd_shear
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: Kd_ePBL
+    reduction: none
+    kind: r4
+- file_name: ocean_daily
+  time_units: hours
+  unlimdim: time
+  is_ocean: true
+  freq: 1 days
+  varlist:
+  - module: ocean_model
+    var_name: SSH
+    output_name: ssh
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: thetao
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: so
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: uo
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: vo
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: RV
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: e
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: hfds
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: ePBL_h_ML
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: tau_mag
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: ustar
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: T_adx_2d
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: T_ady_2d
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: S_adx_2d
+    reduction: average
+    kind: r4
+  - module: ocean_model
+    var_name: S_ady_2d
+    reduction: average
+    kind: r4
+- file_name: ice_daily
+  time_units: hours
+  unlimdim: time
+  freq: 1 days
+  varlist:
+  - module: ice_model
+    var_name: siconc
+    output_name: aice
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: UI
+    output_name: uice
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: VI
+    output_name: vice
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: HI
+    output_name: hice
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: HS
+    output_name: hsnow
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: sispeed
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: sh_d_hf
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: SWDN
+    output_name: swdn
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: STRENGTH
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: RDG_RATE
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: BHEAT
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: SN2IC
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: RDG_HEIGHT
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: cn
+    reduction: average
+    kind: r4
+  - module: ice_model
+    var_name: simass_n
+    reduction: average
+    kind: r4
+- file_name: ocean_Bering_Strait
+  time_units: days
+  unlimdim: time
+  is_ocean: true
+  sub_region:
+  - grid_type: latlon
+    corner1: -148.057 55.01
+    corner2: -148.057 55.01
+    corner3: -148.057 55.34
+    corner4: -148.057 55.34
+  freq: 1 hours
+  varlist:
+  - module: ocean_model_z
+    var_name: volcello
+    reduction: average
+    zbounds: -999 -999
+    kind: r4
+  - module: ocean_model_z
+    var_name: thetao
+    reduction: average
+    kind: r4
+  - module: ocean_model_z
+    var_name: so
+    reduction: average
+    kind: r4
+  - module: ocean_model_z
+    var_name: umo
+    reduction: average
+    kind: r4
+  - module: ocean_model_z
+    var_name: uo
+    reduction: average
+    kind: r4
+- file_name: boem_hourly
+  time_units: hours
+  unlimdim: time
+  freq: 1 hours
+  varlist:
+  - module: ocean_model
+    var_name: ssu_east
+    reduction: none
+    kind: r4
+  - module: ocean_model
+    var_name: ssv_north
+    reduction: none
+    kind: r4
+  - module: ice_model
+    var_name: ui_east
+    reduction: none
+    kind: r4
+  - module: ice_model
+    var_name: vi_north
+    reduction: none
+    kind: r4
+  - module: ice_model
+    var_name: siconc
+    reduction: none
+    kind: r4
