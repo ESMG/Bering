@@ -1,6 +1,5 @@
-DEBUG = True
+DEBUG = False
 DEBUG_BT = False
-!#override BOUSSINESQ = True
 !VERBOSITY = 9
 !#override INTEGRAL_BT_CONTINUITY = True
 !DIABATIC_FIRST = True
@@ -13,3 +12,6 @@ DEBUG_BT = False
 !H_RESCALE_POWER = 103
 !C_RESCALE_POWER = -31
 !S_RESCALE_POWER = 37
+!#override DO_BRINE_PLUME = True
+!#override RESTART_CHECKSUMS_REQUIRED = False
+!SPLIT_RK2B = True

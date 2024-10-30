@@ -164,7 +164,7 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
 NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = False
                                 ! Participation function used in ridging, .false. for Thorndike et al. 1975
                                 ! .true. for Lipscomb et al. 2007
-!NEW_RIDGE_REDISTRIBUTION = True !   [Boolean] default = False
+NEW_RIDGE_REDISTRIBUTION = False !   [Boolean] default = False
                                 ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
                                 ! Lipscomb et al. 2007
 
@@ -205,18 +205,18 @@ ICE_DELTA_EDD_R_POND = 1.0      !   [nondimensional] default = 0.0
 !OBC_COMPUTED_VORTICITY = True   !   [Boolean] default = False
 !OBC_FREESLIP_STRAIN = False     !   [Boolean] default = True
 !OBC_COMPUTED_STRAIN = True      !   [Boolean] default = False
-!OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER"
+!OBC_SEGMENT_001 = "J=N,I=N:2,FLATHER"
 !OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
-!OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER" !
+!OBC_SEGMENT_002 = "I=2,J=N:0,FLATHER" !
 !OBC_SEGMENT_002_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
-!OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER" !
+!OBC_SEGMENT_003 = "J=0,I=2:N,FLATHER" !
 !OBC_SEGMENT_003_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
 !OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER"
 !OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 1.0, 120.0 !   [days] default = 0.0
 !OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
 !OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
-!BRUSHCUTTER_MODE = True         !   [Boolean] default = False
 !OBC_SEGMENT_001_DATA = "U=0.0,V=0.0"
 !OBC_SEGMENT_002_DATA = "U=0.0,V=0.0"
 !OBC_SEGMENT_003_DATA = "U=0.0,V=0.0"
 !OBC_SEGMENT_004_DATA = "U=0.0,V=0.0"
+!MASK_OUTSIDE_OBCS = True

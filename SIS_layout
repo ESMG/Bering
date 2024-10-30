@@ -1,5 +1,5 @@
-LAYOUT = 6,13
-MASKTABLE = "mask_table.6.6x13"
+!LAYOUT = 6,13
+!MASKTABLE = "mask_table.6.6x13"
 !LAYOUT = 5,10
 !MASKTABLE = "mask_table.2.5x10"
 #override IO_LAYOUT = 1,1

@@ -338,8 +338,6 @@ NUDGE_SEA_ICE = False           !   [Boolean] default = False
 TRANSMUTE_SEA_ICE = False       !   [Boolean] default = False
                                 ! If true, allow ice to be transmuted directly into seawater with a spatially
                                 ! varying rate as a form of outflow open boundary condition.
-DO_BRINE_PLUME = False          !   [Boolean] default = False
-                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
@@ -544,6 +542,10 @@ NEW_RIDGE_PARTICIPATION = False !   [Boolean] default = False
 NEW_RIDGE_REDISTRIBUTION = False !   [Boolean] default = False
                                 ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
                                 ! Lipscomb et al. 2007
+ICEPACK_CLEANUP = False         !   [Boolean] default = False
+                                ! Tell icepack_step_ridge to call itd_cleanup for us.
+ICEPACK_REBIN = False           !   [Boolean] default = False
+                                ! Tell icepack_step_ridge to call rebin for us.
 
 ! === module SIS_sum_output ===
 WRITE_STOCKS = True             !   [Boolean] default = True
