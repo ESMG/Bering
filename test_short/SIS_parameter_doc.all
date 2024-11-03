@@ -6,6 +6,8 @@ SPECIFIED_ICE = False           !   [Boolean] default = False
 CGRID_ICE_DYNAMICS = True       !   [Boolean] default = True
                                 ! If true, use a C-grid discretization of the sea-ice dynamics; if false use a
                                 ! B-grid discretization.
+DO_DYNAMICS = True              !   [Boolean] default = True
+                                ! If False, skips the dynamics calls that update u & v.
 USE_SLAB_ICE = False            !   [Boolean] default = False
                                 ! If true, use the very old slab-style ice.
 SINGLE_ICE_STATE_TYPE = True    !   [Boolean] default = True
@@ -338,6 +340,8 @@ NUDGE_SEA_ICE = False           !   [Boolean] default = False
 TRANSMUTE_SEA_ICE = False       !   [Boolean] default = False
                                 ! If true, allow ice to be transmuted directly into seawater with a spatially
                                 ! varying rate as a form of outflow open boundary condition.
+DO_BRINE_PLUME = False          !   [Boolean] default = False
+                                ! If true, split heat and salt fluxes to the ocean into brine plumes and other.
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
@@ -410,6 +414,9 @@ WEAK_LOW_SHEAR_ICE = False      !   [Boolean] default = False
                                 ! If true, the divergent stresses go toward 0 in the C-grid dynamics when the
                                 ! shear magnitudes are very weak. Otherwise they go to -P_ice.  This setting is
                                 ! temporary.
+WEAK_COAST_STRESS = True        !   [Boolean] default = False
+                                ! If true, do not use land masks in determining the area for stress convergence,
+                                ! which acts to weaken the stress-driven acceleration in coastal points.
 PROJECT_ICE_DRAG_VEL = True     !   [Boolean] default = True
                                 ! If true, project forward the ice velocity used in the drag calculation to
                                 ! avoid an instability that can occur when a finite stress is applied to thin
@@ -466,7 +473,7 @@ BASAL_STRESS_MU_S = 0.1         !   [nondim] default = 0.1
 BASAL_STRESS_PUNY = 1.0E-20     !   [nondim] default = 1.0E-20
                                 ! Small number in ITD landfast ice.
 BASAL_STRESS_SCALE = 1.0        !   [m] default = 1.0
-                                ! Scale factor in ITD landfast ice.
+                                ! Parameter to make units work in landfast ice.
 BASAL_STRESS_CUTOFF = 1.943     !   [nondim] default = 1.943
                                 ! Scale factor in ITD landfast ice.
 H2_FILE = "ocean_topoh2.nc"     !
