@@ -72,7 +72,7 @@ Bering 50 vertical levels
 "ice_model",  "sispeed",    "sispeed",   "ocean_hourly", "all", .false., "none", 2
 "ice_model",  "itheta",     "itheta",    "ocean_hourly", "all", .false., "none", 2
 #"ice_model",  "MIS_tot",    "mis",       "ocean_hourly", "all", .false., "none", 2
-#"ice_model",  "SWDN",      "swdn",      "ocean_hourly", "all", .false., "none", 2
+"ice_model",  "SWDN",      "swdn",      "ocean_hourly", "all", .false., "none", 2
 "ocean_model",  "Kd_interface", "Kd_interface",     "ocean_hourly", "all", .false., "none",2
 "ocean_model",  "Kd_heat",      "Kd_heat",          "ocean_hourly", "all", .false., "none",2
 "ocean_model",  "Kd_shear",     "Kd_shear",         "ocean_hourly", "all", .false., "none",2

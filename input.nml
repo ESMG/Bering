@@ -50,7 +50,7 @@
         max_output_fields = 699
         mix_snapshot_average_fields = .false.
         flush_nc_files = .true.
-        use_modern_diag = .true.
+!       use_modern_diag = .true.
 /
 
  &flux_exchange_nml
@@ -130,3 +130,6 @@
         interp_method = 'second_order'
 /
 
+ &data_override_nml
+        use_center_grid_points = .true.
+/
