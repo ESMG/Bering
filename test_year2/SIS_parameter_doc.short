@@ -87,6 +87,9 @@ DT_ICE_DYNAMICS = 1200.0        !   [seconds] default = -1.0
 ICE_STATS_INTERVAL = 0.0416666666666667 !   [days] default = 1.0
                                 ! The interval in units of TIMEUNIT between writes of the globally summed ice
                                 ! statistics and conservation checks.
+WEAK_COAST_STRESS = True        !   [Boolean] default = False
+                                ! If true, do not use land masks in determining the area for stress convergence,
+                                ! which acts to weaken the stress-driven acceleration in coastal points.
 ICE_YIELD_ELLIPTICITY = 1.5     !   [Nondim] default = 2.0
                                 ! The ellipticity coefficient for the plastic yield curve in the sea-ice
                                 ! rheology.  For an infinite ellipticity (i.e., a cavitating fluid rheology),
@@ -136,6 +139,12 @@ ADCROFT_ADVECTIVE_CFL = True    !   [Boolean] default = False
                                 ! If true use the Adcroft reciprocal of the cell mass when calculating the
                                 ! advective CFL numbers used in PPM tracer advection schemes, rather than adding
                                 ! a small mass in the denominator of the advective CFL ratio.
+NEW_RIDGE_PARTICIPATION = True  !   [Boolean] default = False
+                                ! Participation function used in ridging, .false. for Thorndike et al. 1975
+                                ! .true. for Lipscomb et al. 2007
+NEW_RIDGE_REDISTRIBUTION = True !   [Boolean] default = False
+                                ! Redistribution function used in ridging, .false. for Hibler 1980 .true. for
+                                ! Lipscomb et al. 2007
 
 ! === module SIS_sum_output ===
 MAXTRUNC = 200                  !   [truncations save_interval-1] default = 0
