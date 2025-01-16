@@ -329,25 +329,25 @@ OBC_TIDE_N_CONSTITUENTS = 10    ! default = 0
                                 ! Number of tidal constituents being added to the open boundary.
 OBC_SEGMENT_001 = "J=N,I=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
-OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
+OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days]
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
 OBC_SEGMENT_002 = "I=0,J=N:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
-OBC_SEGMENT_002_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
+OBC_SEGMENT_002_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days]
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
 OBC_SEGMENT_003 = "J=0,I=0:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
-OBC_SEGMENT_003_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
+OBC_SEGMENT_003_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days]
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
 OBC_SEGMENT_004 = "I=N,J=0:N,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
-OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days] default = 0.0
+OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days]
                                 ! Timescales in days for nudging along a segment, for inflow, then outflow.
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
@@ -385,7 +385,7 @@ REMAPPING_ANSWER_DATE = 99991231 ! default = 99991231
                                 ! Values below 20190101 result in the use of older, less accurate expressions
                                 ! that were in use at the end of 2018.  Higher values result in the use of more
                                 ! robust and accurate forms of mathematically equivalent expressions.
-OBC_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+OBC_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = False
                                 ! If true, use the OM4 remapping-via-subcells algorithm for neutral diffusion.
                                 ! See REMAPPING_USE_OM4_SUBCELLS for more details. We recommend setting this
                                 ! option to false.
@@ -397,45 +397,45 @@ OBC_TIDE_ADD_NODAL = True       !   [Boolean] default = False
                                 ! If true, include 18.6 year nodal modulation in the boundary tidal forcing.
 OBC_TIDE_REF_DATE = 1980, 1, 1  !
                                 ! Reference date to use for tidal calculations and equilibrium phase.
-OBC_TIDE_NODAL_REF_DATE = 2011, 7, 2 ! default = 0
+OBC_TIDE_NODAL_REF_DATE = 2011, 7, 2 ! default = 0, 0, 0
                                 ! Fixed reference date to use for nodal modulation of boundary tides.
-TIDE_M2_FREQ = 1.405189E-04     !   [s-1] default = 1.405189E-04
+TIDE_M2_FREQ = 1.405189E-04     !   [rad s-1] default = 1.405189E-04
                                 ! Frequency of the M2 tidal constituent. This is only used if TIDES and TIDE_M2
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and M2 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_S2_FREQ = 1.454441E-04     !   [s-1] default = 1.454441E-04
+TIDE_S2_FREQ = 1.454441E-04     !   [rad s-1] default = 1.454441E-04
                                 ! Frequency of the S2 tidal constituent. This is only used if TIDES and TIDE_S2
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and S2 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_N2_FREQ = 1.378797E-04     !   [s-1] default = 1.378797E-04
+TIDE_N2_FREQ = 1.378797E-04     !   [rad s-1] default = 1.378797E-04
                                 ! Frequency of the N2 tidal constituent. This is only used if TIDES and TIDE_N2
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and N2 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_K2_FREQ = 1.4584234E-04    !   [s-1] default = 1.4584234E-04
+TIDE_K2_FREQ = 1.4584234E-04    !   [rad s-1] default = 1.4584234E-04
                                 ! Frequency of the K2 tidal constituent. This is only used if TIDES and TIDE_K2
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and K2 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_K1_FREQ = 7.292117E-05     !   [s-1] default = 7.292117E-05
+TIDE_K1_FREQ = 7.292117E-05     !   [rad s-1] default = 7.292117E-05
                                 ! Frequency of the K1 tidal constituent. This is only used if TIDES and TIDE_K1
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and K1 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_O1_FREQ = 6.759774E-05     !   [s-1] default = 6.759774E-05
+TIDE_O1_FREQ = 6.759774E-05     !   [rad s-1] default = 6.759774E-05
                                 ! Frequency of the O1 tidal constituent. This is only used if TIDES and TIDE_O1
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and O1 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_P1_FREQ = 7.252295E-05     !   [s-1] default = 7.252295E-05
+TIDE_P1_FREQ = 7.252295E-05     !   [rad s-1] default = 7.252295E-05
                                 ! Frequency of the P1 tidal constituent. This is only used if TIDES and TIDE_P1
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and P1 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_Q1_FREQ = 6.495854E-05     !   [s-1] default = 6.495854E-05
+TIDE_Q1_FREQ = 6.495854E-05     !   [rad s-1] default = 6.495854E-05
                                 ! Frequency of the Q1 tidal constituent. This is only used if TIDES and TIDE_Q1
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and Q1 is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_MM_FREQ = 2.6392E-06       !   [s-1] default = 2.6392E-06
+TIDE_MM_FREQ = 2.6392E-06       !   [rad s-1] default = 2.6392E-06
                                 ! Frequency of the MM tidal constituent. This is only used if TIDES and TIDE_MM
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and MM is in
                                 ! OBC_TIDE_CONSTITUENTS.
-TIDE_MF_FREQ = 5.3234E-06       !   [s-1] default = 5.3234E-06
+TIDE_MF_FREQ = 5.3234E-06       !   [rad s-1] default = 5.3234E-06
                                 ! Frequency of the MF tidal constituent. This is only used if TIDES and TIDE_MF
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and MF is in
                                 ! OBC_TIDE_CONSTITUENTS.
@@ -725,6 +725,7 @@ THICKNESS_CONFIG = "coord"      ! default = "uniform"
                                 !     uniform - uniform thickness layers evenly distributed
                                 !       between the surface and MAXIMUM_DEPTH.
                                 !     list - read a list of positive interface depths.
+                                !     param - use thicknesses from parameter THICKNESS_INIT_VALUES.
                                 !     DOME - use a slope and channel configuration for the
                                 !       DOME sill-overflow test case.
                                 !     ISOMIP - use a configuration for the
@@ -826,7 +827,7 @@ OBC_USER_CONFIG = "none"        ! default = "none"
 NUM_DIAG_COORDS = 1             ! default = 1
                                 ! The number of diagnostic vertical coordinates to use. For each coordinate, an
                                 ! entry in DIAG_COORDS must be provided.
-DIAG_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+DIAG_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = False
                                 ! If true, use the OM4 remapping-via-subcells algorithm for diagnostics. See
                                 ! REMAPPING_USE_OM4_SUBCELLS for details. We recommend setting this option to
                                 ! false.
@@ -945,7 +946,7 @@ INTERNAL_WAVE_SPEED_MIN = 0.0   !   [m s-1] default = 0.0
 INTERNAL_WAVE_SPEED_BETTER_EST = True !   [Boolean] default = True
                                 ! If true, use a more robust estimate of the first mode wave speed as the
                                 ! starting point for iterations.
-EBT_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+EBT_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = False
                                 ! If true, use the OM4 remapping-via-subcells algorithm for calculating EBT
                                 ! structure. See REMAPPING_USE_OM4_SUBCELLS for details. We recommend setting
                                 ! this option to false.
@@ -1199,6 +1200,10 @@ PV_ADV_SCHEME = "PV_ADV_CENTERED" ! default = "PV_ADV_CENTERED"
                                 !    PV_ADV_UPWIND1  - upwind, first order
 
 ! === module MOM_self_attr_load ===
+SAL_USE_BPA = False             !   [Boolean] default = False
+                                ! If true, use bottom pressure anomaly to calculate self-attraction and loading
+                                ! (SAL). Otherwise sea surface height anomaly is used, which is only correct for
+                                ! homogenous flow.
 SAL_SCALAR_APPROX = True        !   [Boolean] default = True
                                 ! If true, use the scalar approximation to calculate self-attraction and
                                 ! loading.
@@ -1247,7 +1252,7 @@ TIDAL_SAL_FROM_FILE = False     !   [Boolean] default = False
 USE_PREVIOUS_TIDES = False      !   [Boolean] default = False
                                 ! If true, use the SAL from the previous iteration of the tides to facilitate
                                 ! convergent iteration. This is only used if TIDES is true.
-TIDE_REF_DATE = 2011, 1, 1      ! default = 0
+TIDE_REF_DATE = 2011, 1, 1      ! default = 0, 0, 0
                                 ! Year,month,day to use as reference date for tidal forcing. If not specified,
                                 ! defaults to 0.
 TIDE_USE_EQ_PHASE = True        !   [Boolean] default = False
@@ -1344,9 +1349,18 @@ RHO_PGF_REF = 1035.0            !   [kg m-3] default = 1035.0
                                 ! non-Boussinesq mode.  The default is RHO_0.
 TIDES_ANSWER_DATE = 20230630    ! default = 20230630
                                 ! The vintage of self-attraction and loading (SAL) and tidal forcing
-                                ! calculations in Boussinesq mode. Values below 20230701 recover the old answers
-                                ! in which the SAL is part of the tidal forcing calculation.  The change is due
-                                ! to a reordered summation and the difference is only at bit level.
+                                ! calculations.  Setting dates before 20230701 recovers old answers (Boussinesq
+                                ! and non-Boussinesq modes) when SAL is part of the tidal forcing calculation.
+                                ! The answer difference is only at bit level and due to a reordered summation.
+                                ! Setting dates before 20250201 recovers answers (Boussinesq mode) that
+                                ! interface heights are modified before pressure force integrals are calculated.
+BOUSSINESQ_SAL_TIDES = False    !   [Boolean] default = False
+                                ! If true, in Boussinesq mode, use an alternative method to include
+                                ! self-attraction and loading (SAL) and tidal forcings in pressure gradient, in
+                                ! which their gradients are calculated separately, instead of adding
+                                ! geopotential anomalies as corrections to the interface height.  This
+                                ! alternative method elimates a baroclinic component of the SAL and tidal
+                                ! forcings.
 SSH_IN_EOS_PRESSURE_FOR_PGF = False !   [Boolean] default = False
                                 ! If true, include contributions from the sea surface height in the height-based
                                 ! pressure used in the equation of state calculations for the Boussinesq
@@ -1714,7 +1728,7 @@ DIAG_EBT_MONO_N2_COLUMN_FRACTION = 0.0 !   [nondim] default = 0.0
 DIAG_EBT_MONO_N2_DEPTH = -1.0   !   [m] default = -1.0
                                 ! The depth below which N2 is limited as monotonic for the purposes of
                                 ! calculating the equivalent barotropic wave speed.
-INTWAVE_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
+INTWAVE_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = False
                                 ! If true, use the OM4 remapping-via-subcells algorithm for calculating EBT
                                 ! structure. See REMAPPING_USE_OM4_SUBCELLS for details. We recommend setting
                                 ! this option to false.
@@ -1770,7 +1784,7 @@ EVAP_CFL_LIMIT = 0.8            !   [nondim] default = 0.8
                                 ! The largest fraction of a layer than can be lost to forcing (e.g. evaporation,
                                 ! sea-ice formation) in one time-step. The unused mass loss is passed down
                                 ! through the column.
-MLD_EN_VALS = 3*0.0             !   [J/m2] default = 0.0
+MLD_EN_VALS = 25.0, 2500.0, 2.5E+05 !   [J/m2] default = 25.0, 2500.0, 2.5E+05
                                 ! The energy values used to compute MLDs.  If not set (or all set to 0.), the
                                 ! default will overwrite to 25., 2500., 250000.
 DIAG_MLD_DENSITY_DIFF = 0.1     !   [kg/m3] default = 0.1
@@ -2131,6 +2145,11 @@ MKE_TO_TKE_EFFIC = 0.0          !   [nondim] default = 0.0
 TKE_DECAY = 0.001               !   [nondim] default = 2.5
                                 ! TKE_DECAY relates the vertical rate of decay of the TKE available for
                                 ! mechanical entrainment to the natural Ekman depth.
+DIRECT_EPBL_MIXING_CALC = False !   [Boolean] default = False
+                                ! If true and there is no conversion from mean kinetic energy to ePBL turbulent
+                                ! kinetic energy, use a direct calculation of the diffusivity that is supported
+                                ! by a given energy input instead of the more general but slower iterative
+                                ! solver.
 EPBL_MSTAR_SCHEME = "REICHL_H18" ! default = "CONSTANT"
                                 ! EPBL_MSTAR_SCHEME selects the method for setting mstar.  Valid values are:
                                 !    CONSTANT   - Use a fixed mstar given by MSTAR
@@ -2140,7 +2159,7 @@ MSTAR_CAP = 10.0                !   [nondim] default = -1.0
                                 ! If this value is positive, it sets the maximum value of mstar allowed in ePBL.
                                 ! (This is not used if EPBL_MSTAR_SCHEME = CONSTANT).
 RH18_MSTAR_CN1 = 0.275          !   [nondim] default = 0.275
-                                ! MSTAR_N coefficient 1 (outter-most coefficient for fit). The value of 0.275 is
+                                ! MSTAR_N coefficient 1 (outer-most coefficient for fit). The value of 0.275 is
                                 ! given in RH18.  Increasing this coefficient increases MSTAR for all values of
                                 ! Hf/ust, but more effectively at low values (weakly developed OSBLs).
 RH18_MSTAR_CN2 = 8.0            !   [nondim] default = 8.0
@@ -2185,10 +2204,13 @@ EPBL_MLD_BISECTION = False      !   [Boolean] default = False
                                 ! mixed layer depth.  Otherwise use the false position after a maximum and
                                 ! minimum bound have been evaluated and the returned value or bisection before
                                 ! this.
+EPBL_MLD_ITER_BUG = True        !   [Boolean] default = True
+                                ! If true, use buggy logic that gives the wrong bounds for the next iteration
+                                ! when successive guesses increase by exactly EPBL_MLD_TOLERANCE.
 EPBL_MLD_MAX_ITS = 20           ! default = 20
                                 ! The maximum number of iterations that can be used to find a self-consistent
-                                ! mixed layer depth.  If EPBL_MLD_BISECTION is true, the maximum number
-                                ! iteractions needed is set by Depth/2^MAX_ITS < EPBL_MLD_TOLERANCE.
+                                ! mixed layer depth.  If EPBL_MLD_BISECTION is true, the maximum number of
+                                ! iterations needed is set by Depth/2^MAX_ITS < EPBL_MLD_TOLERANCE.
 EPBL_MIN_MIX_LEN = 0.0          !   [meter] default = 0.0
                                 ! The minimum mixing length scale that will be used by ePBL.  The default (0)
                                 ! does not set a minimum.
@@ -2211,6 +2233,9 @@ EPBL_VEL_SCALE_FACTOR = 0.5477  !   [nondim] default = 1.0
                                 ! the PBL diffusivity.
 VSTAR_SURF_FAC = 1.8258         !   [nondim] default = 1.2
                                 ! The proportionality times ustar to set vstar at the surface.
+EPBL_BBL_EFFIC = 0.0            !   [nondim] default = 0.0
+                                ! The efficiency of bottom boundary layer mixing via ePBL.  Setting this to a
+                                ! value that is greater than 0 to enable bottom boundary layer mixing from EPBL.
 USE_LA_LI2016 = True            !   [Boolean] default = False
                                 ! A logical to use the Li et al. 2016 (submitted) formula to determine the
                                 ! Langmuir number.
@@ -2220,12 +2245,12 @@ EPBL_LANGMUIR_SCHEME = "ADDITIVE" ! default = "NONE"
                                 !    NONE     - Do not do any extra mixing due to Langmuir turbulence
                                 !    RESCALE  - Use a multiplicative rescaling of mstar to account for Langmuir
                                 !      turbulence
-                                !    ADDITIVE - Add a Langmuir turblence contribution to mstar to other
+                                !    ADDITIVE - Add a Langmuir turbulence contribution to mstar to other
                                 !      contributions
 LT_ENHANCE_COEF = 0.1056        !   [nondim] default = 0.447
                                 ! Coefficient for Langmuir enhancement of mstar
 LT_ENHANCE_EXP = -1.0           !   [nondim] default = -1.33
-                                ! Exponent for Langmuir enhancementt of mstar
+                                ! Exponent for Langmuir enhancement of mstar
 LT_MOD_LAC1 = 0.0               !   [nondim] default = -0.87
                                 ! Coefficient for modification of Langmuir number due to MLD approaching Ekman
                                 ! depth.
@@ -2241,6 +2266,10 @@ LT_MOD_LAC4 = 0.8               !   [nondim] default = 0.95
 LT_MOD_LAC5 = 0.8               !   [nondim] default = 0.95
                                 ! Coefficient for modification of Langmuir number due to ratio of Ekman to
                                 ! unstable Obukhov depth.
+EPBL_OPTIONS_DIFF = 0           ! default = 0
+                                ! If positive, this is a coded integer indicating a pair of settings whose
+                                ! differences are diagnosed in a passive diagnostic mode  via extra calls to
+                                ! ePBL_column.  If this is 0 or negative no extra calls occur.
 !EPBL_USTAR_MIN = 1.45842E-18   !   [m s-1]
                                 ! The (tiny) minimum friction velocity used within the ePBL code, derived from
                                 ! OMEGA and ANGSTROM.
