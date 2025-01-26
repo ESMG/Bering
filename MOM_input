@@ -178,13 +178,11 @@ OBC_REMAPPING_USE_OM4_SUBCELLS = False !   [Boolean] default = True
                                 ! option to false.
 OBC_TIDE_CONSTITUENTS = "M2,S2,N2,K2,K1,O1,P1,Q1,MM,MF" !
                                 ! Names of tidal constituents being added to the open boundaries.
-OBC_TIDE_ADD_EQ_PHASE = True    !   [Boolean] default = False
+TIDE_ADD_EQ_PHASE = True    !   [Boolean] default = False
                                 ! If true, add the equilibrium phase argument to the specified tidal phases.
-OBC_TIDE_ADD_NODAL = True       !   [Boolean] default = False
+TIDE_ADD_NODAL = True       !   [Boolean] default = False
                                 ! If true, include 18.6 year nodal modulation in the boundary tidal forcing.
-OBC_TIDE_REF_DATE = 1980, 1, 1  !
-                                ! Reference date to use for tidal calculations and equilibrium phase.
-OBC_TIDE_NODAL_REF_DATE = 2011, 7, 2 ! default = 0
+TIDE_NODAL_REF_DATE = 2011, 7, 2 ! default = 0
                                 ! Fixed reference date to use for nodal modulation of boundary tides.
 
 ! === module MOM_verticalGrid ===
