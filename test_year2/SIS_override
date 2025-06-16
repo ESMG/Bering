@@ -1,7 +1,11 @@
+!#override CONTINUITY_H_NEGLECT = 1e-20 kg m-2
+#override CONTINUITY_FRAC_NEGLECT=1e-20
+#override ICE_COVER_DISCARD = 1e-30
+#override ADCROFT_ADVECTIVE_CFL = True
 #override ICE_YIELD_ELLIPTICITY = 1.5
 #override MIN_H_FOR_TEMP_CALC = 1.e-2
 #override ICE_STATS_INTERVAL = 0.041666
-#override WEAK_COAST_STRESS = True
+!#override WEAK_COAST_STRESS = True
 !DO_POND = True
 !Z_RESCALE_POWER = 31
 !L_RESCALE_POWER = 55
@@ -12,11 +16,18 @@ DEBUG_EVP_SUBSTEPS = False
 !MERGED_CONTINUITY = True
 BASAL_STRESS_NCAT_B = 10       ! default = 100
 !#override DO_BRINE_PLUME = True
-#override BRINE_PLUME_EXPONENT = 1
-#override BRINE_PLUME_FRACTION = 0.9
+!#override BRINE_PLUME_EXPONENT = 1
+!#override BRINE_PLUME_FRACTION = 0.9
 #override RESTART_CHECKSUMS_REQUIRED = False
 #override READ_HLIM_VALS = True
 #override HLIM_VALS = "1.0e-10, 0.1, 0.3, 0.7, 1.1, 1.5, 2.0, 2.5, 3.5, 4.5"
 !#override TEARDROP_YIELD_CURVE = True
 #override NEW_RIDGE_PARTICIPATION = True
 #override NEW_RIDGE_REDISTRIBUTION = True
+ICEPACK_CLEANUP = False          !   [Boolean] default = False
+ICEPACK_REBIN = False           !   [Boolean] default = False
+#override DO_DELTA_EDDINGTON_SW = True
+#override ICE_DELTA_EDD_R_ICE = -1.0
+#override ICE_DELTA_EDD_R_SNOW = -1.0
+#override ICE_DELTA_EDD_R_POND = -1.0
+#override SNOW_CONDUCTIVITY = 0.248

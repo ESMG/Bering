@@ -95,6 +95,8 @@ ICE_RELATIVE_SALINITY = 0.1     !   [nondim] default = 0.0
 
 ! === module SIS2_ice_thm (updates) ===
 ! This sub-module does updates of the sea-ice due to thermodynamic changes.
+SNOW_CONDUCTIVITY = 0.248       !   [W m-1 K-1] default = 0.31
+                                ! The conductivity of heat in snow.
 MIN_H_FOR_TEMP_CALC = 0.01      !   [m] default = 0.0
                                 ! The minimum ice thickness at which to do temperature calculations.
 
@@ -175,13 +177,13 @@ MAXTRUNC = 200                  !   [truncations save_interval-1] default = 0
 
 ! === module SIS_optics ===
 ! This module calculates the albedo and absorption profiles for shortwave radiation.
-ICE_DELTA_EDD_R_ICE = 1.0       !   [nondimensional] default = 0.0
+ICE_DELTA_EDD_R_ICE = -1.0      !   [nondimensional] default = 0.0
                                 ! A dreadfully documented tuning parameter for the radiative propeties of sea
                                 ! ice with the delta-Eddington radiative transfer calculation.
-ICE_DELTA_EDD_R_SNOW = 1.0      !   [nondimensional] default = 0.0
+ICE_DELTA_EDD_R_SNOW = -1.0     !   [nondimensional] default = 0.0
                                 ! A dreadfully documented tuning parameter for the radiative propeties of snow
                                 ! on sea ice with the delta-Eddington radiative transfer calculation.
-ICE_DELTA_EDD_R_POND = 1.0      !   [nondimensional] default = 0.0
+ICE_DELTA_EDD_R_POND = -1.0     !   [nondimensional] default = 0.0
                                 ! A dreadfully documented tuning parameter for the radiative propeties of
                                 ! meltwater ponds on sea ice with the delta-Eddington radiative transfer
                                 ! calculation.
