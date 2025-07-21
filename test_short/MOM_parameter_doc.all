@@ -392,12 +392,6 @@ OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
                                 ! An effective length scale for restoring the tracer concentration at the
                                 ! boundaries to values from the interior when the flow is entering the domain.
-OBC_THICKNESS_RESERVOIR_LENGTH_SCALE_OUT = 0.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the layer thickness at the boundaries
-                                ! to externally imposed values when the flow is exiting the domain.
-OBC_THICKNESS_RESERVOIR_LENGTH_SCALE_IN = 0.0 !   [m] default = 0.0
-                                ! An effective length scale for restoring the layer thickness at the boundaries
-                                ! to values from the interior when the flow is entering the domain.
 OBC_REMAPPING_SCHEME = "PPM_H4" ! default = "PPM_H4"
                                 ! This sets the reconstruction scheme used for OBC vertical remapping for all
                                 ! variables. It can be one of the following schemes:
@@ -1712,6 +1706,11 @@ DTBT = -0.9                     !   [s or nondim] default = -0.98
 BT_USE_OLD_CORIOLIS_BRACKET_BUG = False !   [Boolean] default = False
                                 ! If True, use an order of operations that is not bitwise rotationally symmetric
                                 ! in the meridional Coriolis term of the barotropic solver.
+MASK_COASTAL_PRESSURE_FORCE = False !   [Boolean] default = False
+                                ! If true, use the land masks to zero out the diagnosed barotropic pressure
+                                ! gradient accelerations at coastal or land points.  This changes diagnostics
+                                ! and improves the reproducibility of certain debugging checksums, but it does
+                                ! not alter the solutions themselves.
 
 ! === module MOM_mixed_layer_restrat ===
 MIXEDLAYER_RESTRAT = True       !   [Boolean] default = False
@@ -1851,6 +1850,9 @@ EVAP_CFL_LIMIT = 0.8            !   [nondim] default = 0.8
 MLD_EN_VALS = 25.0, 2500.0, 2.5E+05 !   [J/m2] default = 25.0, 2500.0, 2.5E+05
                                 ! The energy values used to compute MLDs.  If not set (or all set to 0.), the
                                 ! default will overwrite to 25., 2500., 250000.
+BMLD_EN_VALS = 25.0, 2500.0, 2.5E+05 !   [J/m2] default = 25.0, 2500.0, 2.5E+05
+                                ! The energy values used to compute Bottom MLDs.  If not set (or all set to 0.),
+                                ! the default will overwrite to 25., 2500., 250000.
 DIAG_MLD_DENSITY_DIFF = 0.1     !   [kg/m3] default = 0.1
                                 ! The density difference used to determine a diagnostic mixed layer depth,
                                 ! MLD_user, following the definition of Levitus 1982. The MLD is the depth at
@@ -2228,28 +2230,30 @@ EPBL_MSTAR_SCHEME = "REICHL_H18" ! default = "CONSTANT"
                                 !    REICHL_H18 - Use the scheme documented in Reichl & Hallberg, 2018.
 MSTAR_CAP = 10.0                !   [nondim] default = -1.0
                                 ! If this value is positive, it sets the maximum value of mstar allowed in ePBL.
-                                ! (This is not used if EPBL_MSTAR_SCHEME = CONSTANT).
+                                ! (This is not used if EPBL_mstar_scheme = CONSTANT).
 RH18_MSTAR_CN1 = 0.275          !   [nondim] default = 0.275
                                 ! MSTAR_N coefficient 1 (outer-most coefficient for fit). The value of 0.275 is
-                                ! given in RH18.  Increasing this coefficient increases MSTAR for all values of
+                                ! given in RH18.  Increasing this coefficient increases mstar for all values of
                                 ! Hf/ust, but more effectively at low values (weakly developed OSBLs).
 RH18_MSTAR_CN2 = 8.0            !   [nondim] default = 8.0
                                 ! MSTAR_N coefficient 2 (coefficient outside of exponential decay). The value of
-                                ! 8.0 is given in RH18.  Increasing this coefficient increases MSTAR for all
+                                ! 8.0 is given in RH18.  Increasing this coefficient increases mstar for all
                                 ! values of HF/ust, with a much more even effect across a wide range of Hf/ust
                                 ! than CN1.
 RH18_MSTAR_CN3 = -6.0           !   [nondim] default = -5.0
                                 ! MSTAR_N coefficient 3 (exponential decay coefficient). The value of -5.0 is
-                                ! given in RH18.  Increasing this increases how quickly the value of MSTAR
+                                ! given in RH18.  Increasing this increases how quickly the value of mstar
                                 ! decreases as Hf/ust increases.
 RH18_MSTAR_CS1 = 0.2            !   [nondim] default = 0.2
                                 ! MSTAR_S coefficient for RH18 in stabilizing limit. The value of 0.2 is given
-                                ! in RH18 and increasing it increases MSTAR in the presence of a stabilizing
+                                ! in RH18 and increasing it increases mstar in the presence of a stabilizing
                                 ! surface buoyancy flux.
 RH18_MSTAR_CS2 = 0.4            !   [nondim] default = 0.4
                                 ! MSTAR_S exponent for RH18 in stabilizing limit. The value of 0.4 is given in
-                                ! RH18 and increasing it increases MSTAR exponentially in the presence of a
+                                ! RH18 and increasing it increases mstar exponentially in the presence of a
                                 ! stabilizing surface buoyancy flux.
+EPBL_BBL_USE_MSTAR = False      !   [nondim] default = False
+                                ! A logical to use mstar in the calculation of TKE in the ePBL BBL scheme
 NSTAR = 0.06                    !   [nondim] default = 0.2
                                 ! The portion of the buoyant potential energy imparted by surface fluxes that is
                                 ! available to drive entrainment at the base of mixed layer when that energy is
