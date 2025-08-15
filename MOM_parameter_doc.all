@@ -392,6 +392,12 @@ OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
                                 ! An effective length scale for restoring the tracer concentration at the
                                 ! boundaries to values from the interior when the flow is entering the domain.
+OBC_THICKNESS_RESERVOIR_LENGTH_SCALE_OUT = 0.0 !   [m] default = 0.0
+                                ! An effective length scale for restoring the layer thickness at the boundaries
+                                ! to externally imposed values when the flow is exiting the domain.
+OBC_THICKNESS_RESERVOIR_LENGTH_SCALE_IN = 0.0 !   [m] default = 0.0
+                                ! An effective length scale for restoring the layer thickness at the boundaries
+                                ! to values from the interior when the flow is entering the domain.
 OBC_REMAPPING_SCHEME = "PPM_H4" ! default = "PPM_H4"
                                 ! This sets the reconstruction scheme used for OBC vertical remapping for all
                                 ! variables. It can be one of the following schemes:
@@ -457,13 +463,6 @@ TIDE_MF_FREQ = 5.3234E-06       !   [rad s-1] default = 5.3234E-06
                                 ! Frequency of the MF tidal constituent. This is only used if TIDES and TIDE_MF
                                 ! are true, or if OBC_TIDE_N_CONSTITUENTS > 0 and MF is in
                                 ! OBC_TIDE_CONSTITUENTS.
-OBC_PROJECTION_BUG = True       !   [Boolean] default = False
-                                ! If false, use only interior ocean points at OBCs to specify several
-                                ! calculations at OBC points, and it avoids applying a land mask at the bay-like
-                                ! intersection of orthogonal OBC segments.  Otherwise the calculation of terms
-                                ! like the potential vorticity used in the barotropic solver relies on
-                                ! bathymetry or other fields being projected outward across OBCs.  This option
-                                ! changes answers for some configurations that use OBCs.
 CHANNEL_CONFIG = "none"         ! default = "none"
                                 ! A parameter that determines which set of channels are
                                 ! restricted to specific  widths.  Options are:
