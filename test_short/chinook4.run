@@ -6,8 +6,8 @@
 #SBATCH --output=BERING.%j
 #SBATCH --no-requeue
 #SBATCH --ntasks=24
-#SBATCH -p debug
-###SBATCH -p t1small
+###SBATCH -p debug
+#SBATCH -p t1small
 ###SBATCH --ntasks-per-node=28
 ###SBATCH -t 44:00:00
 
