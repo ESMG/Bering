@@ -13,7 +13,7 @@ ENABLE_BUGS_BY_DEFAULT = False  !   [Boolean] default = True
                                 ! If true, the defaults for certain recently added bug-fix flags are set to
                                 ! recreate the bugs so that the code can be moved forward without changing
                                 ! answers for existing configurations.  The defaults for groups of bug-fix flags
-                                ! are periodcially changed to correct the bugs, at which point this parameter
+                                ! are periodically changed to correct the bugs, at which point this parameter
                                 ! will no longer be used to set their default.  Setting this to false means that
                                 ! bugs are only used if they are actively selected, but it also means that
                                 ! answers may change when code is updated due to newly found bugs.
@@ -118,22 +118,26 @@ MAXIMUM_DEPTH = 6500.0          !   [m]
 ! if any.
 OBC_NUMBER_OF_SEGMENTS = 4      ! default = 0
                                 ! The number of open boundary segments.
-OBC_FREESLIP_VORTICITY = False  !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the
-                                ! relative vorticity on open boundaries. This cannot be true if another
-                                ! OBC_XXX_VORTICITY option is True.
-OBC_COMPUTED_VORTICITY = True   !   [Boolean] default = False
-                                ! If true, uses the external values of tangential velocity in the relative
-                                ! vorticity on open boundaries. This cannot be true if another OBC_XXX_VORTICITY
-                                ! option is True.
-OBC_FREESLIP_STRAIN = False     !   [Boolean] default = True
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
-OBC_COMPUTED_STRAIN = True      !   [Boolean] default = False
-                                ! If true, sets the normal gradient of tangential velocity to zero in the strain
-                                ! use in the stress tensor on open boundaries. This cannot be true if another
-                                ! OBC_XXX_STRAIN option is True.
+OBC_VORTICITY_CONFIG = "computed" ! default = "freeslip"
+                                ! Configuration for relative vorticity in momentum advection at open boundaries.
+                                ! Options are:
+                                !     none      - No adjustment.
+                                !     zero      - Sets relative vorticity to zero.
+                                !     freeslip  - Sets the normal gradient of tangential velocity to zero.
+                                !     computed  - Computes the normal gradient of tangential velocity using
+                                !                 external values of tangential velocity.
+                                !     specified - Uses the external values of the normal gradient of
+                                !                 tangential velocity.
+OBC_STRAIN_CONFIG = "computed"  ! default = "freeslip"
+                                ! Configuration for strain in horizontal viscosity at open boundaries.  Options
+                                ! are:
+                                !     none      - No adjustment.
+                                !     zero      - Sets strain to zero.
+                                !     freeslip  - Sets the normal gradient of tangential velocity to zero.
+                                !     computed  - Computes the normal gradient of tangential velocity using
+                                !                 external values of tangential velocity.
+                                !     specified - Uses the external values of the normal gradient of
+                                !                 tangential velocity.
 OBC_ZERO_BIHARMONIC = True      !   [Boolean] default = False
                                 ! If true, zeros the Laplacian of flow on open boundaries in the biharmonic
                                 ! viscosity term.
@@ -647,7 +651,7 @@ KD_MAX = 0.1                    !   [m2 s-1] default = -1.0
                                 ! The maximum permitted increment for the diapycnal diffusivity from TKE-based
                                 ! parameterizations, or a negative value for no limit.
 DOUBLE_DIFFUSION = True         !   [Boolean] default = False
-                                ! If true, increase diffusivites for temperature or salinity based on the
+                                ! If true, increase diffusivities for temperature or salinity based on the
                                 ! double-diffusive parameterization described in Large et al. (1994).
 
 ! === module MOM_kappa_shear ===
