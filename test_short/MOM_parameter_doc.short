@@ -147,6 +147,9 @@ OBC_RAMP_TIMESCALE = 2.0        !   [days] default = 1.0
                                 ! If RAMP_OBCS is true, this sets the ramping timescale.
 OBC_TIDE_N_CONSTITUENTS = 10    ! default = 0
                                 ! Number of tidal constituents being added to the open boundary.
+OBC_TEMP_SALT_NEEDED_BUG = False !   [Boolean] default = True
+                                ! If true, recover a bug that OBC temperature and salinity can be ignored even
+                                ! if they are registered tracers in the rest of the model.
 OBC_SEGMENT_001 = "J=N,I=N-2:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days]
@@ -203,6 +206,9 @@ DTFREEZE_DP = -7.75E-08         !   [degC Pa-1] default = 0.0
 ! === module MOM_tracer_flow_control ===
 
 ! === module MOM_boundary_update ===
+OBC_VALUE_UPDATE_BUG = False    !   [Boolean] default = True
+                                ! If true, recover a bug that OBC segment data does not update if all segments
+                                ! use 'value' and none uses 'file'.
 
 ! === module segment_tracer_registry_init ===
 
