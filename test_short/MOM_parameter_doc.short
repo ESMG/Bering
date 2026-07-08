@@ -147,9 +147,6 @@ OBC_RAMP_TIMESCALE = 2.0        !   [days] default = 1.0
                                 ! If RAMP_OBCS is true, this sets the ramping timescale.
 OBC_TIDE_N_CONSTITUENTS = 10    ! default = 0
                                 ! Number of tidal constituents being added to the open boundary.
-OBC_TEMP_SALT_NEEDED_BUG = False !   [Boolean] default = True
-                                ! If true, recover a bug that OBC temperature and salinity can be ignored even
-                                ! if they are registered tracers in the rest of the model.
 OBC_SEGMENT_001 = "J=N,I=N-2:0,FLATHER,ORLANSKI,NUDGED,ORLANSKI_TAN,NUDGED_TAN" !
                                 ! Documentation needs to be dynamic?????
 OBC_SEGMENT_001_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days]
@@ -214,9 +211,6 @@ DTFREEZE_DP = -7.75E-08         !   [degC Pa-1] default = 0.0
 ! === module MOM_tracer_flow_control ===
 
 ! === module MOM_boundary_update ===
-OBC_VALUE_UPDATE_BUG = False    !   [Boolean] default = True
-                                ! If true, recover a bug that OBC segment data does not update if all segments
-                                ! use 'value' and none uses 'file'.
 
 ! === module segment_tracer_registry_init ===
 
@@ -398,6 +392,12 @@ USE_STORED_SLOPES = True        !   [Boolean] default = False
                                 ! should be necessary.
 
 ! === module MOM_set_visc ===
+SET_VISC_ANSWER_DATE = 99991231 ! default = 20260703
+                                ! The vintage of the order of arithmetic and expressions in the set viscosity
+                                ! calculations.  Values below 20190101 recover the answers from the end of 2018,
+                                ! while higher values use updated and more robust forms of the same expressions.
+                                ! Values below 20260704 use the non-reproducible power operator in place of
+                                ! cuberoot() when finding the open distances with CHANNEL_DRAG.
 CHANNEL_DRAG = True             !   [Boolean] default = False
                                 ! If true, the bottom drag is exerted directly on each layer proportional to the
                                 ! fraction of the bottom it overlies.
