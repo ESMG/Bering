@@ -172,19 +172,15 @@ OBC_SEGMENT_004_VELOCITY_NUDGING_TIMESCALES = 3.0, 360.0 !   [days]
                                 ! Setting both to zero should behave like SIMPLE obcs for the baroclinic
                                 ! velocities.
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for the tracer reservoir update when the flow is
-                                ! exiting the domain. If positive, the reservoir relaxes toward the interior
-                                ! concentration with this length scale. If zero (default), the length scale is
-                                ! truly zero: the reservoir is set instantly to the interior concentration on
-                                ! outflow. If negative, the length scale is effectively infinite: the reservoir
-                                ! is never updated on outflow.
+                                ! The length scale for updating the tracer reservoir toward the interior
+                                ! concentration where flow exits the domain: >0 relaxes over this distance, 0
+                                ! resets the reservoir to that concentration immediately, and <0 (infinite
+                                ! length scale) leaves the reservoir unchanged.  This applies to all tracers on
+                                ! every open boundary segment.
 OBC_TRACER_RESERVOIR_LENGTH_SCALE_IN = 3000.0 !   [m] default = 0.0
-                                ! An effective length scale for the tracer reservoir update when the flow is
-                                ! entering the domain. If positive, the reservoir relaxes toward the external
-                                ! OBC concentration with this length scale. If zero (default), the length scale
-                                ! is truly zero: the reservoir is set instantly to the external OBC
-                                ! concentration on inflow. If negative, the length scale is effectively
-                                ! infinite: the reservoir is never updated on inflow.
+                                ! The length scale for updating the tracer reservoir toward the external OBC
+                                ! concentration where flow enters the domain, following the sign convention of
+                                ! OBC_TRACER_RESERVOIR_LENGTH_SCALE_OUT.
 OBC_THICKNESS_RESERVOIR_LENGTH_SCALE_OUT = 5000.0 !   [m] default = 0.0
                                 ! An effective length scale for restoring the layer thickness at the boundaries
                                 ! to externally imposed values when the flow is exiting the domain.
